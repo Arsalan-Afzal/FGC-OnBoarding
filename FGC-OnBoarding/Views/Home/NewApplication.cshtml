@@ -1,0 +1,574 @@
+﻿
+@{
+    Layout = "_FormLayout";
+}
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+<form id="msform" name="msform" method="post" action="" enctype="multipart/form-data">
+    <div class="profile">
+        <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="pageblockwrapper">
+            <div class="pageblockwrapper1">
+                <!------------------------------------------------------------------------Menu---------------------------------------------------------------------------------->
+                <div class="sidemenu">
+                    <div class="blockmenu menu1">
+                        <div class="mneuline"><img src="~/Images/dotedlinemenu.png" width="7" height="50"></div>
+                        <div class="mneutextb">
+                            <div class="menuheader" id="header1" onclick="showprofile()">Business Profile</div>
+                        </div>
+                    </div><!--blockmenu-->
+                    <div class="blockmenu menu2">
+                        <div class="mneuline"><img src="~/Images/dotstraightline.png" width="7" height="50"></div>
+                        <div class="mneutextb">
+                            <div class="menuheader1" id="header2" onclick="showbussinessinformation()">Business Information</div>
+                        </div>
+                    </div><!--blockmenu-->
+                    <div class="blockmenu menu3">
+                        <div class="mneuline "><img src="~/Images/dotstraightline.png" width="7" height="50"></div>
+                        <div class="mneutextb">
+                            <div class="menuheader1"  onclick="showdirectors()" id="dsall1">Directors &amp; Shareholders</div>
+                            <div class="menuheader1"  onclick="showOwners()" id="mydssole1" style="display:none;">OWNERSHIP INFORMATION</div>
+                            <div class="menuheader1"  onclick="showTrustees()" id="dschar1" style="display:none;">TRUSTEES</div>
+                        </div>
+                    </div><!--blockmenu-->
+                    <div class="blockmenu menu4">
+                        <div class="mneuline "><img src="~/Images/dotstraightline.png" width="7" height="50"></div>
+                        <div class="mneutextb">
+                            <div class="menuheader1" id="header4" onclick="ShowSupportingDocs()">SUPPORTING DOCUMENTS</div>
+                        </div>
+                    </div><!--blockmenu-->
+                    <div class="blockmenu menu5">
+                        <div class="mneuline"><img src="~/Images/dotstraightline.png" width="7" height="50"><img src="~/images/dotlastarrow.png" width="7" height="4"></div>
+                        <div class="mneutextb">
+                            <div class="menuheader1" id="header5" onclick="showdeclaration()">Declarations &amp; Important Notice</div>
+                        </div>
+                    </div><!--blockmenu-->
+                </div><!--sidemenu-->
+                <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <fieldset  id="myfield">
+                </fieldset>
+                <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            </div><!--pageblockwrapper-->
+        </div><!--pageblockwrapper1-->
+    </div><!--pofile-->
+</form>
+@*<script id="rendered-js">
+    $('.input-group.date').datepicker({ format: "dd-mm-yyyy" });
+    $('.input-group1.date').datepicker({ format: "dd-mm-yyyy" });
+    $('.input-group3.date').datepicker({ format: "dd-mm-yyyy" });
+</script>*@
+
+<script type="text/javascript">
+
+    $('#myfield').html("");
+    $(document).ready(function () {
+        debugger
+
+    //    $('#myfield').hide("");
+
+        $.ajax({
+
+            url: '/Home/ServiceRequirment',
+            contentType: 'application/html ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+    })
+    function showbussinessinformation() {
+        $.ajax({
+
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            data: {id : 3},
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                if (data.flag) {
+                    if (data.form != 3) {
+                        $.ajax({
+
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+
+                            dataType: 'json',
+                            data: { Form: 3 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        $.ajax({
+
+                            url: '/Home/ShowBuisnessInformation',
+                            contentType: 'application/html ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'html',
+                            async: false,
+                            success: function (data) {
+                                $('#myfield').hide()
+                                $('#myfield').html(data);
+                                $("#myfield").slideDown("fast", function () {
+                                    // Animation complete.
+                                });
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+    function showOwners() {
+        $.ajax({
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                if (data.flag) {
+                    if (data.form != 5) {
+                        $.ajax({
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'json',
+                            data: { Form: 5 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        $.ajax({
+                            url: '/Home/ShowOwners',
+                            contentType: 'application/html ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'html',
+                            async: false,
+                            success: function (data) {
+                                $('#myfield').hide()
+                                $('#myfield').html(data);
+                                $("#myfield").slideDown("fast", function () {
+                                    // Animation complete.
+                                });
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+    function showdirectors() {
+        $.ajax({
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                if (data.flag) {
+                    if (data.form != 5) {
+                        $.ajax({
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'json',
+                            data: { Form: 5 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        $.ajax({
+                            url: '/Home/ShowDirectors',
+                            contentType: 'application/html ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'html',
+                            async: false,
+                            success: function (data) {
+                                $('#myfield').hide()
+                                $('#myfield').html(data);
+                                $("#myfield").slideDown("fast", function () {
+                                    // Animation complete.
+                                });
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+    function showTrustees() {
+        $.ajax({
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                if (data.flag) {
+                    if (data.form != 5) {
+                        $.ajax({
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'json',
+                            data: { Form: 5 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        $.ajax({
+                            url: '/Home/ShowTrustees',
+                            contentType: 'application/html ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'html',
+                            async: false,
+                            success: function (data) {
+                                $('#myfield').hide()
+                                $('#myfield').html(data);
+                                $("#myfield").slideDown("fast", function () {
+                                    // Animation complete.
+                                });
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+    function showdeclaration() {
+
+        $.ajax({
+
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: {id:8},
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                if (data.flag) {
+                    if (data.form != 8) {
+                        $.ajax({
+
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'json',
+                            data: { Form: 8 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        $.ajax({
+
+                            url: '/Home/ShowDecleration',
+                            contentType: 'application/html ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'html',
+                            async: false,
+                            success: function (data) {
+                                $('#myfield').hide()
+                                $('#myfield').html(data);
+                                $("#myfield").slideDown("fast", function () {
+                                    // Animation complete.
+                                });
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+    }
+    function ShowSupportingDocs() {
+        debugger
+        $.ajax({
+
+            url: '/Home/GetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { id:6},
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                debugger
+                if (data.flag) {
+                    if (data.form != 6) {
+                        $.ajax({
+
+                            url: '/Home/SetCurrentForm',
+                            contentType: 'application/json ; charset:ytf-8',
+                            type: 'Get',
+                            dataType: 'json',
+                            data: { Form: 6 },
+                            async: false,
+                            success: function (data) {
+                                //$('#myfield').html(data);
+                            },
+                            error: function (msg, xhr) {
+                                alert("error")
+                                console.log(msg);
+                                console.log(xhr);
+                            }
+                        })
+                        debugger
+                        if (data.btid == 1) {
+                            $.ajax({
+
+                                url: '/Home/ShowBuisnessDocuments',
+                                contentType: 'application/html ; charset:ytf-8',
+                                type: 'Get',
+                                dataType: 'html',
+                                async: false,
+                                success: function (data) {
+                                    $('#myfield').hide()
+                                    $('#myfield').html(data);
+                                    $("#myfield").slideDown("fast", function () {
+                                        // Animation complete.
+                                    });
+                                },
+                                error: function (msg, xhr) {
+                                    alert("error")
+                                    console.log(msg);
+                                    console.log(xhr);
+                                }
+                            })
+                        }
+                        else if (data.btid == 2) {
+
+                            $.ajax({
+
+                                url: '/Home/ShowCharityDocuments',
+                                contentType: 'application/html ; charset:ytf-8',
+                                type: 'Get',
+                                dataType: 'html',
+                                async: false,
+                                success: function (data) {
+                                    $('#myfield').hide()
+                                    $('#myfield').html(data);
+                                    $("#myfield").slideDown("fast", function () {
+                                        // Animation complete.
+                                    });
+                                },
+                                error: function (msg, xhr) {
+                                    alert("error")
+                                    console.log(msg);
+                                    console.log(xhr);
+                                }
+                            })
+                        }
+                        else if (data.btid == 3) {
+
+                            $.ajax({
+
+                                url: '/Home/ShowCompanyDocuments',
+                                contentType: 'application/html ; charset:ytf-8',
+                                type: 'Get',
+                                dataType: 'html',
+                                async: false,
+                                success: function (data) {
+                                    $('#myfield').hide()
+                                    $('#myfield').html(data);
+                                    $("#myfield").slideDown("fast", function () {
+                                        // Animation complete.
+                                    });
+                                },
+                                error: function (msg, xhr) {
+                                    alert("error")
+                                    console.log(msg);
+                                    console.log(xhr);
+                                }
+                            })
+                        }
+                   
+                    }
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+    }
+    function showprofile() {
+        debugger
+           $.ajax({
+
+               url: '/Home/GetCurrentForm',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                    if (data.flag) {
+                        if (data.form != 0) {
+                            $.ajax({
+
+                                url: '/Home/SetCurrentForm',
+                                contentType: 'application/json ; charset:ytf-8',
+                                type: 'Get',
+                                dataType: 'json',
+                                data: { Form: 0 },
+                                async: false,
+                                success: function (data) {
+                                    //$('#myfield').html(data);
+                                },
+                                error: function (msg, xhr) {
+                                    alert("error")
+                                    console.log(msg);
+                                    console.log(xhr);
+                                }
+                            })
+                            $.ajax({
+
+                                url: '/Home/ServiceRequirment',
+                                contentType: 'application/html ; charset:ytf-8',
+                                type: 'Get',
+                                dataType: 'html',
+                                async: false,
+                                success: function (data) {
+                                    $('#myfield').hide()
+                                    $('#myfield').html(data);
+                                    $("#myfield").slideDown("fast", function () {
+                                        // Animation complete.
+                                    });
+                                },
+                                error: function (msg, xhr) {
+                                    alert("error")
+                                    console.log(msg);
+                                    console.log(xhr);
+                                }
+                            })
+                        }
+                    }
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+       
+
+    }
+
+    //$(function () {
+    //    $("#chkautho").click(function () {
+    //        if ($(this).is(":checked")) {
+    //            $(".bussinopen").show();
+    //            $("#caddress").focus();
+    //        } else {
+    //            $(".bussinopen").hide();
+    //        }
+    //    });
+    //});
+</script>

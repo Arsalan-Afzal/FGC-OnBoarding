@@ -1,0 +1,240 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="formblockportion">
+
+    <div class="topheader">
+        <!--<div class="pagehee">Declarations & Important Notice</div>
+        <div class="pagett">Read and accept the declarations</div>-->
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+    <div class="topheader111">
+        <div class="topheader2">
+            <div class="pagehee1" style="padding: 10px 0 0px 0; !important">DECLARATIONS</div>
+        </div>
+    </div><!--topheader-->
+
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="dectext">
+                The personal information that we collect in this application form and during the lifetime of your account is kept private. We collect personal information to determine your eligibility for products and services, to ensure high service standards, to meet regulatory requirements, and to verify your identity. Personal information you provide to FGC Systems will not be used in any commercial way and will not be provided to anyone else except in response to a request from regulatory, governmental or law enforcement agencies, or with our business partners and service providers to assist us in providing services to you. These business partners and service providers may be located within or outside of the UK. Whenever we request services from our business partners, we enter into a contractual agreement to ensure confidentiality and share the least amount of information needed to perform the task. A copy of FGC's privacy policy is available upon request. <br><br>
+                FGC may request additional documentation after review of this Application Form.<br><br>
+                FGC may request relevant URLs or other relevant promotional material along with completed and signed service agreements before we can set up accounts or process payments on your behalf. If service agreements have not been sent to you already, they will be issued based on information provided in this Application Form.
+            </div><!--dectext-->
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="pagehee1" style="color:#597489 !important;">IMPORTANT NOTICE</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="dectext">
+                Words and expressions used in this Application will, unless otherwise defined in this Application, have the same meaning as set out in the Terms and Conditions. By signing this Application, you are: <br><br>
+                <i class="fa fa-check" aria-hidden="true"></i> Confirming that you are duly authorised to sign for and act on behalf of the Company and no consent or approval is from
+                any other person. <br><br>
+                <i class="fa fa-check" aria-hidden="true"></i> Confirming that the information that you have provided in this Application is accurate and correctly reflects the profile, products and services of your business and the payment services you wish to receive. You further confirm and agree that you will notify FGC in good time of any changes to the information provided herein.<br><br>
+                <i class="fa fa-check" aria-hidden="true"></i> Agreeing to and authorising the searches which include a credit rating search, due diligence enquiries and use of your information as set out in the Privacy Policy and Framework Terms for Payment Services.<br><br>
+                <i class="fa fa-check" aria-hidden="true"></i> Acknowledging and agreeing that you have read and are bound by the terms of the Agreement (comprising this Application, the Framework Terms, and such other documents as the two parties may from time to time agree which together shall constitute the entire Agreement between the parties).<br><br>
+                <i class="fa fa-check" aria-hidden="true"></i> FGC Application Form (the "Application") should be signed by or on behalf of the Client. It is very important that the Client has read the Application and the declarations set out within in conjunction with the Agreement (as defined in the "Declarations" section below) before signing. By signing the Application, you are confirming that the details provided within are correct and that you have read, understood and agreed to be bound by the terms of the Agreement and that the signatory has the capacity to entered into the agreement on behalf of the applicant (company).
+            </div><!--dectext-->
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="pagehee1" style="color:#597489 !important;">SIGNATURE</div>
+        </div>
+    </div><!--topheader-->
+
+    <div class="topheader11">
+        <div class="topheader2">
+            <label class="container" id="textcon">
+                By clicking this box you are agreed to our terms and conditions. <span class="asteric">*</span>
+                <input type="checkbox" name="signatured" value="sigdone" id="sig1" required="">
+                <span class="checkmark1"></span>
+            </label><br><br>
+            <div id="sige" class="errormsg"></div>
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="topheader11">
+        <div class="topheader2" style="text-align:center;">
+            @if (ViewBag.BuisnessType == 1)
+            {
+                <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowSoloPersonalDocs()" tabindex="3">
+            }
+            else if (ViewBag.BuisnessType == 2)
+            {
+                <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowCharityPersonalDocs()" tabindex="3">
+            }
+            else if (ViewBag.BuisnessType == 3 || ViewBag.BuisnessType == 4)
+            {
+                <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowBuisnessPersonalDocs()" tabindex="3">
+            }
+            <input type="button" name="submitbut" class="action-button" value="Submit" onclick="SubmitForm()" tabindex="1">
+        </div>
+    </div><!--topheader-->
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('.menu1').find('#header1').prop('class', 'menuheader2');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader2');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader2');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+    })
+    function SubmitForm() {
+    debugger
+        if ($('#sig1').is(":checked")) {
+            debugger
+            location.href = "SubmitApplication?BuisnessProfileId=@ViewBag.BuisnessProfileId"
+        }
+        else {
+            $('#sige').html("This Field Is Mandatory")
+        }
+    }
+    function ShowSoloPersonalDocs() {
+        $.ajax({
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 7 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+            url: '/Home/ShowSoloPersonalDocuments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+                //$("#myfield").show("slow", function () {
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+
+    function ShowCharityPersonalDocs() {
+        $.ajax({
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 7 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+            url: '/Home/ShowcharityPersonalDocuments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+                //$("#myfield").show("slow", function () {
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+
+    function ShowBuisnessPersonalDocs() {
+        $.ajax({
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 7 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+            url: '/Home/ShowBuisnessPersonalDocuments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+                //$("#myfield").show("slow", function () {
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+
+</script>

@@ -1,0 +1,76 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration Confirmation</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+
+</head>
+<body style="overflow: hidden;">
+
+    @{
+        await Html.RenderPartialAsync("TopNavbarIdentity");
+    }
+
+
+    <br /><br /><br /><br /><br />
+    <div class="row" style="justify-content:center">
+        <h3 style="justify-content:center">   Please check your email to confirm your account. </h3>
+    </div>
+    <br /><br /><br /><br /><br />
+    @{
+        await Html.RenderPartialAsync("FooterIdentityPages");
+    }
+
+
+
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="../../Admin-Lte/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../Admin-Lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../Admin-Lte/dist/js/adminlte.min.js"></script>
+
+    <script>
+
+        $('#myeye').click(function () {
+            debugger
+            var PasswordField = document.getElementById('Input_Password')
+
+            if (PasswordField.type == "password") {
+
+                PasswordField.type = "text";
+            }
+            else {
+                PasswordField.type = "password";
+            }
+        })
+
+
+
+    </script>
+    <link rel="stylesheet" href="../../Admin-Lte/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../Admin-Lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../Admin-Lte/dist/css/adminlte.min.css">
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+</html>
+
+

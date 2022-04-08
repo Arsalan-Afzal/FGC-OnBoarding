@@ -1,0 +1,1087 @@
+﻿@model FGC_OnBoarding.Models.Buisness.FinancialInformation
+@{
+    Layout = null;
+}
+
+<div class="formblockportion">
+
+    <div class="topheader"></div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagehee1" style="padding-bottom:10px;">Financial Information</div>
+        </div>
+    </div><!--topheader-->
+
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="pagett2">Anticipated Turnover</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="textformblockn">
+                <div class="formb1">
+                    <div class="formhe">Per Month <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr1">
+
+                            @Html.TextBox("PerMonth","", new {@placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext1" placeholder="Provide only numbers" tabindex="1" id="b9" onkeypress="bsuc9();">*@
+                            <div id="Validation1" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+
+                <div class="formb2">
+                    <div class="formhe">Per Annum <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr2">
+                            @Html.TextBox("PerAnum","", new { @placeholder = "Provide only numbers" })
+                            <div id="Validation2" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblockn-->
+        </div>
+    </div><!--topheader-->
+
+
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="pagett2">Anticipated Number of Payments Per Month</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="textformblockn">
+                <div class="formb1">
+                    <div class="formhe">Incoming <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr3">
+                            @Html.TextBox("PaymentIncoming","", new { @onkeypress = "checkvalue(PaymentIncoming)", @placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext3" placeholder="Provide only numbers" tabindex="3" id="b11" onkeypress="bsuc11();">*@
+                            <div id="Validation3" class="errormsg">
+                            </div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+
+                <div class="formb2">
+                    <div class="formhe">Outgoing <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr4">
+                            @Html.TextBox("PaymentOutgoing","", new { @placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext4" placeholder="Provide only numbers" tabindex="4" id="b12" onkeypress="bsuc12();">*@
+                            <div id="Validation4" class="errormsg">
+                            </div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblockn-->
+        </div>
+    </div><!--topheader-->
+
+
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="pagett2">Average Transaction Value</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="textformblockn">
+                <div class="formb1">
+                    <div class="formhe">Incoming <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr5">
+                            @*<input type="text" name="transtext5" placeholder="Provide only numbers" tabindex="5" id="b13" onkeypress="bsuc13();">*@
+                            @Html.TextBox("TransactionIncoming","", new { @placeholder = "Provide only numbers" })
+                            <div id="Validation5" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+
+                <div class="formb2">
+                    <div class="formhe">Outgoing <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr6">
+                            @Html.TextBox("TransactionOutgoing","", new { @placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext6" placeholder="Provide only numbers" tabindex="6" id="b14" onkeypress="bsuc14();">*@
+                            <div id="Validation6" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblockn-->
+        </div>
+    </div><!--topheader-->
+
+
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="pagett2">International Payments</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11n">
+        <div class="topheader2">
+            <div class="textformblockn">
+                <div class="formb1">
+                    <div class="formhe">Number of payments per month <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr7">
+                            @Html.TextBox("NoOfPaymentsPerMonth","", new { @placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext7" placeholder="Provide only numbers" tabindex="7" id="b15" onkeypress="bsuc15();">*@
+                            <div id="Validation7" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+
+                <div class="formb2">
+                    <div class="formhe">Volumn per month<span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx">
+                        <div id="curr8">
+                            @Html.TextBox("VolumePermonth","", new { @placeholder = "Provide only numbers" })
+                            @*<input type="text" name="transtext8" placeholder="Provide only numbers" tabindex="8" id="b16" onkeypress="bsuc16();">*@
+                            <div id="Validation8" class="errormsg"></div>
+                        </div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblockn-->
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader1">
+        <div class="topheader2" style="margin-top:10px;">
+            <div class="pagehee1" style="color:#597489 !important;">Bank Account Detail</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader11">
+        <div class="topheader2">
+            <label class="container" id="textcon">
+                Please check this box if you have bank account held with other providers.
+                @*<input type="checkbox" name="authormust" id="chkauthob" value="authdone">*@
+                @Html.CheckBoxFor(x => x.AccountDetails, new { @name = "authormust" })
+                <span class="checkmark1"></span>
+            </label>
+        </div>
+    </div><!--topheader-->
+    <div class="banldetail" style="display:none;">
+        <div class="topheader11">
+            <div class="topheader2">
+                <div class="textformblock">
+                    <div class="formb1">
+                        <div class="formhe">Bank Name</div><!--formhe-->
+                        <div class="formtx">
+                            @Html.TextBoxFor(x => x.BankName, new { @placeholder = "Enter your full bank name" })
+                            @*<input type="text" name="batext1" tabindex="9" id="b17" placeholder="Enter your full bank name">*@
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                    <div class="formb2">
+                        <div class="formhe">Bank Address</div><!--formhe-->
+                        <div class="formtx">
+                            @Html.TextBoxFor(x => x.BankAddress, new { @placeholder = "Enter your full bank address" })
+                            @*<input type="text" name="batext2" tabindex="10" placeholder="Enter your full bank address">*@
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                </div><!--textformblock-->
+                <div class="textformblock">
+                    <div class="formb1">
+                        <div class="formhe">Sort Code / Transit / ABA No</div><!--formhe-->
+                        <div class="formtx">
+                            @Html.TextBoxFor(x => x.SortCode, new { @placeholder = "Enter code" })
+                            @*<input type="text" name="batext3" tabindex="11" id="b18" placeholder="Enter code">*@
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                    <div class="formb2">
+                        <div class="formhe">Account Name</div><!--formhe-->
+                        <div class="formtx">
+                            @Html.TextBoxFor(x => x.AccountName, new { @placeholder = "Enter your full account name" })
+                            @*<input type="text" name="batext4" tabindex="12" id="b19" placeholder="Enter your full account name">*@
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                </div><!--textformblock-->
+                <div class="textformblock">
+                    <div class="formb1">
+                        <div class="formhe">Account Number (UK)</div><!--formhe-->
+                        <div class="formtx">
+                            @Html.TextBoxFor(x => x.AccountNumber, new { @placeholder = "Enter your full account number(UK)" })
+                            @*<input type="text" name="batext5" tabindex="13" id="b20" placeholder="Enter your full account number(UK)">*@
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                    <div class="formb2">
+                        <div class="formhe">IBAN (if applicable)</div><!--formhe-->
+                        <div class="formtx">
+                            @*<input type="text" name="batext6" tabindex="14" placeholder="Enter your full IBAN number">*@
+                            @Html.TextBoxFor(x => x.IBAN, new { @placeholder = "Enter your full IBAN number" })
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                </div><!--textformblock-->
+                <div class="textformblock">
+                    <div class="formb1">
+                        <div class="formhe">SWIFT Code / BIC</div><!--formhe-->
+                        <div class="formtx">
+                            @*<input type="text" name="batext7" tabindex="15" placeholder="Enter code">*@
+                            @Html.TextBoxFor(x => x.SwiftCode, new { @placeholder = "Enter code" })
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                    <div class="formb2">
+                        <div class="formhe">Currency of Account</div><!--formhe-->
+                        <div class="formtx">
+                            @*<input type="text" name="batext8" tabindex="16" placeholder="Enter your currency of account">*@
+                            @Html.TextBoxFor(x => x.AccountCurrency, new { @placeholder = "Enter your currency of account" })
+                        </div><!--formtx-->
+                    </div><!--formb1-->
+                </div><!--textformblock-->
+            </div>
+        </div><!--topheader-->
+    </div><!--bankdetail-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader11">
+        <div class="topheader2" style="text-align:center;">
+            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowBuisnessInformation()" tabindex="18">
+            @if (ViewBag.BuisnessType == 1)
+            {
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowOwners()" tabindex="17">
+            }
+            else if (ViewBag.BuisnessType == 2)
+            {
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowTrustees()" tabindex="17">
+            }
+            else if (ViewBag.BuisnessType == 3 || ViewBag.BuisnessType == 4)
+            {
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowDirectors()" tabindex="17">
+            }
+        </div>
+    </div><!--topheader-->
+</div>
+<script>
+    $(document).ready(function () {
+        debugger
+        $('.menu1').find('#header1').prop('class', 'menuheader2');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader1');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader1');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+
+
+    if ("@Model.AccountDetails".toLocaleLowerCase() == "true") {
+                  debugger
+              $('#AccountDetails').attr('checked', 'true');
+              $('.banldetail').css('display', '')
+        }
+
+        if ("@Model.PerMonth" != "") {
+            $('#PerMonth').val(@Model.PerMonth);
+            changeFigure("PerMonth");
+        }
+        if ("@Model.PerAnum" != "") {
+            $('#PerAnum').val(@Model.PerAnum);
+            changeFigure("PerAnum");
+        }
+        if ("@Model.PaymentIncoming" != "") {
+            $('#PaymentIncoming').val(@Model.PaymentIncoming);
+            changeFigure("PaymentIncoming");
+        }
+        if ("@Model.PaymentOutgoing" != "") {
+             $('#PaymentOutgoing').val(@Model.PaymentOutgoing);
+             changeFigure("PaymentOutgoing");
+        }
+        if ("@Model.TransactionIncoming" != "") {
+             $('#TransactionIncoming').val(@Model.TransactionIncoming);
+             changeFigure("TransactionIncoming");
+        }
+        if ("@Model.TransactionOutgoing" != "") {
+            $('#TransactionOutgoing').val(@Model.TransactionOutgoing);
+            changeFigure("TransactionOutgoing");
+        }
+        if ("@Model.TransactionOutgoing" != "") {
+            $('#TransactionOutgoing').val(@Model.TransactionOutgoing);
+            changeFigure("TransactionOutgoing");
+        }
+        if ("@Model.NoOfPaymentsPerMonth" != "") {
+              $('#NoOfPaymentsPerMonth').val(@Model.NoOfPaymentsPerMonth);
+              changeFigure("NoOfPaymentsPerMonth");
+        }
+        if ("@Model.VolumePermonth" != "") {
+            $('#VolumePermonth').val(@Model.VolumePermonth);
+            changeFigure("VolumePermonth");
+        }
+    })
+    function changeFigure(Element) {
+        var ElementId = "#" + Element;
+
+        var input = $(ElementId).val();
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt(input, 10) : 0;
+        $(ElementId).val(function () {
+            return (input === 0) ? "" : input.toLocaleString("en-US");
+        });
+    }
+
+    $('#PerMonth,#PerAnum,#PaymentIncoming,#PaymentOutgoing,#TransactionIncoming,#TransactionOutgoing,#NoOfPaymentsPerMonth,#VolumePermonth').on("keyup", function (event) {
+        // When user select text in the document, also abort.
+        debugger
+        var selection = window.getSelection().toString();
+        if (selection !== '') {
+            return;
+        }
+        // When the arrow keys are pressed, abort.
+        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+            return;
+        }
+        var $this = $(this);
+        // Get the value.
+        var input = $this.val();
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt(input, 10) : 0;
+        $this.val(function () {
+            return (input === 0) ? "" : input.toLocaleString("en-US");
+        });
+    });
+
+
+
+
+    $('#AccountDetails').click(function () {
+        debugger
+        if ($(this).is(":checked")) {
+
+            $('.banldetail').css('display', '')
+                  var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+              "AccountDetails":true
+        };
+        }
+        else {
+            $('.banldetail').css('display', 'none')
+                  var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+              "AccountDetails":false
+        };
+        }
+
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+            /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#PerMonth').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "PerMonth": $('#PerMonth').val(),
+               "FieldName": "1",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#PerAnum').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "PerAnum": $('#PerAnum').val(),
+               "FieldName": "2",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#PaymentIncoming').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "PaymentIncoming": $('#PaymentIncoming').val(),
+               "FieldName": "3",
+               "AccountDetails": $('#AccountDetails').val(),
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#PaymentOutgoing').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "PaymentOutgoing": $('#PaymentOutgoing').val(),
+               "FieldName": "4",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#TransactionIncoming').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "TransactionIncoming": $('#TransactionIncoming').val(),
+               "FieldName": "5",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#TransactionOutgoing').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "TransactionOutgoing": $('#TransactionOutgoing').val(),
+               "FieldName": "6",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#NoOfPaymentsPerMonth').focusout(function () {
+        debugger
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "NoOfPaymentsPerMonth": $('#NoOfPaymentsPerMonth').val(),
+               "FieldName": "7",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#VolumePermonth').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "VolumePermonth": $('#VolumePermonth').val(),
+               "FieldName": "8",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#BankName').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "BankName": $('#BankName').val(),
+               "FieldName": "9",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#BankAddress').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "BankAddress": $('#BankAddress').val(),
+               "FieldName": "10",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#SortCode').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "SortCode": $('#SortCode').val(),
+               "FieldName": "11",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#AccountName').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "AccountName": $('#AccountName').val(),
+               "FieldName": "12",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#AccountNumber').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "AccountNumber": $('#AccountNumber').val(),
+               "FieldName": "13",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#IBAN').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "IBAN": $('#IBAN').val(),
+               "FieldName": "14",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#SwiftCode').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "SwiftCode": $('#SwiftCode').val(),
+               "FieldName": "15",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+    $('#AccountCurrency').focusout(function () {
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "AccountCurrency": $('#AccountCurrency').val(),
+               "FieldName": "16",
+               "AccountDetails": $('#AccountDetails').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveFinancialInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+
+    function ShowBuisnessInformation() {
+        $.ajax({
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 3 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+            url: '/Home/ShowBuisnessInformation',
+            contentType: 'application/json; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            async: true,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data)
+                $("#myfield").slideDown("fast", function () {
+                });
+            },
+            error: function (msg, xhr) {
+                debugger
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+    function ShowDirectors() {
+             var flag = false;
+            $('.errormsg').html("");
+            $.ajax({
+
+                url: '/Home/ValidateFinancialInfoFields',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { BuisnessProfileId: @Model.BuisnessProfileId },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                    debugger
+                    if (data.length == 0) {
+                        flag = false;
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        debugger
+                        flag = true;
+                        var Id = "#" + data[i].validationid;
+                        $(Id).html(data[i].message)
+                    }
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+
+
+            if (flag == false) {
+                $.ajax({
+
+                    url: '/Home/SetCurrentForm',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'json',
+                    data: { Form: 5 },
+                    async: false,
+                    success: function (data) {
+                        //$('#myfield').html(data);
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+                $.ajax({
+
+                    url: '/Home/ShowDirectors',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html("");
+                        $('#myfield').html(data);
+
+                        //$("#myfield").show("slow", function () {
+                        //    // Animation complete.
+                        //});
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+    }
+    function ShowOwners() {
+             var flag = false;
+            $('.errormsg').html("");
+            $.ajax({
+
+                url: '/Home/ValidateFinancialInfoFields',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { BuisnessProfileId: @Model.BuisnessProfileId },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                    debugger
+                    if (data.length == 0) {
+                        flag = false;
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        debugger
+                        flag = true;
+                        var Id = "#" + data[i].validationid;
+                        $(Id).html(data[i].message)
+                    }
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+
+
+            if (flag == false) {
+                $.ajax({
+
+                    url: '/Home/SetCurrentForm',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'json',
+                    data: { Form: 5 },
+                    async: false,
+                    success: function (data) {
+                        //$('#myfield').html(data);
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+                $.ajax({
+
+                    url: '/Home/ShowOwners',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html(data);
+
+                        //$("#myfield").show("slow", function () {
+                        //    // Animation complete.
+                        //});
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+    }
+
+    function ShowTrustees() {
+             var flag = false;
+            $('.errormsg').html("");
+            $.ajax({
+
+                url: '/Home/ValidateFinancialInfoFields',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { BuisnessProfileId: @Model.BuisnessProfileId },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                    debugger
+                    if (data.length == 0) {
+                        flag = false;
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        debugger
+                        flag = true;
+                        var Id = "#" + data[i].validationid;
+                        $(Id).html(data[i].message)
+                    }
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+
+
+            if (flag == false) {
+                $.ajax({
+
+                    url: '/Home/SetCurrentForm',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'json',
+                    data: { Form: 5 },
+                    async: false,
+                    success: function (data) {
+                        //$('#myfield').html(data);
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+                $.ajax({
+
+                    url: '/Home/ShowTrustees',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html("");
+                        $('#myfield').html(data);
+
+                        //$("#myfield").show("slow", function () {
+                        //    // Animation complete.
+                        //});
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+    }
+
+</script>

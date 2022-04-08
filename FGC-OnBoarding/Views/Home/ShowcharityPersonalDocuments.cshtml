@@ -1,0 +1,549 @@
+﻿@model FGC_OnBoarding.Models.Buisness.CharityDocument
+@{
+    Layout = null;
+}
+<div class="formblockportion">
+
+    <div class="topheader"></div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagehee1" style="padding-bottom:15px;">Personal Documentation</div>
+            <div class="pagett2" style="color: #597489;">If you are unable to provide below documents now, it will be required at later stage</div>
+        </div>
+    </div><!--topheader-->
+
+
+    <div class="topheader11">
+        <div class="topheader2">
+
+            <div class="leftblock1h">
+
+                <div class="hhhbl">
+
+                    <div class="heastext" id="pchar1" style="display: block;">Proof of ID of each trustee</div><!--heatext-->
+
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" class="BuisnessFile1" name="FormFile" id="FormFile1" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file1_prev_charity">
+                            @if (ViewBag.charityPersonalDocs1 != null)
+                            {
+                                @foreach (var item in ViewBag.charityPersonalDocs1)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="charitydiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div><!--hhhbl-->
+
+                <div class="hhhb3">
+                    <div class="heastext">Proof of Personal Address <br>(Incase of European Nationals Address should be notarized and translated into English )</div><!--heatext-->
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" name="FormFile1" class="BuisnessFile2" id="FormFile2" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file2_prev_charity">
+                            @if (ViewBag.charityPersonalDocs2 != null)
+                            {
+                                @foreach (var item in ViewBag.charityPersonalDocs2)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="charitydiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div><!--hhhbl-->
+
+                <div class="hhhb3">
+
+                    <div class="heastext" id="pchar2" style="display: block;">Proof of ID &amp; Address of Each Authorized representative (passport, utility bill, driving license, state issued ID, Incase of European Nationals ID should be notarized)</div><!--heatext-->
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" class="BuisnessFile3" name="FormFile3" id="FormFile3" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file3_prev_charity">
+                            @if (ViewBag.charityPersonalDocs3 != null)
+                            {
+                                @foreach (var item in ViewBag.charityPersonalDocs3)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="charitydiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div><!--hhhbl-->
+
+            </div><!--leftblock1h-->
+
+
+            <div class="leftblock1h">
+
+
+                <div class="dectext" id="pchar3" style="display: block;">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="font-size:16px;"></i> Original seen (certified true copy) valid photo ID of authorised representative &amp; trustees.<br><br>
+
+                    The copy document must be in colour, (Passport, State issued ID and Drivers Licence ONLY). <br><br>
+
+                    Copy must be of front and back of any card used for ID verification or double page of the passport. <br><br>
+
+                    Proof of home address of the above trustees, authorised representative. <br><br>
+
+                    Latest utility bill or bank statement, not older than three months.
+                </div>
+
+
+
+
+
+            </div><!--leftblock1h-->
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="spacef"></div>
+
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="pagehee1" style="color:#597489 !important;">PEP DECLARATION</div>
+        </div>
+    </div><!--topheader-->
+
+    <div class="topheader11">
+        <div class="topheader2">
+            <div class="dectext">
+                Do any of the above-named authorized representative, owner or any members of their family hold a politically exposed position or are they close associates or cohabitants of anyone who holds a politically exposed position. <br><br>
+                A politically exposed position is a head of state or government minister, deputy or assistant a member of the executive council or legislature, and ambassador, embassy attaché or counsellor a high-ranking officer in the armed forces a member of the administrative management or supervisory body of a state-owned enterprise a member of a court of auditors or the board of a central bank a head of a government agency a member of a supreme court constitutional court or high level judicial body.
+            </div><!--dectext-->
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="topheader11">
+        <div class="topheader2">
+
+            <div class="blockdata">
+                <div class="checkblock">
+                    <label class="container">
+                        No
+                        <input type="radio" name="yesorno" value="no" checked="checked" class="hidetextbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                </div>
+                <div class="checkblock">
+                    <label class="container">
+                        Yes
+                        <input type="radio" name="yesorno" value="yes" class="hidetextbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                </div>
+            </div><!--blockdata-->
+
+            <div class="textformblock" id="text1yn" style="display: none;">
+                <div class="formb3">
+                    <div class="formhe">If yes, please name the person and the relationship</div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextBoxFor(x => x.RelationShip, new { @placeholder = "Enter full name and relationship" })
+                        <div id="iiyes" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+    <div class="topheader11">
+        <div class="topheader2" style="text-align:center;">
+            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowCharityDocuments()" tabindex="3">
+            <input type="button" name="next1" class="action-button1" value="Next" onclick="showDeclerations()" tabindex="2">
+        </div>
+    </div><!--topheader-->
+
+</div>
+<style>
+    .charitydiscardupload, .discardupload2, .discardupload3 {
+        font-size: 10px;
+        font-weight: bolder;
+        display: inline;
+        margin-left: 15px;
+        color: #F00;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        $('.menu1').find('#header1').prop('class', 'menuheader2');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader2');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader1');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+
+
+    })
+     if (("@Model.isPop").toLowerCase() == "true") {
+
+        $(".hidetextbox:radio[value='yes']").prop("checked", "true");
+        $('#text1yn').css('display', 'block');
+    }
+    else {
+        $(".hidetextbox:radio[value='no']").prop("checked", "true");
+        $('#text1yn').css('display', 'none');
+    }
+  
+    $('.BuisnessFile1').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+
+        var files = $('#FormFile1').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+            $('#file1_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='charitydiscardupload'>(x)</p></span>");
+        }
+
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/CharityPersonalFile1',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file1_prev').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+                            $('#file1_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='charitydiscardupload'>(x)</p></span>");
+                        }
+                        //$('#file1_prev').find('.filenamedis').each(function () {
+                        //    $(this).find('.discardupload1').attr('id', result[i]);
+                        //    i++;
+                        //});
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+
+
+    });
+    $('.BuisnessFile2').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+
+        var files = $('#FormFile2').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+            $('#file2_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='charitydiscardupload'>(x)</p></span>");
+        }
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/CharityPersonalFile2',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file2_prev_charity').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+
+
+                            $('#file2_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='charitydiscardupload'>(x)</p></span>");
+                        }
+                        //$('#file1_prev').find('.filenamedis').each(function () {
+                        //    $(this).find('.discardupload1').attr('id', result[i]);
+                        //    i++;
+                        //});
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+    });
+    $('.BuisnessFile3').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+        var files = $('#FormFile3').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+            $('#file3_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='charitydiscardupload'>(x)</p></span>");
+        }
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/CharityPersonalFile3',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file3_prev_charity').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+                            $('#file3_prev_charity').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='charitydiscardupload'>(x)</p></span>");
+                        }
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+    });
+    function showDeclerations() {
+        $('#iiyes').html("");
+        if ($('#RelationShip').val() != "") {
+            $.ajax({
+                url: '/Home/SetCurrentForm',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { Form: 8 },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+            $.ajax({
+                url: '/Home/ShowDecleration',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'html',
+                async: false,
+                success: function (data) {
+                    $('#myfield').hide()
+                    $('#myfield').html(data);
+                    //$("#myfield").show("slow", function () {
+                    $("#myfield").slideDown("fast", function () {
+                        // Animation complete.
+                    });
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+        }
+        else {
+            $('#iiyes').html("This field is mandatory")
+        }
+    }
+    function ShowCharityDocuments() {
+        $.ajax({
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 7 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+            url: '/Home/ShowCharityDocuments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+                //$("#myfield").show("slow", function () {
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+   $('.hidetextbox').click(function () {
+        debugger
+        var Flag = false;
+        if ($(this).val() == "yes") {
+            $('#text1yn').css('display', 'block');
+            Flag = true;
+        }
+        else {
+            $('#text1yn').css('display', 'none');
+            Flag = false;
+        }
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+            "isPop": Flag,
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveCharityPersonalDocsData',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+   })
+   $('#RelationShip').focusout(function () {
+        debugger
+        var Flag = false;
+        if ($('.hidetextbox:checked').val() == "yes") {
+          //  $('#text1yn').css('display', 'block');
+            Flag = true;
+        }
+        else {
+           // $('#text1yn').css('display', 'none');
+            Flag = false;
+        }
+         var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+            "isPop": Flag,
+            "RelationShip": $('#RelationShip').val(),
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveCharityPersonalDocsData',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    })
+
+</script>

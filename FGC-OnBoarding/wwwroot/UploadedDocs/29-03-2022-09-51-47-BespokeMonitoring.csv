@@ -1,0 +1,59 @@
+BPID,ClientID,CompanyName,OrgNo,DateofReport,EventNo,Event,PostedDate,ComplianceStatus,AuditStatus,ClientName,OverDueDaysCount,TotalTransaction,AccountStatus
+58,5,AK SLOUGH LIMITED,13533135,14/02/2022 12:00:00 am,1,Mr A. Tahir has left the board,25/02/2022 6:26:23 pm,Open,-,AK SLOUGH LIMITED,0,0,Dormant
+57,4,ACS YORKSHIRE LIMITED,13065858,14/02/2022 12:00:00 am,1,New Board Member Dr V.A. Neumann appointed,25/02/2022 6:26:23 pm,Open,-,ACS YORKSHIRE LIMITED,0,0,Dormant
+56,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 6:26:23 pm,Open,-,SIEGERT LIMITED,0,44,Active
+55,89,Roze Int PVT Ltd,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 6:26:23 pm,Open,-,Roze Int PVT Ltd,0,20,-
+54,5,AK SLOUGH LIMITED,13533135,14/02/2022 12:00:00 am,1,Mr A. Tahir has left the board,25/02/2022 1:54:32 pm,Pending,Verified,AK SLOUGH LIMITED,0,0,Dormant
+53,4,ACS YORKSHIRE LIMITED,13065858,14/02/2022 12:00:00 am,1,New Board Member Dr V.A. Neumann appointed,25/02/2022 1:54:31 pm,Open,-,ACS YORKSHIRE LIMITED,0,0,Dormant
+52,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 1:54:31 pm,Open,-,SIEGERT LIMITED,0,44,Active
+51,89,Roze Int PVT Ltd,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 1:54:31 pm,Open,-,Roze Int PVT Ltd,0,20,-
+50,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:44:50 pm,Open,-,SIEGERT LIMITED,0,44,Active
+49,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:44:49 pm,Open,-,Roze Int PVT Ltd,0,20,-
+48,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:40:12 pm,Open,-,SIEGERT LIMITED,0,44,Active
+47,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:40:12 pm,Open,-,Roze Int PVT Ltd,0,20,-
+46,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:39:29 pm,Open,-,SIEGERT LIMITED,0,44,Active
+45,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:39:28 pm,Open,-,Roze Int PVT Ltd,0,20,-
+44,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:38:29 pm,Open,-,SIEGERT LIMITED,0,44,Active
+43,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:38:28 pm,Open,-,Roze Int PVT Ltd,0,20,-
+42,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:36:56 pm,Open,-,SIEGERT LIMITED,0,44,Active
+41,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:36:55 pm,Open,-,Roze Int PVT Ltd,0,20,-
+40,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:34:14 pm,Open,-,SIEGERT LIMITED,0,44,Active
+39,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:34:13 pm,Open,-,Roze Int PVT Ltd,0,20,-
+38,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:31:51 pm,Open,-,SIEGERT LIMITED,0,44,Active
+37,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:31:50 pm,Open,-,Roze Int PVT Ltd,0,20,-
+36,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:27:02 pm,Open,-,SIEGERT LIMITED,0,44,Active
+35,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:27:01 pm,Open,-,Roze Int PVT Ltd,0,20,-
+34,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:21:30 pm,Open,-,SIEGERT LIMITED,0,44,Active
+33,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:21:27 pm,Open,-,Roze Int PVT Ltd,0,20,-
+32,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:19:13 pm,Open,-,SIEGERT LIMITED,0,44,Active
+31,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:19:12 pm,Open,-,Roze Int PVT Ltd,0,20,-
+30,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:15:10 pm,Open,-,SIEGERT LIMITED,0,44,Active
+29,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:15:09 pm,Open,-,Roze Int PVT Ltd,0,20,-
+28,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 12:03:11 pm,Open,-,SIEGERT LIMITED,0,44,Active
+27,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 12:03:10 pm,Open,-,Roze Int PVT Ltd,0,20,-
+26,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 11:59:59 am,Open,-,SIEGERT LIMITED,0,44,Active
+25,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 11:59:58 am,Open,-,Roze Int PVT Ltd,0,20,-
+24,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 11:58:18 am,Open,-,SIEGERT LIMITED,0,44,Active
+23,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 11:58:17 am,Open,-,Roze Int PVT Ltd,0,20,-
+22,5,MANCHESTER COLLEGE OF LAW (MCL) LIMITED,13533135,14/02/2022 12:00:00 am,1,Mr A. Tahir has left the board,25/02/2022 11:20:37 am,Open,-,AK SLOUGH LIMITED,0,0,Dormant
+21,4,TINTRA PLC,13065858,14/02/2022 12:00:00 am,1,New Board Member Dr V.A. Neumann appointed,25/02/2022 11:20:36 am,Open,-,ACS YORKSHIRE LIMITED,0,0,Dormant
+20,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 11:20:34 am,Open,-,SIEGERT LIMITED,0,44,Active
+19,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 11:20:32 am,Open,-,Roze Int PVT Ltd,0,20,-
+18,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 11:09:05 am,Open,-,SIEGERT LIMITED,0,44,Active
+17,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 11:09:01 am,Open,-,Roze Int PVT Ltd,0,20,-
+16,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 11:03:13 am,Open,-,SIEGERT LIMITED,0,44,Active
+15,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 11:03:12 am,Open,-,Roze Int PVT Ltd,0,20,-
+14,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 10:58:03 am,Open,-,SIEGERT LIMITED,0,44,Active
+13,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 10:58:01 am,Open,-,Roze Int PVT Ltd,0,20,-
+12,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 10:53:28 am,Open,-,SIEGERT LIMITED,0,44,Active
+11,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 10:53:26 am,Open,-,Roze Int PVT Ltd,0,20,-
+10,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 10:42:51 am,Open,-,SIEGERT LIMITED,0,44,Active
+9,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 10:42:49 am,Open,-,Roze Int PVT Ltd,0,20,-
+8,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 10:41:06 am,Open,-,SIEGERT LIMITED,0,44,Active
+7,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 10:41:05 am,Open,-,Roze Int PVT Ltd,0,20,-
+6,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,25/02/2022 10:37:59 am,Open,-,SIEGERT LIMITED,0,44,Active
+5,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,25/02/2022 10:36:44 am,Open,-,Roze Int PVT Ltd,0,20,-
+4,99,SIEGERT LIMITED,10986839,07/02/2022 12:00:00 am,1,Mr M.A. Javed has left the board,22/02/2022 5:43:14 pm,Pending,Return,SIEGERT LIMITED,0,44,Active
+3,89,ROZE INT (PVT) LTD,8681338,07/02/2022 12:00:00 am,1,New Board Member Mr A. Taj appointed,22/02/2022 5:43:14 pm,Complete,Verified,Roze Int PVT Ltd,0,20,-
+2,99,SIEGERT LIMITED,10986839,02/07/2022 12:00:00 am,1,Mr M.A. Javed has left the board,22/02/2022 5:39:42 pm,Open,Verified,SIEGERT LIMITED,3,44,Active
+1,99,SIEGERT LIMITED,10986839,02/07/2022 12:00:00 am,1,Mr M.A. Javed has left the board,22/02/2022 5:38:38 pm,Pending,Verified,SIEGERT LIMITED,0,44,Active

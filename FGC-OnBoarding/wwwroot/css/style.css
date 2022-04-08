@@ -1,0 +1,1339 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+@font-face {
+    font-family: "ProximaNova-Regular";
+    src: url(../font/ProximaNova-Regular.otf);
+}
+
+@font-face {
+    font-family: "ProximaNovaAltBold";
+    src: url(../font/ProximaNovaAltBold.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+    background: #f2f2f2;
+}
+
+body {
+    font-family: "ProximaNova-Regular";
+    overflow-x: hidden;
+    color: #597489;
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="text"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: rgba(51, 153, 51, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(51, 153, 51, 0.8);
+    outline: 0 none;
+}
+
+.formtx select:focus {
+    border-color: rgba(51, 153, 51, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(51, 153, 51, 0.8);
+    outline: 0 none;
+}
+/*form styles*/
+#msform {
+    width: 100%;
+    position: relative;
+}
+
+    #msform fieldset {
+        margin: auto;
+        float: left;
+        width: 69%;
+        height: auto;
+        border: none !important;
+    }
+
+    #msform .action-button {
+        width: 100px;
+        /* background: #5e8c21; */
+        background-image: linear-gradient(to right,#19663c, #258e48);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        letter-spacing: 1px;
+        font-family: montserrat, arial, verdana;
+    }
+
+
+    #msform .action-button1 {
+        width: 100px;
+        /* background: #5e8c21; */
+        background-image: linear-gradient(to right,#19663c, #258e48);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        letter-spacing: 1px;
+        font-family: montserrat, arial, verdana;
+    }
+
+
+
+        #msform .action-button1:hover, #msform .action-button1:focus {
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        }
+
+    #msform .action-button:hover, #msform .action-button:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+    }
+
+::placeholder {
+    color: #CCC;
+}
+
+.spacefooter {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.spacef {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.headerbgblock {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: #FFF;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    -webkit-box-shadow: 0 8px 10px -6px #c5c2c2;
+    -moz-box-shadow: 0 8px 10px -6px #c5c2c2;
+    box-shadow: 0 8px 10px -6px #c5c2c2;
+}
+
+.headerblockleft {
+    margin: auto;
+    float: left;
+    width: 40%;
+    height: auto;
+}
+
+.icon1 {
+    margin: auto;
+    float: left;
+    width: 60px;
+}
+
+.icon2 {
+    margin: auto;
+    float: left;
+    margin-left: 100px;
+    margin-top: 6px;
+}
+
+.headerblockright {
+    margin: auto;
+    float: right;
+    width: 59.5%;
+    height: auto;
+}
+
+.icon3 {
+    margin: auto;
+    float: left;
+    width: 27px;
+    height: 50px;
+}
+
+.icon4 {
+    margin: auto;
+    float: left;
+    width: 96.5%;
+    height: 50px;
+    background: #1f8f46;
+}
+
+.menyblock {
+    margin: auto;
+    float: right;
+    margin-right: 20px;
+    margin-top: 17px;
+}
+
+    .menyblock a {
+        margin: auto;
+        float: left;
+        color: #FFF;
+        font-size: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+        .menyblock a:hover {
+            text-decoration: underline;
+        }
+
+.footerblockbg {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding-bottom: 50px;
+}
+
+.footerblockbg1 {
+    margin: auto;
+    width: 75%;
+    height: auto;
+    border-top: #8cc046 solid 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.foorterleft {
+    margin: auto;
+    float: left;
+    margin-top: 6px;
+}
+
+.foorterright {
+    margin: auto;
+    float: right;
+    margin-top: 6px;
+}
+
+    .foorterright a {
+        margin: auto;
+        float: left;
+        padding-left: 3px;
+        padding-right: 3px;
+        color: #000;
+        text-decoration: none;
+    }
+
+        .foorterright a:hover {
+            text-decoration: underline;
+        }
+
+#topcheck {
+    margin-top: 10px;
+}
+
+.pageblockwrapper {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    margin-top: 100px;
+    padding-bottom: 60px;
+}
+
+.pageblockwrapper1 {
+    margin: auto;
+    width: 75%;
+    height: auto;
+    overflow: auto;
+}
+
+.sidemenu {
+    margin: auto;
+    float: left;
+    width: 30%;
+    height: auto;
+    padding-bottom: 20px;
+    margin-top: 15%;
+}
+
+.formblockportion {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+    -webkit-box-shadow: 0 0 10px #c1bdbd;
+    box-shadow: 0 0 10px #c1bdbd;
+    background: #FFF;
+}
+
+.formblockportion1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: 3px;
+    -webkit-box-shadow: 0 0 10px #c1bdbd;
+    box-shadow: 0px 0px 10px #c1bdbd;
+    /* background: #FFF;*/
+}
+
+.blockmenu {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.mneuline {
+    margin: auto;
+    float: left;
+    width: 10px;
+    height: auto;
+    margin-top: 4px;
+}
+
+.mneutextb {
+    margin: auto;
+    float: left;
+    width: 85%;
+    height: auto;
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.menuheader {
+    margin: auto;
+    float: left;
+    width: auto;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 2px;
+    border-bottom: #8cc046 solid 2px;
+    text-decoration: none;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+.menutext {
+    margin: auto;
+    float: left;
+    font-size: 11px;
+    color: #0b0c0c;
+    margin-top: 10px;
+    width: 70%;
+}
+
+.menuheader1 {
+    margin: auto;
+    float: left;
+    width: auto;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 2px;
+    text-decoration: none;
+    color: #597489;
+}
+
+    .menuheader1:hover {
+        border-bottom: #8cc046 solid 2px;
+        color: #000;
+        cursor: pointer;
+    }
+
+.menuheader2 {
+    margin: auto;
+    float: left;
+    width: auto;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 2px;
+    text-decoration: none;
+    color: #1f8f46;
+    border-bottom: #8cc046 solid 2px;
+}
+
+    .menuheader2:hover {
+        color: #000;
+        cursor: pointer;
+    }
+
+.topheader {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px 0 20px 0;
+    background: #f9f9f9;
+}
+
+.pagehee {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    color: #2ca945;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.pagett {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    color: #0b0c0c;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 6px;
+    font-family: "ProximaNovaAltBold";
+}
+
+.topheader1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 10px 0 0px 0;
+}
+
+.topheader11 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 10px 0 20px 0;
+}
+
+.topheader111 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 10px 0 0 0;
+}
+
+.topheader2 {
+    margin: auto;
+    width: 95%;
+    height: auto;
+}
+
+.topheader11n {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 10px 0 0 0;
+}
+
+.pagehee1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    color: #1f8f46;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.pagett1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    color: #597489;
+    font-size: 13px;
+    margin-top: 6px;
+    font-family: "ProximaNovaAltBold";
+}
+
+.pagett2 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    color: #4c4f50;
+    font-size: 14px;
+    margin-top: 0px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.blockdata {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding-top: 6px;
+}
+
+.blockdata1 {
+    margin: auto;
+    width: 95%;
+}
+
+.checkblock { /* margin:auto; */
+    float: left;
+    width: 28%;
+    display: inline;
+    padding: 10px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #4c4f50;
+    margin-right: 10px;
+}
+
+.checkblock1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    display: inline;
+    font-size: 12px;
+    color: #000;
+}
+
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #f0f6fb;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #1f8f46;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Create a custom checkbox */
+.checkmark1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #f0f6fb;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark1 {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark1 {
+    background-color: #1f8f46;
+}
+
+/* Create the checkmark1/indicator (hidden when not checked) */
+.checkmark1:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark1 when checked */
+.container input:checked ~ .checkmark1:after {
+    display: block;
+}
+
+/* Style the checkmark1/indicator */
+.container .checkmark1:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.textformblock {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding: 15px 0 0px 0;
+}
+
+.textformblockn {
+    margin: auto;
+    float: left;
+    width: 100%;
+}
+
+.formb1 {
+    margin: auto;
+    float: left;
+    width: 45%;
+}
+
+.formb2 {
+    margin: auto;
+    float: left;
+    width: 45%;
+    margin-left: 40px;
+}
+
+.formb3 {
+    margin: auto;
+    float: left;
+    width: 100%;
+}
+
+.formbn1 {
+    margin: auto;
+    float: left;
+    width: 33%;
+}
+
+.formhe, .formhe a {
+    margin: auto;
+    float: left;
+    color: #597489;
+    font-size: 13px;
+    width: auto;
+    padding-bottom: 3px;
+    font-family: "ProximaNovaAltBold";
+    text-decoration: none;
+}
+
+    .formhe a:hover {
+        text-decoration: underline;
+    }
+
+.formtx input {
+    margin: auto;
+    float: left;
+    width: 100%;
+    padding: 14px 10px 14px 10px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+}
+
+.formtx1 input {
+    margin: auto;
+    float: left;
+    width: 96%;
+    padding: 14px 10px 14px 10px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+}
+
+.formtx1 textarea {
+    margin: auto;
+    float: left;
+    width: 96%;
+    padding: 14px 10px 14px 10px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+    font-family: "ProximaNova-Regular" !important;
+}
+
+.formtx2 input {
+    margin: auto;
+    float: left;
+    width: 86%;
+    padding: 14px 10px 14px 10px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+}
+
+.asteric {
+    color: #F00;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#textcon {
+    margin: auto;
+    float: left;
+    font-size: 13px;
+    padding-left: 40px;
+    padding-top: 5px;
+    color: #597489;
+    font-family: "ProximaNovaAltBold";
+}
+
+.formtx select {
+    margin: auto;
+    float: left;
+    padding: 18px 10px 10px 0px;
+    border: #d4e3ee solid 1px;
+    border-radius: 4px;
+    width: 107%;
+}
+
+hr.new1 {
+    margin: auto;
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#addnewauth {
+    display: inline-block;
+    margin: auto;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    float: right;
+    /* background: #5e8c21; */
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 38px;
+    border-radius: 1px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: auto;
+    padding: 0px 30px 0px 30px;
+    text-align: center;
+}
+
+a#addnewauth:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+
+#addnewauthn {
+    display: inline-block;
+    margin: auto;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    float: right;
+    /* background: #5e8c21; */
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 38px;
+    border-radius: 1px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: auto;
+    padding: 0px 30px 0px 30px;
+    text-align: center;
+}
+
+a#addnewauthn:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+
+#addnewauth1 {
+    display: inline-block;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: left;
+    /* background: #5e8c21; */
+    background: #C00;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 38px;
+    border-radius: 1px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: auto;
+    padding: 0px 30px 0px 30px;
+    text-align: center;
+}
+
+a#addnewauth1:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #C00;
+}
+
+.bakclass {
+    margin: auto;
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #597489;
+    text-decoration: underline;
+    font-family: "ProximaNovaAltBold";
+}
+
+    .bakclass:hover {
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+.dectext {
+    margin: auto;
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #597489;
+    line-height: 20px;
+}
+
+#file1_prev, #file2_prev, #file3_prev, #file4_prev, #file5_prev, #file6_prev {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    text-align: left;
+}
+
+.filenamedis {
+    margin: auto;
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    display: inline;
+    text-align: left;
+    margin-top: 5px;
+    color: blue;
+    padding: 10px;
+    background: #fbf8f8;
+    border: #ccc solid 1px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+label.uplofile {
+    padding: 10px;
+    /*background: #5e8c21;*/
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    border-color: #5e8c21;
+    color: #FFFFFF;
+    display: table;
+    border: none;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+.close, .close2, .close3, .close4, .close5, .close6 {
+    font-size: 10px;
+    font-weight: bolder;
+    display: inline;
+    margin-left: 15px;
+    color: #F00;
+    cursor: pointer;
+}
+
+.leftblock1h {
+    margin: auto;
+    float: left;
+    width: 49%;
+}
+
+.heastext {
+    margin: auto;
+    float: left;
+    font-size: 13px;
+    font-family: "ProximaNovaAltBold";
+}
+
+.hhhbl {
+    margin: auto;
+    float: left;
+    width: 90%;
+}
+
+.hhhb2 {
+    margin: auto;
+    float: left;
+    width: 90%;
+    margin-top: 5px;
+}
+
+.hhhb3 {
+    margin: auto;
+    float: left;
+    width: 90%;
+    margin-top: 40px;
+}
+/* Create a custom checkbox */
+.checkmark2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #f0f6fb;
+    border: #d4e3ee solid 1px;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark2 {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark2 {
+    background-color: #1f8f46;
+}
+
+/* Create the checkmark2/indicator (hidden when not checked) */
+.checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark2 when checked */
+.container input:checked ~ .checkmark2:after {
+    display: block;
+}
+
+/* Style the checkmark2/indicator */
+.container .checkmark2:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input-group-addon {
+    margin: auto;
+    float: right;
+    margin-top: -33px;
+    margin-right: 15px;
+}
+
+
+.errormsg {
+    color: #F00;
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
+    margin: auto;
+    float: left;
+    width: 100%;
+}
+
+.errormsg {
+    color: #F00;
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.errormsg1 {
+    border: #F00 solid 2px;
+}
+
+#blockconfirmation {
+    margin: auto;
+    width: 60%;
+    height: auto;
+    padding: 20px;
+    background: #fff;
+    margin-top: 100px;
+    -webkit-box-shadow: 0 0 10px #c1bdbd;
+    box-shadow: 0 0 10px #c1bdbd;
+}
+
+.fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+    /*background: #5e8c21;*/
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    padding: 5px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    margin: auto;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.blockcon {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.addnewauth1 a {
+    display: inline-block;
+    margin: auto;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    /*background: #5e8c21;*/
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 38px;
+    border-radius: 1px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 200px;
+    text-align: center;
+}
+
+.formblockportions {
+    margin: auto;
+    width: 60%;
+    padding-bottom: 10px;
+    -webkit-box-shadow: 0 0 10px #c1bdbd;
+    box-shadow: 0 0 10px #c1bdbd;
+    background: #FFF;
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+.formblockportionsi {
+    margin: auto;
+    width: 60%;
+    height: 2px;
+    -webkit-box-shadow: 0 0 10px #c1bdbd;
+    box-shadow: 0px 0px 10px #c1bdbd;
+    /* background: #FFF;*/
+}
+
+.addnewauth1 a:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+.signblock {
+    margin: auto;
+    width: 80%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.signheading {
+    margin: auto;
+    color: #597489;
+    margin: auto;
+    float: left;
+    font-size: 24px;
+    height: auto;
+    font-family: "ProximaNovaAltBold";
+}
+
+.signheading1 {
+    margin: auto;
+    width: 80%;
+    color: #597489;
+    margin: auto;
+    float: left;
+    text-align: right;
+    font-size: 14px;
+    height: auto;
+    font-family: "ProximaNova-Regular";
+    margin-top: 5px;
+}
+
+.signheading2 {
+    margin: auto;
+    width: 20%;
+    color: #597489;
+    margin: auto;
+    float: left;
+    font-size: 24px;
+    height: auto;
+    font-family: "ProximaNovaAltBold";
+}
+
+.signheading1 a {
+    color: #09F;
+}
+
+    .signheading1 a:hover {
+        color: #03F;
+    }
+
+.action-buttonsi {
+    width: 100px;
+    /* background: #5e8c21; */
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+    letter-spacing: 1px;
+    font-family: montserrat, arial, verdana;
+    margin-left: 0px;
+}
+
+    .action-buttonsi:hover, .action-buttonsi:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        outline: none;
+        border: none;
+    }
+
+.action-buttonsnew {
+    width: 200px;
+    /* background: #5e8c21; */
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    display: inline;
+    cursor: pointer;
+    padding: 10px 10px;
+    margin: 10px 5px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-family: montserrat, arial, verdana;
+}
+
+    .action-buttonsnew a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+select {
+    color: #ccc;
+}
+
+option {
+    color: #000;
+}
+
+    option:first-child {
+        color: #ccc;
+    }
+
+.blockselct {
+    margin: auto;
+    float: left;
+    width: 100%;
+    height: auto;
+    margin-top: 130px;
+    padding-bottom: 50px;
+}
+
+.blockselct1 {
+    margin: auto;
+    width: 75%;
+    height: auto;
+    padding-bottom: 10px;
+    background: #FFF;
+    border: #1f8f46 solid 2px;
+    overflow: auto;
+}
+
+.addnewblockbut {
+    margin: auto;
+    float: left;
+    width: 99%;
+    height: auto;
+    text-align: center;
+}
+
+.addnewblockbut1 {
+    margin: auto;
+    float: left;
+    width: 98%;
+    height: auto;
+    padding: 10px;
+    background: #f6f3f3;
+    border-bottom: #bcb8b8 solid 2px;
+    border-top: #bcb8b8 solid 2px;
+}
+
+.headerblockbut {
+    margin: auto;
+    width: 98%;
+    height: auto;
+    border-bottom: #CCC solid 1px;
+    overflow: auto;
+}
+
+.hhh1 {
+    margin: auto;
+    float: left;
+    width: 45%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: "ProximaNovaAltBold";
+    text-indent: 10px;
+}
+
+.hhh2 {
+    margin: auto;
+    float: left;
+    width: 20%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: "ProximaNovaAltBold";
+    text-indent: 10px;
+}
+
+.hhh3 {
+    margin: auto;
+    float: left;
+    width: 45%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+    text-indent: 10px;
+}
+
+.hhh4 {
+    margin: auto;
+    float: left;
+    width: 20%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+    text-indent: 10px;
+}
+
+.hhh22 {
+    margin: auto;
+    float: left;
+    width: 5%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: "ProximaNovaAltBold";
+    text-indent: 10px;
+    text-align: center;
+}
+
+.actionbutton {
+    width: 200px;
+    /* background: #5e8c21; */
+    background-image: linear-gradient(to right,#19663c, #258e48);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+    letter-spacing: 1px;
+    font-family: montserrat, arial, verdana;
+}
+
+    .actionbutton:hover, .actionbutton:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+    }
+
+.mainback a {
+    margin: auto;
+    float: right;
+    width: 70px;
+    padding: 5px;
+    background: #1f8f46;
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
+    margin-top: -20px;
+}

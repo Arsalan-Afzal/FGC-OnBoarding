@@ -1,0 +1,37 @@
+﻿
+
+.datepicker .datepicker-dropdown .dropdown-menu .datepicker-orient-left .datepicker-orient-top {
+    width: 20% !important;
+}
+
+.datepicker {
+    width: 20% !important;
+}
+
+.table-condensed {
+    width: 100% !important;
+}
+
+.datepicker td, .datepicker th {
+    background: #faf8fb !important;
+}
+
+    .datepicker td:hover, .datepicker th:hover {
+        background: #CCC !important;
+    }
+
+    .datepicker td:active, .datepicker th:active {
+        background-image: linear-gradient(to right,#19663c, #258e48);
+        color: #333 !important;
+    }
+
+.datepicker table tr td.active.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active:active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active:hover:active {
+    color: #fff !important;
+    background: #5e8c21 !important;
+}
+
+
+.datepicker table tr td span.active.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover.active, .datepicker table tr td span.active.disabled:hover.disabled, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active.disabled:hover[disabled], .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active:hover.disabled, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active:hover[disabled], .datepicker table tr td span.active[disabled] {
+    color: #fff !important;
+    background: #5e8c21 !important;
+}

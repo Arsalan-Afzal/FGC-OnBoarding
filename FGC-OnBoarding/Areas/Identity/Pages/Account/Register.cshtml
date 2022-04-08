@@ -1,0 +1,582 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FGC Form</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="~/css/media.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <style>
+        .formhe, .formhe a {
+            margin: auto;
+            float: left;
+            color: #597489;
+            font-size: 13px;
+            width: auto;
+            padding-bottom: 3px;
+            font-family: "ProximaNovaAltBold";
+            text-decoration: none;
+        }
+
+        .field-icon {
+            float: right;
+            margin-top: -30px;
+            margin-right: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .action-buttonsi {
+            width: 100px;
+            /* background: #5e8c21; */
+            background-image: linear-gradient(to right,#19663c, #258e48);
+            font-weight: bold;
+            color: white;
+            border: 0 none;
+            border-radius: 1px;
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 10px 5px;
+            letter-spacing: 1px;
+            font-family: montserrat, arial, verdana;
+            margin-left: 0px;
+        }
+
+        .pageblockwrapper {
+            margin: auto;
+            float: left;
+            width: 100%;
+            height: auto;
+            overflow: auto;
+            margin-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        .pageblockwrapper1 {
+            margin: auto;
+            width: 75%;
+            height: auto;
+            overflow: auto;
+        }
+
+        .formblockportions {
+            margin: auto;
+            width: 60%;
+            padding-bottom: 10px;
+            -webkit-box-shadow: 0 0 10px #c1bdbd;
+            box-shadow: 0 0 10px #c1bdbd;
+            background: #FFF;
+            overflow: auto;
+            padding-bottom: 30px;
+        }
+
+        .signblock {
+            margin: auto;
+            width: 80%;
+            height: auto;
+            margin-top: 30px;
+        }
+
+        .signheading2 {
+            margin: auto;
+            width: 20%;
+            color: #597489;
+            margin: auto;
+            float: left;
+            font-size: 24px;
+            height: auto;
+            font-family: "ProximaNovaAltBold";
+        }
+
+        .signheading1 {
+            margin: auto;
+            width: 80%;
+            color: #597489;
+            margin: auto;
+            float: left;
+            text-align: right;
+            font-size: 14px;
+            height: auto;
+            font-family: "ProximaNova-Regular";
+            margin-top: 5px;
+        }
+
+        .textformblock {
+            margin: auto;
+            float: left;
+            width: 100%;
+            padding: 15px 0 0px 0;
+        }
+
+        .formb3 {
+            margin: auto;
+            float: left;
+            width: 100%;
+        }
+
+        .signheading1 a {
+            color: #09F;
+        }
+
+        .formtx1 input {
+            margin: auto;
+            float: left;
+            width: 96%;
+            padding: 14px 10px 14px 10px;
+            border: #d4e3ee solid 1px;
+            border-radius: 4px;
+        }
+
+        .footerblockbg {
+            margin: auto;
+            float: left;
+            width: 100%;
+            height: auto;
+            padding-bottom: 50px;
+        }
+    </style>
+    <style>
+        .menyblock {
+            margin: auto;
+            float: right;
+            margin-right: 20px;
+            margin-top: 17px;
+        }
+
+            .menyblock a {
+                margin: auto;
+                float: left;
+                color: #FFF;
+                font-size: 12px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-weight: bold;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+        .headerblockleft {
+            margin: auto;
+            float: left;
+            width: 40%;
+            height: auto;
+        }
+
+        .headerblockright {
+            margin: auto;
+            float: right;
+            width: 59.5%;
+            height: auto;
+        }
+
+        .headerbgblock {
+            margin: auto;
+            float: left;
+            width: 100%;
+            height: 50px;
+            background: #FFF;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            -webkit-box-shadow: 0 8px 10px -6px #c5c2c2;
+            -moz-box-shadow: 0 8px 10px -6px #c5c2c2;
+            box-shadow: 0 8px 10px -6px #c5c2c2;
+        }
+
+        .icon4 {
+            margin: auto;
+            float: left;
+            width: 96.5%;
+            height: 50px;
+            background: #1f8f46;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .icon1 {
+            margin: auto;
+            float: left;
+            width: 60px;
+        }
+
+        .icon2 {
+            margin: auto;
+            float: left;
+            margin-left: 100px;
+            margin-top: 6px;
+        }
+
+        .icon3 {
+            margin: auto;
+            float: left;
+            width: 27px;
+            height: 50px;
+        }
+
+        .footerblockbg {
+            margin: auto;
+            float: left;
+            width: 100%;
+            height: auto;
+            padding-bottom: 50px;
+        }
+
+        .footerblockbg1 {
+            margin: auto;
+            width: 75%;
+            height: auto;
+            border-top: #8cc046 solid 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body style="overflow: hidden; background-color:#F2F2F2;font-family:ProximaNova-Regular">
+    @{
+        await Html.RenderPartialAsync("TopNavbarIdentity");
+    }
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="pageblockwrapper">
+            <div class="pageblockwrapper1">
+                <div class="formblockportions">
+                    <div class="signblock">
+
+                        <div asp-validation-summary="All" style="color:#F00; font-size:14px; font-weight:bold; padding-bottom:10px;" class="text-danger"></div>
+                        <div class="signheading2">Sign up</div><!--signheading-->
+                        <div class="signheading1">Already have an account? <a href="~/Identity/Account/Login">Sign in</a></div><!--signheading-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <div class="formhe" style="color:#597489;">Your Name</div><!--formhe-->
+                                <div class="formtx1">
+                                    <input asp-for="Input.Name" type="text" class="form-control" tabindex="1" required="" autofocus="" placeholder="Name">
+                                    @*<input type="text" name="signupname" id="signupname" placeholder="Write your full name" tabindex="1" required="" autofocus="">*@
+                                </div><!--formtx-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <div class="formhe" style="color:#597489;">Business Name</div><!--formhe-->
+                                <div class="formtx1">
+                                    <input asp-for="Input.BuisnessName" type="text" class="form-control" tabindex="2" placeholder="Write your business name">
+                                    @*<input type="text" name="signupbus" id="signupbus" placeholder="Write your business name" tabindex="2" required="">*@
+                                </div><!--formtx-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <div class="formhe" style="color:#597489;">Business Email Address</div><!--formhe-->
+                                <div class="formtx1">
+                                    <input asp-for="Input.Email" type="email" class="form-control" tabindex="3" placeholder="Write your business email">
+                                    @*<input type="email" name="sigupadess" id="sigupadess" placeholder="Write your business email" tabindex="3" required="">*@
+                                </div><!--formtx-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <div class="formhe" style="color:#597489;">Password</div><!--formhe-->
+                                <div class="formtx1">
+                                    <input asp-for="Input.Password" type="password" class="form-control" tabindex="4" placeholder="Write your password">
+                                    @*<input type="password" name="signuppass" id="signuppass" placeholder="Write your password" tabindex="4" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="">*@
+                                    <span id="strength" style="float:left; width:100%;" class="errormsg"></span>
+                                </div><!--formtx-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <div class="formhe" style="color:#597489;">Confirm Password</div><!--formhe-->
+                                <div class="formtx1">
+                                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control" tabindex="5" placeholder="Write your password again">
+                                    @*<input type="password" name="signupcpass" id="signupcpass" placeholder="Write your password again" tabindex="5" required="" onclick="checkpassd();" onkeyup="checkpp();">*@
+                                    @*<div id="message" class="errormsg" style="float:left; width:100%;"></div>*@
+                                </div><!--formtx-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                        <div class="textformblock">
+                            <div class="formb3">
+                                <button type="submit" class="action-buttonsi" style="margin-left:1px;" tabindex="6">Sign Up</button>
+                                @*<input type="submit" name="submitbutsignup" class="action-buttonsi" value="Sign Up" tabindex="6" style="margin-left:1px;">*@
+                                <!--<span style="font-size:12px; font-weight:600;">OR</span>
+                                <a href="index.php"><input type="button" name="submitbutlogin" class="action-buttonsi" value="Sign in"  tabindex="7" /></a>-->
+                            </div><!--formb1-->
+                        </div><!--textformblock-->
+
+                    </div><!--signblock-->
+
+                </div><!--formblockportion--><div class="formblockportionsi"></div>
+            </div>
+        </div>
+        </form>
+        <div class="footerblockbg">
+            <div class="footerblockbg1">
+
+                <div class="foorterleft">
+                    © 2010-2022 - FGC | Digital Banking Solution
+                </div><!--footerleft-->
+
+
+                <div class="foorterright">
+                    <a href="https://www.fgc-capital.com/contact-us/" target="_blank">Report an error</a>
+                    <a href="">|</a>
+                    <a href="https://www.fgc-capital.com/contact-us/" target="_blank">Support</a>
+                    <a href="">|</a>
+                    <a href="https://www.fgc-capital.com/contact-us/" target="_blank">Contact us</a>
+                </div><!--footerleft-->
+
+            </div>
+        </div>
+        <!--<div class="row">
+            <div class="col-12">
+                <div style="justify-content: normal; background-color: #f2f2f2;" class="hold-transition login-page">
+                    <div style="min-width:35%" class="register-box mt-5">-->
+        @*<div class="register-logo">
+                <a href="../../index2.html"><b>Admin</b>LTE</a>
+            </div>*@
+
+        <!--<div class="card mt-5">
+            <div style="box-shadow: 0 0 10px #c1bdbd;" class="card-body register-card-body">
+                <p style="padding-left:0;padding-right:0;font-weight:bold;font-size:20px" class="login-box-msg float-left">Sign Up</p>
+                <p style="padding-right:0" class="login-box-msg float-right">Already have An Account ?<a href="~/Identity/Account/Login">Sign In</a></p>
+
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div class="input-group mb-3">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.Name" type="text" class="form-control" placeholder="Name">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.BuisnessName" type="text" class="form-control" placeholder="Buisness Name">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.BuisnessName" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.Email" type="email" class="form-control" placeholder="Email">
+
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="show-btn"><i id="myeye" class="fas fa-eye"></i></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Retype password">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="show-btn"><i id="myeye1" class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    <div class="row">-->
+        @*<div class="col-8">
+                <div class="icheck-primary">
+                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                    <label for="agreeTerms">
+                        I agree to the <a href="#">terms</a>
+                    </label>
+                </div>
+            </div>*@
+        <!--<!-- /.col -->
+        <!--<div class="col-4">
+            <button type="submit" class="action-buttonsi">Sign Up</button>
+        </div>-->
+        <!-- /.col -->
+        <!--</div>
+        </form>-->
+        @*<div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Sign up using Google+
+                </a>
+            </div>*@
+
+        @*<a href="~/Identity/Account/Login" class="text-center">I already have a membership</a>
+            </div>-->*@
+        <!-- /.form-box -->
+        <!--</div>--><!-- /.card -->
+        <!--</div>
+                    @{
+                        await Html.RenderPartialAsync("FooterIdentityPages");
+                    }
+
+                </div>
+            </div>
+        </div>-->
+        <!-- /.register-box -->
+        <!-- jQuery -->
+        <script src="../../Admin-Lte/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../../Admin-Lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../../Admin-Lte/dist/js/adminlte.min.js"></script>
+
+        <script>
+            $('#myeye').click(function () {
+                debugger
+                var PasswordField = document.getElementById('Input_Password')
+
+                if (PasswordField.type == "password") {
+
+                    PasswordField.type = "text";
+                }
+                else {
+                    PasswordField.type = "password";
+                }
+            })
+            $('#myeye1').click(function () {
+                debugger
+                var PasswordField = document.getElementById('Input_ConfirmPassword')
+
+                if (PasswordField.type == "password") {
+
+                    PasswordField.type = "text";
+                }
+                else {
+                    PasswordField.type = "password";
+                }
+            })
+        </script>
+
+        <link rel="stylesheet" href="../../Admin-Lte/plugins/fontawesome-free/css/all.min.css">
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="../../Admin-Lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="../../Admin-Lte/dist/css/adminlte.min.css">
+        <style>
+            .action-buttonsi {
+                width: 100px;
+                /* background: #5e8c21; */
+                background-image: linear-gradient(to right,#19663c, #258e48);
+                font-weight: bold;
+                color: white;
+                border: 0 none;
+                border-radius: 1px;
+                cursor: pointer;
+                padding: 10px 5px;
+                margin: 10px 5px;
+                letter-spacing: 1px;
+                font-family: montserrat, arial, verdana;
+                margin-left: 0px;
+            }
+        </style>
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+</html>
+
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>
+    </div>*@
+

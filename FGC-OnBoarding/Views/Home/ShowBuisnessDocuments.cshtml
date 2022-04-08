@@ -1,0 +1,464 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="formblockportion">
+
+    <div class="topheader"></div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagehee1" style="padding-bottom: 15px; display: block;" id="hsole1">Business Documentation</div>
+
+
+            <div class="pagett2" style="color: #597489;">If you are unable to provide below documents now, it will be required at later stage</div>
+        </div>
+    </div><!--topheader-->
+
+
+    <div class="topheader11">
+        <div class="topheader2">
+
+            <div class="leftblock1h">
+
+                <div class="hhhbl">
+                    <div class="heastext" id="hall3" style="display: block;"><b>Proof of Business Address</b> <br> Uploaded proof should not be older then 3 months</div><!--heatext-->
+                    <div class="heastext" id="hchar1" style="display: none;"><b>Proof of Charity Address</b> <br> Uploaded proof should not be older then 3 months</div><!--heatext-->
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" class="BuisnessFile1" name="FormFile" id="FormFile1" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file1_prev">
+                            @if (ViewBag.Buisness1 != null)
+                            {
+                                @foreach (var item in ViewBag.Buisness1)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="Buisnessdiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div><!--hhhbl-->
+
+                <div class="hhhb3">
+                    <div class="heastext">Regulatory License</div><!--heatext-->
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" name="FormFile1" class="BuisnessFile2" id="FormFile2" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file2_prev">
+                            @if (ViewBag.Buisness2 != null)
+                            {
+                                @foreach (var item in ViewBag.Buisness2)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="Buisnessdiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                            </div>
+                    </div>
+                </div><!--hhhbl-->
+
+                <div class="hhhb3">
+
+                    <div class="heastext" id="hsole4" style="display: block;">Annual Accounts</div><!--heatext-->
+
+                    <div class="hhhb2">
+                        <div class="fileUpload btn btn-primary">
+                            <label class="uplofile">
+                                Upload File
+                                <input type="file" class="BuisnessFile3" name="FormFile3" id="FormFile3" multiple tabindex="1">
+                            </label>
+                        </div>
+                        <div id="file3_prev">
+                            @if (ViewBag.Buisness3 != null)
+                            {
+                                @foreach (var item in ViewBag.Buisness3)
+                                {
+                                    <span class="filenamedis">
+                                        @item.DisplayFilename
+                                        <p id="filename" style="display:none">@item.DisplayFilename</p>
+                                        <p id="@item.DocumentId" class="Buisnessdiscardupload">(x)</p>
+                                    </span>
+                                }
+                            }
+                            </div>
+                    </div>
+                </div><!--hhhbl-->
+            </div><!--leftblock1h-->
+            <div class="leftblock1h">
+                <div class="dectext" id="hcharsole2" style="display: block;">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="font-size:16px;"></i> For regulated businesses that require any form of authorisation document, a copy of the authorisation document needs to be submitted. <br><br>
+                    For Proof of business address purposes, (where a P.O. box address is not accepted), bank statements, or utility bills not older than 3 months; or Council Tax notifications, or Office Rental Agreements are admissible. <br><br>
+                    In certain cases, a legal opinion of the business model or a copy of the business plan may be requested. <br><br>
+                    Other information or documents may be requested during the application process.
+                </div>
+            </div><!--leftblock1h-->
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader11">
+        <div class="topheader2" style="text-align:center;">
+
+            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowOwners()" tabindex="5">
+
+
+            <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowSoloPersonalDocuments()" tabindex="4">
+        </div>
+    </div><!--topheader-->
+
+</div>
+<style>
+    .Buisnessdiscardupload, .discardupload2, .discardupload3 {
+        font-size: 10px;
+        font-weight: bolder;
+        display: inline;
+        margin-left: 15px;
+        color: #F00;
+        cursor: pointer;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+
+        $('.menu1').find('#header1').prop('class', 'menuheader2');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader2');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader2');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader1');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+
+
+    })
+    //var FilesList1 =[];
+   
+    //$(document).on('click', '', function () {
+    //    debugger
+    //    var DocumentId = $(this).attr('id');
+    //    //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+    //    // var files = $('#FormFile1').prop('files');
+    //    //  FilesList1.push(FileName);
+    //    $(this).closest('.filenamedis').remove()
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Home/DeleteBuisnessFile1',
+    //        //contentType: false,
+    //        //processData: false,
+    //        data: { Documentid: DocumentId },
+    //        async: true,
+    //        success: function (result) {
+    //            // alert(result)
+    //        },
+    //        error: function (xhr, status, p3, p4) {
+    //            alert('Something is going to wrong please try again!');
+    //        }
+    //    });
+
+    //})
+
+
+    $('.BuisnessFile1').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+
+        var files = $('#FormFile1').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+            $('#file1_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='Buisnessdiscardupload'>(x)</p></span>");
+        }
+
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/BuisnessFile1',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file1_prev').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+                            $('#file1_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='Buisnessdiscardupload'>(x)</p></span>");
+                        }
+
+
+                        //$('#file1_prev').find('.filenamedis').each(function () {
+                        //    $(this).find('.discardupload1').attr('id', result[i]);
+                        //    i++;
+                        //});
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+
+
+    });
+    $('.BuisnessFile2').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+
+        var files = $('#FormFile2').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+          
+            $('#file2_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='Buisnessdiscardupload'>(x)</p></span>");
+        }
+
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/BuisnessFile2',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file2_prev').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+
+
+                            $('#file2_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='Buisnessdiscardupload'>(x)</p></span>");
+                        }
+
+
+                        //$('#file1_prev').find('.filenamedis').each(function () {
+                        //    $(this).find('.discardupload1').attr('id', result[i]);
+                        //    i++;
+                        //});
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+
+
+    });
+    $('.BuisnessFile3').on('change', function () {
+        /*    $('.BuisnessFile1').on('change', function () {*/
+        debugger
+
+        var files = $('#FormFile3').prop('files');// $('#file').files[0];// e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            //if (FilesList1.indexOf(files[i].name) > -1) {
+            //    delete FilesList1[FilesList1.indexOf(files[i].name)]
+            //}
+            $('#file3_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='Buisnessdiscardupload'>(x)</p></span>");
+        }
+
+        // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    // if (FilesList1.length > 0) {
+                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                    //  data.append("file" + x, files[x]);
+                    //  }
+                    // }
+                    // else {
+                    data.append("file" + x, files[x]);
+                    // }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/BuisnessFile3',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    async: true,
+                    success: function (result) {
+                        debugger
+                        if (result.length > 0) {
+                            $('#file3_prev').html("");
+                        }
+                        for (var i = 0; i < result.length; i++) {
+                            $('#file3_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='Buisnessdiscardupload'>(x)</p></span>");
+                        }
+
+
+                        //$('#file1_prev').find('.filenamedis').each(function () {
+                        //    $(this).find('.discardupload1').attr('id', result[i]);
+                        //    i++;
+                        //});
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try agan!');
+                    }
+                });
+            } else {
+                alert("Upgrade your browser!");
+            }
+        }
+
+
+    });
+
+    function ShowOwners() {
+        $.ajax({
+
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 5 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+
+            url: '/Home/ShowOwners',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+
+                //$("#myfield").show("slow", function () {
+                //    // Animation complete.
+                //});
+                //$("#myfield").fadeIn("slow", function () {
+                //    // Animation complete
+                //});
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+
+    function ShowSoloPersonalDocuments() {
+        $.ajax({
+
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 7 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        $.ajax({
+
+            url: '/Home/ShowSoloPersonalDocuments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'html',
+            async: false,
+            success: function (data) {
+                $('#myfield').hide()
+                $('#myfield').html(data);
+
+                //$("#myfield").show("slow", function () {
+                //    // Animation complete.
+                //});
+                //$("#myfield").fadeIn("slow", function () {
+                //    // Animation complete
+                //});
+                $("#myfield").slideDown("fast", function () {
+                    // Animation complete.
+                });
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+</script>

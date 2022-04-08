@@ -1,0 +1,695 @@
+﻿@model FGC_OnBoarding.Models.Buisness.BuisnessProfile
+@{
+    ViewData["Title"] = "ServiceRequirment";
+    //Layout = "~/Views/Shared/_FormLayout.cshtml";
+    Layout = null;
+}
+
+<div class="formblockportion">
+    <div class="topheader"></div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagehee1">Service Requirement</div>
+        </div>
+    </div><!--topheader-->
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagett1">In which currency do you wish your accounts to be maintained? <span style="display:none" id="pountyp" class="errormsg">This Field Is Mandatory</span></div>
+        </div>
+    </div><!--topheader-->
+    <div class="blockdata">
+        <div class="blockdata1">
+            <div class="checkblock">
+                <label class="container">
+                    Pound Sterling (GBP)
+                    <input type="checkbox" class="currencycheck" checked="checked" id="poundtype" value="1" name="serpound">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="checkblock">
+                <label class="container">
+                    Euro (EUR)
+                    <input type="checkbox" class="currencycheck" value="2" name="sereuro">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="checkblock">
+                <label class="container">
+                    US Dollars (USD)
+                    <input type="checkbox" value="3" class="currencycheck" name="serdollar" disabled="disabled">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div><!--blockdata-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagett1">Type of Business <span style="display:none" id="typebus" class="errormsg">This Field Is Mandatory</span></div>
+        </div>
+    </div><!--topheader-->
+    <div class="blockdata">
+        <div class="blockdata1">
+            <div class="checkblock">
+                <label class="container">
+                    Sole proprietor
+                    <input class="BuisnessTypecheck" type="radio" checked="checked" value="1" id="typeb1" name="bitext1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="checkblock">
+                <label class="container">
+                    Charity
+                    <input class="BuisnessTypecheck" type="radio" value="2" id="typeb2" name="bitext1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="checkblock">
+                <label class="container">
+                    Partnership
+                    <input class="BuisnessTypecheck" type="radio" value="3" id="typeb3" name="bitext1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="checkblock" id="topcheck">
+                <label class="container">
+                    Limited Company
+                    <input class="BuisnessTypecheck" type="radio" value="4" id="typeb4" name="bitext1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div><!--blockdata-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div style="display:none" id="bussector">
+        <div class="topheader1">
+            <div class="topheader2">
+                <div class="pagett1">Business Sector <span style="display:none" id="sectorbus" class="errormsg">This Field Is Mandatory</span></div>
+            </div>
+        </div><!--topheader-->
+        <div class="blockdata">
+            <div class="blockdata1">
+                <div class="checkblock">
+                    <label class="container">
+                        Financial Institution
+                        <input class="BuisnessSectorCheck" type="radio" value="1" id="bs1" name="bitext2" @*onchange="closebussec()*@>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="checkblock">
+                    <label class="container">
+                        Corporate
+                        <input class="BuisnessSectorCheck" type="radio" value="2" id="bs2" name="bitext2" @*onchange="closebussec()*@>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="checkblock">
+                    <label class="container">
+                        MSB
+                        <input class="BuisnessSectorCheck" type="radio" value="3" id="bs3" name="bitext2" @*onchange="closebussec()*@>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div><!--blockdata-->
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="topheader11">
+        <div class="topheader2" style="text-align:center;">
+            <a href="~/Home/Index"><input type="button" name="next1" class="action-button1" value="Previous"></a>
+            <button type="button" name="next1" class="action-button1" id="showMyBuisnessProfile">Next</button>
+        </div>
+    </div><!--topheader-->
+</div><!--formblockportion-->
+
+<script>
+    debugger
+    var CurrencyIds = "";
+    var BuisnessType = 0;
+    var BuisnessSector = 0;
+    $(document).ready(function () {
+        debugger
+
+        if ($('.BuisnessTypecheck').val() == "1") {
+
+            $("#dsall1").hide(); $("#mydssole1").show(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+            //$(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ($('.BuisnessTypecheck').val() == "2") {
+            $("#dsall1").hide(); $("#mydssole1").hide(); $("#dschar1").show();
+            $('#bussector').css('display', 'none')
+            // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ($('.BuisnessTypecheck').val() == "3") {
+            $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+            // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ($('.BuisnessTypecheck').val() == "4") {
+            $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+            // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+
+        $('.menu1').find('#header1').prop('class', 'menuheader');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader1');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader1');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader1');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+
+       
+      
+        //$.ajax({
+
+        //    url: '/SideMenu/SideMenu1',
+        //    contentType: 'application/html ; charset:ytf-8',
+        //    type: 'Get',
+        //    dataType: 'html',
+        //    async: false,
+        //    success: function (data) {
+        //        $('.sidemenu').html(data);
+        //        $('.sidemenu').html(data);
+        //    },
+        //    error: function (msg, xhr) {
+        //        alert("error")
+        //        console.log(msg);
+        //        console.log(xhr);
+        //    }
+        //})
+      //  $('#myfield').html("");
+                  var Currency = ("@ViewBag.Currency").split(',');
+/////////////////For Checking Currency////////////
+    for (var i = 0; i < Currency.length; i++) {
+        $(".currencycheck:checkbox[value='" + Currency[i] + "']").prop("checked", "true");
+        }
+////////////End///////////////
+        //////////////////////Checking Buisness Type of Existing Form////////////
+        if ("@ViewBag.BuisnessType" != "") {
+     $(".BuisnessTypecheck:radio[value='" +@ViewBag.BuisnessType+"']").prop("checked", "true");
+        }
+        /////////////////End///////////////////
+        ////////////////////Checking Buisness Sector Existing Form//////////////////
+     if ("@ViewBag.BuisnessSector" != "") {
+     $(".BuisnessSectorCheck:radio[value='" +@ViewBag.BuisnessSector+"']").prop("checked", "true");
+        }
+        ///////////////End/////////////////
+        ///////////////////////Hide Unhide Buisness Sector Accroding To Buisness Type of Existing Form
+        if ("@ViewBag.BuisnessType" == "1") {
+
+            $("#dsall1").hide(); $("#mydssole1").show(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+            //$(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ("@ViewBag.BuisnessType" == "2") {
+            $("#dsall1").hide(); $("#mydssole1").hide(); $("#dschar1").show();
+            $('#bussector').css('display', 'none')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ("@ViewBag.BuisnessType" == "3") {
+            $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+         else if ("@ViewBag.BuisnessType" == "4") {
+            $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+
+
+        //////////////////
+
+
+        /////Opening User Last Interaction Form/////////////
+        if ("@ViewBag.CurrentForm" != "0") {
+
+            if ("@ViewBag.CurrentForm" == "1") {
+
+                CallBuisnessProfile();
+            }
+            if ("@ViewBag.CurrentForm" == "2") {
+                $.ajax({
+
+                    url: '/Home/ShowAuthorizeRepresentatives',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (data) {
+                        $('#myfield').hide()
+
+                        $('#myfield').html(data);
+
+                        //$("#myfield").show("slow", function () {
+                        //    // Animation complete.
+                        //});
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+            if ("@ViewBag.CurrentForm" == "3") {
+                $.ajax({
+                    url: '/Home/ShowBuisnessInformation',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html(data)
+                        $("#myfield").slideDown("fast", function () {
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        debugger
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+            if ("@ViewBag.CurrentForm" == "4") {
+                $.ajax({
+                    url: '/Home/ShowFinancialInformation',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html(data)
+                        $("#myfield").slideDown("fast", function () {
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        debugger
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+            if ("@ViewBag.CurrentForm" == "5") {
+
+                 if ("@ViewBag.BuisnessType" == "1") {
+                     $.ajax({
+                         url: '/Home/ShowOwners',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+                 else if ("@ViewBag.BuisnessType" == "2") {
+
+                     $.ajax({
+                         url: '/Home/ShowTrustees',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+
+                  else if ("@ViewBag.BuisnessType" == "3" || "@ViewBag.BuisnessType" == "4") {
+
+                     $.ajax({
+                         url: '/Home/ShowDirectors',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+            }
+            if ("@ViewBag.CurrentForm" == "6") {
+
+                 if ("@ViewBag.BuisnessType" == "1") {
+                     $.ajax({
+                         url: '/Home/ShowBuisnessDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+                 else if ("@ViewBag.BuisnessType" == "2") {
+
+                     $.ajax({
+                         url: '/Home/ShowCharityDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+
+                  else if ("@ViewBag.BuisnessType" == "3" || "@ViewBag.BuisnessType" == "4") {
+
+                     $.ajax({
+                         url: '/Home/ShowCompanyDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+            }
+            if ("@ViewBag.CurrentForm" == "7") {
+
+                 if ("@ViewBag.BuisnessType" == "1") {
+                     $.ajax({
+                         url: '/Home/ShowSoloPersonalDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+                 else if ("@ViewBag.BuisnessType" == "2") {
+
+                     $.ajax({
+                         url: '/Home/ShowcharityPersonalDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+
+                  else if ("@ViewBag.BuisnessType" == "3" || "@ViewBag.BuisnessType" == "4") {
+
+                     $.ajax({
+                         url: '/Home/ShowBuisnessPersonalDocuments',
+                         contentType: 'application/json; charset=utf-8',
+                         type: 'GET',
+                         dataType: 'html',
+                         async: true,
+                         success: function (data) {
+                             $('#myfield').hide()
+                             $('#myfield').html(data)
+                             $("#myfield").slideDown("fast", function () {
+                             });
+                         },
+                         error: function (msg, xhr) {
+                             debugger
+                             alert("error")
+                             console.log(msg);
+                             console.log(xhr);
+                         }
+                     })
+                 }
+            }
+            if ("@ViewBag.CurrentForm" == "8") {
+
+                $.ajax({
+                    url: '/Home/ShowDecleration',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html(data)
+                        $("#myfield").slideDown("fast", function () {
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        debugger
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+        }
+
+
+    })
+    ///////////////////////////End//////////////////
+
+    $('.BuisnessTypecheck').click(function () {
+        debugger
+
+         if ($(this).val() == "1") {
+
+             $("#dsall1").hide(); $("#mydssole1").show(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+            //$(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ($(this).val() == "2") {
+             $("#dsall1").hide(); $("#mydssole1").hide(); $("#dschar1").show();
+            $('#bussector').css('display', 'none')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+        else if ($(this).val() == "3") {
+             $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+         else if ($(this).val() == "4") {
+             $("#dsall1").show(); $("#mydssole1").hide(); $("#dschar1").hide();
+            $('#bussector').css('display', '')
+           // $(".BuisnessSectorCheck").prop("checked", false);
+        }
+    })
+
+
+    function CallBuisnessProfile() {
+        CurrencyIds = "";
+        BuisnessType = 0;
+        BuisnessSector = 0;
+
+        $('#typebus').css('display', 'none');
+        $('#sectorbus').css('display', 'none');
+        $('#pountyp').css('display', 'none');
+
+
+        $('.currencycheck:checkbox:checked').each(function () {
+
+            debugger
+
+            CurrencyIds += $(this).val() + ",";
+
+
+
+        })
+        debugger
+        BuisnessType = $('.BuisnessTypecheck:checked').val()
+        BuisnessSector = $('.BuisnessSectorCheck:checked').val()
+        CurrencyIds = CurrencyIds.slice(0, -1)
+
+        debugger
+        if (CurrencyIds == "") {
+            $('#pountyp').css('display', '');
+        }
+        else if (BuisnessType == undefined) {
+            $('#typebus').css('display', '');
+        }
+        else if (BuisnessSector == undefined) {
+            if (BuisnessType != 2) {
+                $('#sectorbus').css('display', '');
+
+            }
+            else {
+                CallServiceRequirments();
+            }
+        }
+        else {
+            CallServiceRequirments();
+        }
+    }
+
+    $('#showMyBuisnessProfile').click(function () {
+        debugger
+
+        $.ajax({
+
+            url: '/Home/SetCurrentForm',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { Form: 1 },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+        CallBuisnessProfile();
+
+    })
+    function CallServiceRequirments() {
+        debugger
+
+
+                $.ajax({
+
+            url: '/Home/ShowBuisnessProfile',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    async:true,
+             data: { BuisnessProfileId: "@ViewBag.BuisnessProfileId", CurrencyIds: CurrencyIds, BuisnessType: BuisnessType, BuisnessSector: BuisnessSector},
+
+                    success: function (data) {
+                        $('#myfield').hide()
+                $('#myfield').html(data)
+
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+
+                //$("#myfield").show("slow", function () {
+                //    // Animation complete.
+                //});
+
+
+            },
+            error: function (msg, xhr) {
+                debugger
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+    }
+
+
+
+</script>

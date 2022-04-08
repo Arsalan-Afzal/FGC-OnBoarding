@@ -1,0 +1,625 @@
+﻿@model FGC_OnBoarding.Models.Buisness.BuisnessInformation
+@{
+    Layout = null;
+}
+<div class="formblockportion">
+    <div class="topheader">
+    </div><!--topheader-->
+
+    <div class="topheader1">
+        <div class="topheader2">
+            <div class="pagehee1">BUSINESS INFORMATION</div>
+        </div>
+    </div><!--topheader-->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="bussinfo-charity">
+        <div class="topheader11">
+            @if (ViewBag.BuisnessType == 2)
+            {
+                <div class="topheader2">
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">Charity Overview  <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer1, new { @rows = "5", @placeholder = "Enter Charity Overview" })
+                                @*<textarea type="text" name="bichar1" rows="5" tabindex="1" id="bch1" onkeypress="bsuch1();" placeholder="Enter Charity Overview"></textarea>*@
+                                <div id="Validation1" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">Who the charity helps? <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer2, new { @rows = "5", @placeholder = "Enter Charity Overview" })
+                                @*<textarea type="text" name="bichar2" tabindex="2" id="bch2" onkeypress="bsuch2();" placeholder="Who the charity helps?" rows="5"></textarea>*@
+                                <div id="Validation2" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">What the charity does? <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer3, new { @rows = "5", @placeholder = "Briefly explain" })
+                                @*<textarea name="bichar3" id="bch3" tabindex="3" rows="5" onkeypress="bsuch3();" placeholder="Briefly explain"></textarea>*@
+                                <div id="Validation3" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">How the charity helps? <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer4, new { @rows = "5", @placeholder = "How the charity helps?" })
+                                @*<textarea name="bichar4" tabindex="4" rows="5" id="bch4" onkeypress="bsuch4();" placeholder="How the charity helps?"></textarea>*@
+                                <div id="Validation4" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">Who are your donors and where are they based? <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer5, new { @rows = "5", @placeholder = "Who are your donors?" })
+                                @*<textarea type="text" name="bichar5" tabindex="5" rows="5" id="bch5" onkeypress="bsuch5();" placeholder="Who are your donors?"></textarea>*@
+                                <div id="Validation5" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">Where the charity operates? <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextAreaFor(x => x.Answer6, new { @rows = "5", @placeholder = "Where the charity operates?" })
+                                @*<textarea type="text" name="bichar6" tabindex="6" rows="5" id="bch6" onkeypress="bsuch6();" placeholder="Where the charity operates?"></textarea>*@
+                                <div id="Validation6" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb1">
+                            <div class="formhe">Regulatory Registration number &amp; details if applicable</div><!--formhe-->
+                            <div class="formtx1">
+                                @Html.TextBoxFor(x => x.Answer7, new { @placeholder = "Registration number such as FCA, HMRC" })
+                                @*<input type="text" name="bichar7" tabindex="8" placeholder="Registration number such as FCA, HMRC">*@
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+
+                        <div class="formb2">
+                            <div class="formhe">How did you hear about FGC-Capital? <span class="asteric">*</span> </div><!--formhe-->
+                            <div class="formtx1" style="margin-top:37px;">
+                                @Html.TextBoxFor(x => x.Answer8, new { @placeholder = "Provide details of recommended introducer" })
+                                @*<input type="text" name="bichar8" tabindex="9" onkeypress="bsuch7();" id="bch7" placeholder="Provide details of recommended introducer">*@
+                                <div id="Validation8" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                    <div class="textformblock">
+                        <div class="formb3">
+                            <div class="formhe">Enter name of countries you would be sending payments to<span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx">
+                                @Html.TextBoxFor(x => x.Answer9, new { @style = "width:95%;", @placeholder = "Enter countries" })
+                                @*<input type="text" name="bichar9" tabindex="10" onkeypress="bsuch8();" id="bch8" placeholder="Enter countries" style="width:95%;">*@
+                                <div id="Validation9" class="errormsg"></div>
+                            </div><!--formtx-->
+                        </div><!--formb1-->
+                    </div><!--textformblock-->
+
+                </div>
+            }
+            else @if (ViewBag.BuisnessType == 1 || ViewBag.BuisnessType == 3 || ViewBag.BuisnessType == 4)
+       {
+        <div class="topheader2">
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">What corridors do you serve? <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextAreaFor(x => x.Answer1, new { @placeholder = "Enter corridors list", @rows = "5" })
+                        @*<textarea type="text" name="bitext5" tabindex="1" id="b1" onkeypress="bsuc1();" placeholder="Enter corridors list" rows="5"></textarea>*@
+                        <div id="Validation1" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">What is the source of your funds? <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextAreaFor(x => x.Answer2, new { @placeholder = "e.g through company income, Directors funds etc", @rows = "5" })
+                        @*<textarea type="text" name="bitext6" tabindex="2" id="b2" onkeypress="bsuc2();" placeholder="e.g through company income, Directors funds etc" rows="5"></textarea>*@
+                        <div id="Validation2" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">Who are your suppliers? Please provide their website address, if any? <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextAreaFor(x => x.Answer3, new { @placeholder = "Enter suppliers list", @rows = "5" })
+                        @*<textarea type="text" name="bitext4" id="b3" tabindex="3" onkeypress="bsuc3();" placeholder="Enter suppliers list" rows="5"></textarea>*@
+                        <div id="Validation3" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">
+                        What product &amp; services your business provide? How do you operate your business?
+                        <span class="asteric">*</span>
+                    </div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextAreaFor(x => x.Answer4, new { @placeholder = "e.g through a network of branches, online or any other business model", @rows = "5" })
+                        @*<textarea name="bitext7" tabindex="4" rows="5" id="b4" onkeypress="bsuc4();" placeholder="e.g through a network of branches, online or any other business model"></textarea>*@
+                        <div id="Validation4" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">Who are your customers and where are they based? <span class="asteric">*</span></div><!--formhe-->
+                    <div class="formtx1">
+                        @Html.TextAreaFor(x => x.Answer5, new { @placeholder = "Enter customers list", @rows = "5" })
+                        @*<textarea type="text" name="bitext8" tabindex="5" rows="5" id="b5" onkeypress="bsuc5();" placeholder="Enter customers list"></textarea>*@
+                        <div id="Validation5" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb1">
+                    <div class="formhe">Regulatory Registration number &amp; details if applicable</div><!--formhe-->
+                    <div class="formtx1">
+                        @*<input type="text" name="bitext9" tabindex="6" placeholder="Registration number such as FCA, HMRC">*@
+                        @Html.TextBoxFor(x => x.Answer6, new { @placeholder = "Registration number such as FCA, HMRC" })
+                    </div><!--formtx-->
+                </div><!--formb1-->
+                <div class="formb2">
+                    <div class="formhe">How did you hear about FGC-Capital? <span class="asteric">*</span> </div><!--formhe-->
+                    <div class="formtx1" style="margin-top:37px;">
+                        @Html.TextBoxFor(x => x.Answer7, new { @placeholder = "Provide details of recommended introducer" })
+                        @*<input type="text" name="bitext11" tabindex="7" onkeypress="bsuc6();" id="b6" placeholder="Provide details of recommended introducer">*@
+                        <div id="Validation7" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+            <div class="textformblock">
+                <div class="formb3">
+                    <div class="formhe">Enter name of countries you would be sending payments to<span class="asteric">*</span><br></div><!--formhe-->
+                    <div class="formtx" style="margin:auto; float:left; width:100%;">
+                        @Html.TextBoxFor(x => x.Answer8, new { @placeholder = "Enter countries", @style = "width:95%;" })
+                        @*<input type="text" name="bitext10" tabindex="8" placeholder="Enter countries" onkeypress="bsuc7();" id="b7" >*@
+                        <div id="Validation8" class="errormsg"></div>
+                    </div><!--formtx-->
+                </div><!--formb1-->
+            </div><!--textformblock-->
+        </div>
+    }
+        </div><!--topheader-->
+        <div class="topheader11">
+            <div class="topheader2" style="text-align:center;">
+                <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowAuthorizeRepresentatives()" tabindex="12">
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowFinancialInformation()" tabindex="11">
+            </div>
+        </div><!--topheader-->
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+</div>
+<script>
+
+
+
+    $(document).ready(function () {
+        $('.menu1').find('#header1').prop('class', 'menuheader2');
+        $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
+
+        $('.menu2').find('#header2').prop('class', 'menuheader');
+        $('.menu2').find('.mneuline').find('img').prop('src', '../Images/dotedlinemenu.png')
+
+        $('.menu3').find('#dsall1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#mydssole1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu3').find('#dschar1').prop('class', 'menuheader1');
+        $('.menu3').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu4').find('#header4').prop('class', 'menuheader1');
+        $('.menu4').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+
+        $('.menu5').find('#header5').prop('class', 'menuheader1');
+        $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
+    })
+
+
+
+
+      function ShowAuthorizeRepresentatives() {
+            $.ajax({
+                url: '/Home/SetCurrentForm',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { Form: 2 },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+            $.ajax({
+                url: '/Home/ShowAuthorizeRepresentatives',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'html',
+                async: false,
+                success: function (data) {
+                    $('#myfield').hide()
+                    $('#myfield').html(data);
+                    //$("#myfield").show("slow", function () {
+                    //    // Animation complete.
+                    //});
+                    //$("#myfield").fadeIn("slow", function () {
+                    //    // Animation complete
+                    //});
+                    $("#myfield").slideDown("fast", function () {
+                        // Animation complete.
+                    });
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+        }
+
+       $('#Answer1').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer1": $('#Answer1').val(),
+               "FieldName": "1"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+    })
+       $('#Answer2').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer2": $('#Answer2').val(),
+               "FieldName": "2"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+     })
+       $('#Answer3').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer3": $('#Answer3').val(),
+               "FieldName": "3"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+     })
+       $('#Answer4').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer4": $('#Answer4').val(),
+               "FieldName": "4"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+      })
+       $('#Answer5').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer5": $('#Answer5').val(),
+               "FieldName": "5"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+      })
+       $('#Answer6').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer6": $('#Answer6').val(),
+               "FieldName": "6"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+     })
+       $('#Answer7').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer7": $('#Answer7').val(),
+               "FieldName": "7"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+       })
+       $('#Answer8').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer8": $('#Answer8').val(),
+               "FieldName": "8"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+       })
+       $('#Answer9').focusout(function () {
+
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+               "Answer9": $('#Answer9').val(),
+               "FieldName": "9"
+
+        };
+        debugger
+        $.ajax({
+            url: '/Home/SaveBuisnessInformationFields',
+          /*  contentType: 'application/json ; charset:ytf-8',*/
+            type: 'POST',
+            dataType: 'json',
+            data: { objFields: objFields },
+            async: true,
+            success: function (data) {
+                //$('#myfield').html(data);
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+
+    })
+
+    function ShowFinancialInformation() {
+        var flag = false;
+        $('.errormsg').html("");
+        $.ajax({
+            url: '/Home/ValidateBuisnessInfoFields',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { BuisnessProfileId: @Model.BuisnessProfileId },
+            async: false,
+            success: function (data) {
+                //$('#myfield').html(data);
+                debugger
+                if (data.length == 0) {
+                    flag = false;
+                }
+                else {
+                  
+                    window.scrollTo(0, 0);
+                }
+                for (var i = 0; i < data.length; i++) {
+                    debugger
+                    flag = true;
+                    var Id = "#" + data[i].validationid;
+                    $(Id).html(data[i].message)
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+        if (flag == false) {
+
+            $.ajax({
+
+                url: '/Home/SetCurrentForm',
+                contentType: 'application/json ; charset:ytf-8',
+                type: 'Get',
+                dataType: 'json',
+                data: { Form: 4 },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+
+            $.ajax({
+                url: '/Home/ShowFinancialInformation',
+                contentType: 'application/json; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                async: true,
+                success: function (data) {
+                    $('#myfield').hide()
+                    $('#myfield').html(data)
+                    $("#myfield").slideDown("fast", function () {
+                    });
+                },
+                error: function (msg, xhr) {
+                    debugger
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+        }
+    }
+</script>

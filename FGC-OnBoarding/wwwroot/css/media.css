@@ -1,0 +1,88 @@
+﻿@media screen and (min-width:768px) and (max-width:1024px),(min-device-width:768px) and (max-device-width:1024px) and (orientation :landscape) {
+}
+
+
+
+@media screen and (max-width:600px),(min-device-width:600px) and (max-device-width:960px) and (orientation :portrait) {
+    .sidemenu {
+        display: none !important;
+    }
+
+    #msform fieldset, .formblockportions {
+        width: 100% !important;
+    }
+
+    .signblock {
+        width: 90% !important;
+    }
+
+    .signheading2 {
+        font-size: 20px !important;
+    }
+
+    .pageblockwrapper1 {
+        width: 90% !important;
+    }
+
+    .foorterright {
+        float: left !important;
+    }
+
+    .pageblockwrapper {
+        padding-bottom: 30px !important;
+    }
+
+    .footerblockbg1 {
+        width: 90%;
+    }
+
+    .icon2 {
+        margin-left: 50px !important;
+        margin-top: -45px;
+    }
+
+    .icon3 {
+        display: none !important;
+    }
+
+    .menyblock {
+        margin-right: 10px;
+        margin-top: 17px;
+    }
+
+        .menyblock a {
+            font-size: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-weight: 600;
+        }
+
+    .checkblock {
+        width: 42% !important;
+        margin-bottom: 10px !important;
+    }
+
+    #topcheck {
+        margin-top: 0px !important;
+    }
+
+    .formb2 {
+        margin-left: 30px !important;
+        width: 42% !important;
+    }
+
+    .formtx1 input {
+        width: 94% !important;
+    }
+}
+
+@media screen and (max-width: 600px), (min-device-width: 600px) and (max-device-width: 960px) and (orientation: portrait)#msform fieldset,.formblockportions {
+    width: 100% !important;
+}
+
+@media screen and (min-width:360px) and (max-width:640px),(min-device-width:360px) and (max-device-width:640px) and (orientation :landscape) {
+    .checkblock {
+        width: 93% !important;
+        margin-bottom: 10px !important;
+    }
+}
