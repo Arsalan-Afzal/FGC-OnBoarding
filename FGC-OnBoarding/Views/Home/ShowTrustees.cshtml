@@ -15,14 +15,14 @@
         </div>
     </div><!--topheader-->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->           <div class="sectidir">
-        <div class="section">
-            <div id="@ViewBag.TrusteeId" class="topheader11">
+        <div class="mysection">
+            <div id="@ViewBag.TrusteeId" class="topheader11 myform">
                 <div class="topheader2">
                     <div class="textformblock" style="padding: 0 0 0 0 !important;">
                         <div class="formb1">
                             <div class="formhe">First Name <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.FirstName, new { @placeholder = "Enter your first name" })
+                                @Html.TextBoxFor(x => x.FirstName, new { @tabindex = 1, @placeholder = "Enter your first name" })
                                 @*<input type="text" name="directorfname[]" id="d1" onkeypress="dir1();" tabindex="1" placeholder="Enter your first name">*@
                                 <div id="Validation1" class="errormsg"></div>
                             </div><!--formtx-->
@@ -30,7 +30,7 @@
                         <div class="formb2">
                             <div class="formhe">Last Name <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.LastName, new { @placeholder = "Enter your last name" })
+                                @Html.TextBoxFor(x => x.LastName, new { @tabindex = 2, @placeholder = "Enter your last name" })
                                 @*<input type="text" name="directorlname[]" id="d2" onkeypress="dir2();" tabindex="2" placeholder="Enter your last name">*@
                                 <div id="Validation2" class="errormsg"></div>
                             </div><!--formtx-->
@@ -40,7 +40,7 @@
                         <div class="formb1">
                             <div class="formhe">Address <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.Address, new { @placeholder = "Enter your full address" })
+                                @Html.TextBoxFor(x => x.Address, new { @tabindex = 3, @placeholder = "Enter your full address" })
                                 @*<input type="text" name="directorcadd[]" id="d3" onkeypress="dir3();" tabindex="3" placeholder="Enter your full address">*@
                                 <div id="Validation3" class="errormsg"></div>
                             </div><!--formtx-->
@@ -48,7 +48,7 @@
                         <div class="formb2">
                             <div class="formhe">City <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.City, new { @placeholder = "Enter your city" })
+                                @Html.TextBoxFor(x => x.City, new { @tabindex = 4, @placeholder = "Enter your city" })
                                 @*<input type="text" name="directorcity[]" id="d4" onkeypress="dir4();" tabindex="4" placeholder="Enter your city">*@
                                 <div id="Validation4" class="errormsg"></div>
                             </div><!--formtx-->
@@ -58,7 +58,7 @@
                         <div class="formb1">
                             <div class="formhe">Postcode <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.PostCode, new { @placeholder = "Enter your postcode" })
+                                @Html.TextBoxFor(x => x.PostCode, new { @tabindex = 5, @placeholder = "Enter your postcode" })
                                 @*<input type="text" min="1" name="directorpost[]" id="d5" onkeypress="dir5();" tabindex="5" placeholder="Enter your postcode">*@
                                 <div id="Validation5" class="errormsg"></div>
                             </div><!--formtx-->
@@ -66,7 +66,7 @@
                         <div class="formb2">
                             <div class="formhe">County</div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.County, new { @placeholder = "Enter your county" })
+                                @Html.TextBoxFor(x => x.County, new { @tabindex = 6, @placeholder = "Enter your county" })
                                 @*<input type="text" name="directorcounty[]" tabindex="6" id="d6" placeholder="Enter your county">*@
                             </div><!--formtx-->
                         </div><!--formb1-->
@@ -74,8 +74,8 @@
                     <div class="textformblock">
                         <div class="formb1">
                             <div class="formhe">Country <span class="asteric">*</span></div><!--formhe-->
-                            <div class="formtx">
-                                <select style="color:black" id="countrySelect" name="directorcountry[]" onchange="dir7(this);" tabindex="7">
+                            <div class="formtx" >
+                                <select style="color:black" id="countrySelect" name="directorcountry[]"  tabindex="7" >
                                     <option value="Select country" disabled="" selected="">Select country</option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Aland Islands">Aland Islands</option>
@@ -328,7 +328,7 @@
                         <div class="formb2">
                             <div class="formhe">Nationality <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                <select style="color:black" name="directornationality[]" id="NationalitySelect" onchange="dir8(this);" tabindex="8">
+                                <select style="color:black" name="directornationality[]" id="NationalitySelect" tabindex="8">
                                     <option value="Select nationality">Select nationality</option>
                                     <option value="afghan">Afghan</option>
                                     <option value="albanian">Albanian</option>
@@ -532,11 +532,12 @@
                             <div class="formhe">Date of Birth <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
                                 <div class="input-group4 date" data-date-format="dd-mm-yyyy">
-                                    @Html.EditorFor(x => x.DOB, new { @placeholder = "Enter you date of birth (dd-mm-yyyy)" })
+                                    <input type="date" asp-for="DOB" class="form-control MYDOB" tabindex="9" />
+                                    @*@Html.EditorFor(x => x.DOB, new { @placeholder = "Enter you date of birth (dd-mm-yyyy)" })*@
                                     @*<input type="text" class="form-control" placeholder="Enter you date of birth (dd-mm-yyyy)" name="directordob[]" id="datepicker4" onchange="dir14();" tabindex="9">*@
                                     @*<div class="input-group-addon">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                                     <div id="Validation8" class="errormsg"></div>
                                 </div>
                             </div><!--formtx-->
@@ -544,7 +545,7 @@
                         <div class="formb2">
                             <div class="formhe">Phone no <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.PhoneNumber, new { @placeholder = "Enter your contact no" })
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @tabindex = 10, @placeholder = "Enter your contact no" })
                                 @*<input type="text" name="directorphono[]" id="d9" onkeypress="dir9();" tabindex="10" placeholder="Enter your contact no">*@
                                 <div id="Validation9" class="errormsg"></div>
                             </div><!--formtx-->
@@ -554,31 +555,33 @@
                         <div class="formb1">
                             <div class="formhe">Email <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.Email, new { @placeholder = "Enter your valid email address" })
+                                @Html.TextBoxFor(x => x.Email, new { @tabindex = 11, @placeholder = "Enter your valid email address" })
                                 @*<input type="text" name="directoreadd[]" id="d10" onkeypress="dir10();" tabindex="11" placeholder="Enter your valid email address">*@
                                 <div id="Validation10" class="errormsg"></div>
                             </div><!--formtx-->
                         </div><!--formb1-->
-                    </div><!--textformblock-->
-                    <div class="textformblock" id="char8" style="display: block;">
-                        <div class="formb1">
+                        <div class="formb2">
                             <div class="formhe">Role <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.Role, new { @placeholder = "Enter your role" })
+                                @Html.TextBoxFor(x => x.Role, new { @tabindex = 12, @placeholder = "Enter your role" })
                                 @*<input type="text" name="directorrole[]" placeholder="Enter your role" id="d12" tabindex="13" onkeypress="dir12();">*@
                                 <div id="Validation11" class="errormsg"></div>
                             </div><!--formtx-->
                         </div><!--formb1-->
+                    </div><!--textformblock-->
+                    <div class="textformblock" id="char8" style="display: block;">
+                       
 
-                        <div class="formb2" id="newshare">
+                        <div class="formb1" id="newshare">
                             <div class="formhe">Date of Appointment <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
                                 <div class="input-group5 date" data-date-format="dd-mm-yyyy">
-                                    @Html.EditorFor(x => x.AppointmentDate, new { @placeholder = "Enter date of appointment (dd-mm-yyyy)" })
+                                    <input type="date" asp-for="AppointmentDate" class="form-control MYAPPDATE" tabindex="13" />
+                                    @*@Html.EditorFor(x => x.AppointmentDate, new { @placeholder = "Enter date of appointment (dd-mm-yyyy)" })*@
                                     @*<input type="text" class="form-control" placeholder="Enter date of appointment (dd-mm-yyyy)" name="directordapp[]" id="datepicker5" tabindex="14" onchange="dir13();">*@
                                     @*<div class="input-group-addon">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                                     <div id="Validation12" class="errormsg"></div>
                                 </div>
                             </div><!--formtx-->
@@ -648,7 +651,7 @@
                         <div class="formb1">
                             <div class="formhe">Country  <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                <select style="color:black" id="countrySelect" name="directorcountry[]" onchange="dir7(this);">
+                                <select style="color:black" id="countrySelect" name="directorcountry[]">
                                     <option value="Select country">Select country</option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Aland Islands">Aland Islands</option>
@@ -901,7 +904,7 @@
                         <div class="formb2">
                             <div class="formhe">Nationality  <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
-                                <select style="color:black" name="directornationality[]" id="NationalitySelect" onchange="dir8(this);">
+                                <select style="color:black" name="directornationality[]" id="NationalitySelect">
                                     <option value="Select nationality">Select nationality</option>
                                     <option value="afghan">Afghan</option>
                                     <option value="albanian">Albanian</option>
@@ -1107,7 +1110,7 @@
                                 <div class="input-group4 date" data-date-format="dd-mm-yyyy">
                                     @*<input type="text" class="form-control" placeholder="Enter your date of birth (dd-mm-yyyy)" name="directordob[]">*@
                                     @*@Html.EditorFor(x => x.DOB, new { @placeholder = "Enter you date of birth (dd-mm-yyyy)" })*@
-                                    <input data-date-format="yyyy-MM-dd" type="date" class="TrustMydate" id="dt1" />
+                                    <input data-date-format="yyyy-MM-dd" type="date" class="TrustMydate MYDOB" id="dt1" />
                                     <div id="Validation8" class="errormsg"></div>
                                     @*<div class="input-group-addon">
             <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -1126,28 +1129,34 @@
                     <div class="textformblock">
                         <div class="formb1">
                             <div class="formhe">Email  <span class="asteric">*</span></div><!--formhe-->
-                            <div class="formtx"><input class="MyEmail" type="text" name="directoreadd[]" placeholder="Enter your valid email address"></div><!--formtx-->
-                            <div id="Validation10" class="errormsg"></div>
+                            <div class="formtx">
+                                <input class="MyEmail" type="text" name="directoreadd[]" placeholder="Enter your valid email address">
+                                <div id="Validation10" class="errormsg"></div>
+                            </div><!--formtx-->
+                           
+                        </div><!--formb1-->
+                        <div class="formb2">
+                            <div class="formhe">Role <span class="asteric">*</span></div><!--formhe-->
+                            <div class="formtx">
+                                <input type="text" class="Myrole" name="directorrole[]" placeholder="Enter your role" id="hh2">
+                                <div id="Validation11" class="errormsg"></div>
+                            </div><!--formtx-->
+                          
                         </div><!--formb1-->
                     </div><!--textformblock-->
                     <div class="textformblock" id="dirccharitynew">
-                        <div class="formb1">
-                            <div class="formhe">Role</div><!--formhe-->
-                            <div class="formtx">
-                                <input type="text" class="Myrole" name="directorrole[]" placeholder="Enter your role" id="hh2">
-                            </div><!--formtx-->
-                            <div id="Validation11" class="errormsg"></div>
-                        </div><!--formb1-->
-                        <div class="formb2" id="newshare">
-                            <div class="formhe">Date of Appointment</div><!--formhe-->
+                      
+                        <div class="formb1" id="newshare">
+                            <div class="formhe">Date of Appointment <span class="asteric">*</span></div><!--formhe-->
                             <div class="formtx">
                                 <div class="input-group5 date" data-date-format="dd-mm-yyyy">
-                                    @Html.EditorFor(x => x.AppointmentDate, new { @placeholder = "Enter date of appointment (dd-mm-yyyy)" })
+                                    <input data-date-format="yyyy-MM-dd" type="date" class="MYAPPDATE" id="" />
+                                    @*@Html.EditorFor(x => x.AppointmentDate, new { @class = "MYAPPDATE", @placeholder = "Enter date of appointment (dd-mm-yyyy)" })*@
                                     <div id="Validation12" class="errormsg"></div>
                                     @*<input type="text" class="form-control" placeholder="Enter date of appointment (dd-mm-yyyy)" name="directordapp[]" id="hh3">*@
                                     @*<div class="input-group-addon">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                                 </div>
                             </div><!--formtx-->
                         </div><!--formb1-->
@@ -1161,8 +1170,8 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="topheader11">
         <div class="topheader2" style="text-align:center;">
-            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowFinancialInfo()" tabindex="30">
-                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowCharityDocuments()" tabindex="29">
+            <input type="button" name="next1" class="action-button1" value="Previous" tabindex="14" onclick="ShowFinancialInfo()" >
+                <input type="button" name="next1" class="action-button1" value="Next" tabindex="15" onclick="ShowCharityDocuments()" >
         </div>
     </div><!--topheader-->
 </div>
@@ -1215,7 +1224,7 @@
                     debugger
                     TrusteesList = data;
                     for (var i = 0; i < data.length; i++) {
-                        $('.section').append("<div id='" + data[i].trusteeId + "' class='myform'>" + $('.sectiontoadd').html() + "</div>")
+                        $('.mysection').append("<div class='section'><div id='" + data[i].trusteeId + "' class='myform'>" + $('.sectiontoadd').html() + "</div></div>")
 
                     }
                 },
@@ -1226,7 +1235,7 @@
                 }
            })
         var y = 0;
-        $('.myform').each(function () {
+        $('.section').find('.myform').each(function () {
             debugger
             $(this).find('.MyFirstName').val(TrusteesList[y].firstName)
             $(this).find('.MyLastName').val(TrusteesList[y].lastName)
@@ -1240,13 +1249,17 @@
             $(this).find('.MyPhone').val(TrusteesList[y].phoneNumber)
             $(this).find('.MyEmail').val(TrusteesList[y].email)
             $(this).find('.Myrole').val(TrusteesList[y].role)
-            $(this).find('#AppointmentDate').val(TrusteesList[y].appointmentDate)
+            $(this).find('.MYAPPDATE').val(TrusteesList[y].dateofAppointment)
             y++;
         })
 
 
-           $("#FirstName,.MyFirstName").on('focusout', function () {
+
+        $(document).on('focusout', '#FirstName,.MyFirstName', function () {
                debugger
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1254,7 +1267,9 @@
                var objFields = {
                    "Formid": FormId,
                    "FirstName": $(this).val(),
-                   "FieldName": "firstname"
+                   "FieldName": "firstname",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1263,7 +1278,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                        //if (data.flag) {
@@ -1283,9 +1298,13 @@
                })
 
 
-           })
-           $("#LastName,.MyLastName").on('focusout', function () {
+        })
+
+        $(document).on('focusout', '#LastName,.MyLastName', function () {
                debugger
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1293,7 +1312,9 @@
                var objFields = {
                    "Formid": FormId,
                    "LastName": $(this).val(),
-                   "FieldName": "lastname"
+                   "FieldName": "lastname",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1302,7 +1323,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1314,9 +1335,12 @@
                })
 
 
-           })
-           $("#Address,.MyAddress").on('focusout', function () {
+        })
+        $(document).on('focusout', '#Address,.MyAddress', function () {
 
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1325,7 +1349,9 @@
                var objFields = {
                    "Formid": FormId,
                    "Address": $(this).val(),
-                   "FieldName": "address"
+                   "FieldName": "address",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1334,7 +1360,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1346,8 +1372,13 @@
                })
 
 
-           })
-           $("#City,.MyCity").on('focusout', function () {
+        })
+
+        $(document).on('focusout', '#City,.MyCity', function () {
+
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1355,7 +1386,9 @@
                var objFields = {
                    "Formid": FormId,
                    "City": $(this).val(),
-                   "FieldName": "city"
+                   "FieldName": "city",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1364,7 +1397,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1374,8 +1407,12 @@
                        console.log(xhr);
                    }
                })
-           })
-           $("#PostCode,.MyPostCode").on('focusout', function () {
+        })
+
+        $(document).on('focusout', '#PostCode,.MyPostCode', function () {
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1383,7 +1420,9 @@
                var objFields = {
                    "Formid": FormId,
                    "PostCode": $(this).val(),
-                   "FieldName": "postcode"
+                   "FieldName": "postcode",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1392,7 +1431,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1402,9 +1441,14 @@
                        console.log(xhr);
                    }
                })
-           })
-           $("#DOB,.TrustMydate").on('focusout', function () {
+        })
 
+        $(document).on('focusout', '#DOB,.TrustMydate', function () {
+
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
+               debugger
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1412,7 +1456,8 @@
                var objFields = {
                    "Formid": FormId,
                    "DOB": $(this).val(),
-                   "FieldName": "dob"
+                   "FieldName": "dob",
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1421,7 +1466,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1433,9 +1478,13 @@
                })
 
 
-           })
-           $("#PhoneNumber,.MyPhone").on('focusout', function () {
+        })
 
+        $(document).on('focusout', '#PhoneNumber,.MyPhone', function () {
+
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1443,7 +1492,9 @@
                var objFields = {
                    "Formid": FormId,
                    "PhoneNumber": $(this).val(),
-                   "FieldName": "phonenumber"
+                   "FieldName": "phonenumber",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1452,7 +1503,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1464,9 +1515,12 @@
                })
 
 
-           })
-           $("#Email,.MyEmail").on('focusout', function () {
+        })
 
+        $(document).on('focusout', '#Email,.MyEmail', function () {
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var Form = $(this).closest('.topheader11');
                EmailForm = $(this).closest('.topheader11');
                var FormId = $(this).closest('.topheader11').attr('id');
@@ -1476,7 +1530,9 @@
                var objFields = {
                    "Formid": FormId,
                    "Email": $(this).val(),
-                   "FieldName": "email"
+                   "FieldName": "email",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1485,7 +1541,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                        debugger
@@ -1514,8 +1570,12 @@
 
            })
 
-        $(document).on('change', "#countrySelect", function () {
 
+
+        $(document).on('change', "#countrySelect", function () {
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1523,7 +1583,9 @@
                var objFields = {
                    "Formid": FormId,
                    "Country": $(this).val(),
-                   "FieldName": "country"
+                   "FieldName": "country",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1532,7 +1594,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1544,8 +1606,10 @@
                })
 
 
-           })
-           $("#County,.MyCounty").on('focusout', function () {
+        })
+
+        $(document).on('focusout', '#County,.MyCounty', function () {
+
 
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
@@ -1554,7 +1618,9 @@
                var objFields = {
                    "Formid": FormId,
                    "County": $(this).val(),
-                   "FieldName": "county"
+                   "FieldName": "county",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1563,7 +1629,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1577,7 +1643,9 @@
 
            })
         $(document).on('change', "#NationalitySelect", function () {
-
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1585,7 +1653,9 @@
                var objFields = {
                    "Formid": FormId,
                    "Nationality": $(this).val(),
-                   "FieldName": "nationality"
+                   "FieldName": "nationality",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1594,7 +1664,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1606,9 +1676,14 @@
                })
 
 
-           })
-           $("#Role,.Myrole").on('focusout', function () {
+        })
 
+        $(document).on('focusout', '#Role,.Myrole', function () {
+
+               debugger
+               if ($(this).val() != "") {
+                   $(this).closest('.formtx').find('.errormsg').html("");
+               }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1616,7 +1691,9 @@
                var objFields = {
                    "Formid": FormId,
                    "Role": $(this).val(),
-                   "FieldName": "role"
+                   "FieldName": "role",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
+                   "AppointmentDate": $(this).closest('.myform').find('.MYAPPDATE').val()
                };
                debugger
                $.ajax({
@@ -1625,7 +1702,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1637,9 +1714,13 @@
                })
 
 
-           })
-           $("#AppointmentDate").on('focusout', function () {
+        })
 
+        $(document).on('focusout', '#AppointmentDate,.MYAPPDATE', function () {
+
+            if ($(this).val() != "") {
+                $(this).closest('.formtx').find('.errormsg').html("");
+            }
                var FormId = $(this).closest('.topheader11').attr('id');
                if (FormId == undefined) {
                    FormId = $(this).closest('.myform').attr('id');
@@ -1647,7 +1728,8 @@
                var objFields = {
                    "Formid": FormId,
                    "AppointmentDate": $(this).val(),
-                   "FieldName": "appdate"
+                   "FieldName": "appdate",
+                   "DOB": $(this).closest('.myform').find('.MYDOB').val(),
                };
                debugger
                $.ajax({
@@ -1656,7 +1738,7 @@
                    type: 'POST',
                    dataType: 'json',
                    data: { objFields: objFields },
-                   async: true,
+                   async: false,
                    success: function (data) {
                        //$('#myfield').html(data);
                    },
@@ -1687,7 +1769,7 @@
                         debugger
                          TrusteeId = data;
                        /*  $('.section').find('.topheader11').attr('id', ReperesentativeID)*/
-                         $('.section').append("<div id='" + TrusteeId+"' class='myform'>" + $('.sectiontoadd').html() + "</div>")
+                         $('.mysection').append("<div class='section'><div id='" + TrusteeId + "' class='myform'>" + $('.sectiontoadd').html() + "</div></div>")
                          $("html").animate({
                              scrollTop: $(
                                  'html').get(0).scrollHeight
@@ -1705,7 +1787,7 @@
 
 
 
-   
+
 
 
 
@@ -1724,18 +1806,19 @@
             success: function (data) {
                 debugger
                 $(ThisForm).closest('.myform').remove();
-                if (data.trusteeId != 0) {
-                    var FormId = "#" + data.trusteeId;
-                    var Position = $(FormId).find('input').first().position();
-                  //  window.scrollTo(Position.left, Position.top);
-                     $("html").animate({
+                $("html").animate({
                     scrollTop: $(
-                        'html').get(Position.top).scrollHeight
+                        'html').get(0).scrollHeight
                 });
-                }
-                else {
-                    window.scrollTo(0, 0);
-                }
+                //if (data.trusteeId != 0) {
+                //    var FormId = "#" + data.trusteeId;
+                //    var Position = $(FormId).find('input').first().position();
+                //    window.scrollTo(Position.left, Position.top);
+                //}
+                //else {
+                //    window.scrollTo(0, 0);
+                //}
+
             },
             error: function (msg, xhr) {
                 debugger
@@ -1751,10 +1834,11 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 4 },
+            data: { Form: 4,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
+
             },
             error: function (msg, xhr) {
                 alert("error")
@@ -1766,6 +1850,7 @@
             url: '/Home/ShowFinancialInformation',
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
+             data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             dataType: 'html',
             async: false,
             success: function (data) {
@@ -1790,7 +1875,7 @@
     }
 
 
-    
+
 
     function ShowCharityDocuments() {
 
@@ -1806,23 +1891,36 @@
                 success: function (data) {
                     //$('#myfield').html(data);
                     debugger
+                    var Position;
                     if (data.length == 0) {
                         flag = false;
                     }
-                    else {
-                        window.scrollTo(0, 0);
-                    }
-                    if (EmailFlag == true) {
-                        $('#Validation11').html("Invalid Email Address")
-                        flag = true;
-                        window.scrollTo(0, 0);
+                    //else {
+                    //    window.scrollTo(0, 0);
+                    //}
+                    //if (EmailFlag == true) {
+                    //    $('#Validation10').html("Invalid Email Address")
+                    //    flag = true;
+                    //    window.scrollTo(0, 0);
 
-                    }
+                    //}
                     for (var i = 0; i < data.length; i++) {
                         debugger
                         flag = true;
                         var Id = "#" + data[i].validationid;
-                        $(Id).html(data[i].message)
+                        var FormId = "#" + data[i].formId;
+                        $(FormId).find(Id).html(data[i].message)
+                        if (i == 0) {
+
+                            Position = $(Id).position();
+                        }
+                    }
+                    if (data.length > 0) {
+                        debugger
+                        /* var PositionToscroll = parseFloat(Position.top - 150);*/
+                        window.scroll(0, Position.top);
+
+
                     }
                 },
                 error: function (msg, xhr) {
@@ -1840,7 +1938,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 6 },
+                    data: { Form: 6 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -1858,6 +1956,7 @@
                     type: 'Get',
                     dataType: 'html',
                     async: false,
+                      data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     success: function (data) {
                         $('#myfield').hide()
                         $('#myfield').html("");

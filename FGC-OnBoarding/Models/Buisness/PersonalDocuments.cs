@@ -18,5 +18,7 @@ namespace FGC_OnBoarding.Models.Buisness
         public bool ISpep { get; set; }
         public string RelationShip { set; get; }
         public int DocumentTypeId {get;set;}
+
+        public bool IsDelete { get; set; }
     }
 }

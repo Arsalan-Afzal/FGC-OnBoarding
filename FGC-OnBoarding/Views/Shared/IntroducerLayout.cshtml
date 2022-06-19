@@ -1,0 +1,329 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using FGC_OnBoarding.Areas.Identity.Data
+@using FGC_OnBoarding.Areas.Identity.Data
+@inject FGC_OnBoarding.Data.FGC_OnBoardingContext Dbcontext
+@inject UserManager<FGC_OnBoardingUser> UserManager
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FGC Form</title>
+    <link rel="icon" href="~/images/icon.jpg" type="image/gif" sizes="16x16">
+
+    <!-- jQuery -->
+    <script src="~/Admin-Lte/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Admin-Lte/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Admin-Lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Admin-Lte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Admin-Lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Admin-Lte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Admin-Lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Admin-Lte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Admin-Lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/Admin-Lte/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/Admin-Lte/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Admin-Lte/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/Admin-Lte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/Admin-Lte/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/Admin-Lte/plugins/moment/moment.min.js"></script>
+    <script src="~/Admin-Lte/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Admin-Lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/Admin-Lte/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Admin-Lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Admin-Lte/dist/js/adminlte.js"></script>
+    <script src="~/js/SweetAlart.js"></script>
+
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Admin-Lte/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Admin-Lte/plugins/summernote/summernote-bs4.min.css">
+    <link href="~/css/SweetAlertcs.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/ckeditor_4.19.0_standard_easyimage/ckeditor/ckeditor.js"></script>
+    <script>
+        $(document).on('click', '.BuisnessPersdiscardupload', function () {
+            debugger
+            var DocumentId = $(this).attr('id');
+            //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+            // var files = $('#FormFile1').prop('files');
+            //  FilesList1.push(FileName);
+            $(this).closest('.filenamedis').remove()
+            if (DocumentId != undefined) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/DeleteBuisnessPersonalFiles',
+                    //contentType: false,
+                    //processData: false,
+                    data: { Documentid: DocumentId },
+                    async: true,
+                    success: function (result) {
+                        // alert(result)
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try again!');
+                    }
+                });
+            }
+        })
+        $(document).on('click', '.discardcharityupload', function () {
+
+            debugger
+            var DocumentId = $(this).attr('id');
+            //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+            // var files = $('#FormFile1').prop('files');
+            //  FilesList1.push(FileName);
+
+
+            $(this).closest('.filenamedis').remove()
+            if (DocumentId != undefined) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/DeleteCharityFile1',
+                    //contentType: false,
+                    //processData: false,
+                    data: { Documentid: DocumentId },
+                    async: true,
+                    success: function (result) {
+                        // alert(result)
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try again!');
+                    }
+                });
+            }
+        })
+        $(document).on('click', '.Companydiscardupload', function () {
+            debugger
+            var DocumentId = $(this).attr('id');
+            //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+            // var files = $('#FormFile1').prop('files');
+            //  FilesList1.push(FileName);
+            $(this).closest('.filenamedis').remove()
+            if (DocumentId != undefined) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/DeleteCompanyFile1',
+                    //contentType: false,
+                    //processData: false,
+                    data: { Documentid: DocumentId },
+                    async: true,
+                    success: function (result) {
+                        // alert(result)
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try again!');
+                    }
+                });
+            }
+        })
+        $(document).on('click', '.discardsolo', function () {
+            debugger
+            var DocumentId = $(this).attr('id');
+            //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+            // var files = $('#FormFile1').prop('files');
+            //  FilesList1.push(FileName);
+            $(this).closest('.filenamedis').remove()
+            if (DocumentId != undefined) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/DeleteSolePersonalFiles',
+                    //contentType: false,
+                    //processData: false,
+                    data: { Documentid: DocumentId },
+                    async: true,
+                    success: function (result) {
+                        // alert(result)
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try again!');
+                    }
+                });
+            }
+
+        })
+        $(document).on('click', '.charitydiscardupload', function () {
+            debugger
+            var DocumentId = $(this).attr('id');
+            //  var FileName = $(this).closest('.filenamedis').find('#filename').html();
+            // var files = $('#FormFile1').prop('files');
+            //  FilesList1.push(FileName);
+            $(this).closest('.filenamedis').remove()
+            if (DocumentId != undefined) {
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/DeleteCharityPersonalFiles',
+                    //contentType: false,
+                    //processData: false,
+                    data: { Documentid: DocumentId },
+                    async: true,
+                    success: function (result) {
+                        // alert(result)
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        alert('Something is going to wrong please try again!');
+                    }
+                });
+            }
+
+        })
+    </script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Preloader -->
+        @*<div class="preloader flex-column justify-content-center align-items-center">
+                <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            </div>*@
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a style="background: linear-gradient(to right,#19663c, #258e48);" class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars" style="color:white"></i></a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item d-none d-sm-inline-block mr-5 mt-2">
+                    Welcome:
+                    @{
+                        var UserClaims = User.Identities.Select(x => x.Claims).FirstOrDefault();
+                        var Username = UserClaims.Where(x => x.Type == "FullName").FirstOrDefault().Value;
+                        @Username
+                    }
+                </li>
+                <li class="nav-item d-none d-sm-inline-block float-right">
+                    <a style="color:lightgray" href="~/Identity/account/logout" class="nav-link">
+                        <i class="fa fa-sign-out mr-3"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside style="background-image: linear-gradient(to right,#19663c, #258e48);" class="main-sidebar sidebar-dark-default elevation-4">
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                        <li class="nav-header mb-4 mt-4">
+                            <div class="dropdown profile-element">
+                                <span>
+                                    <img alt="image" class="" src="~/Images/logo2.png" width="160">
+                                </span>
+                            </div>
+                        </li>
+                        @{
+                            var Introducerid = Convert.ToInt32(UserClaims.Where(x => x.Type == "UserId").FirstOrDefault().Value);
+                            var IntroducerUser = Dbcontext.IntroducerUsers.Where(x => x.UserId == Introducerid).FirstOrDefault();
+                            var IntroducerId = IntroducerUser.IntroducerId;
+                            if (IntroducerUser.UserRoleId == 2)
+                            {
+                                var IntroducerUsersList = Dbcontext.IntroducerUsers.Where(x => x.IntroducerId == IntroducerId).ToList();
+                                foreach (var intro in IntroducerUsersList)
+                                {
+                                    var IntroudcerUserName = intro.FirstName + " " + intro.LastName;
+                                    <li class="nav-item">
+                                        <a href="/Introducer/NewApplications/?ComingIntroducerId=@intro.UserId" class="nav-link">
+                                            <i class="fa fa-files-o nav-icon"></i>
+                                            <p>@IntroudcerUserName</p>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                var IntroudcerUserName = IntroducerUser.FirstName + " " + IntroducerUser.LastName;
+                                <li class="nav-item">
+                                    <a href="/Introducer/NewApplications/?ComingIntroducerId=@IntroducerUser.UserId" class="nav-link">
+                                        <i class="fa fa-files-o nav-icon"></i>
+                                        <p>@IntroudcerUserName</p>
+                                    </a>
+                                </li>
+                            }
+
+
+                        }
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong style="justify-content:center">©2022 FGC-Capital FORM. All Rights Reserved.</strong>
+
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Powered by: </b> <a href="https://cyberinfotechsolutions.com/" target="_blank" style="color:#03F">CitSol</a>
+            </div>
+        </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <style>
+        .nav-header {
+            padding: 33px 25px;
+        }
+
+        .filenamedis {
+            overflow-wrap: break-word;
+        }
+    </style>
+</body>
+</html>

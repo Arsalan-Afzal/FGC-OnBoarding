@@ -2,21 +2,19 @@
 @{
     Layout = "_FormLayout";
 }
-
-
-  
-
     <div id="blockconfirmation">
         <h2 class="fs-title">Confirmation Message</h2><br><br><br>
         <h3 class="fs-subtitle" style="text-align:center; font-size:14px;"><b>Thank you very much for submitting your application, <br>one of our team members will get back to you sooner to discuss further details. You can make changes upto 15 days</b> </h3>
         <div class="blockcon">
             <div class="action-buttonsnew">
-                <a href="~/Identity/Account/login">Back to website</a>
+                <a href="www.fgc-capital.com">Back to website</a>
             </div>
             <div class="action-buttonsnew">
                 <a href="~/Home/BrowseOldApplications">Manage Application</a>
             </div>
+            <div class="action-buttonsnew">
+                <a asp-controller="Home" asp-action="NewApplication" style="cursor:pointer">New Application</a>
+            </div>
         </div>
-
     </div>
     <div class="spacefooter"></div>

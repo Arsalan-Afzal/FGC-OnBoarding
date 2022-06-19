@@ -1,6 +1,8 @@
 ﻿
 
-
+@using Microsoft.AspNetCore.Identity
+@using FGC_OnBoarding.Areas.Identity.Data
+@inject UserManager<FGC_OnBoardingUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FGC_OnBoarding</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
- 
+
     <link href="~/Admin-Lte/dist/css/adminlte.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -141,17 +143,25 @@
             <div class="icon1"><img src="~/Images/icon.jpg" width="42" height="50"></div>
             <div class="icon2"><a asp-controller="Home" asp-action="Index"><img src="~/Images/fgcnewlogo.png" width="109" height="40"></a></div>
         </div><!--headerblockleft-->
-    
-       
+
+
 
         <div class="headerblockright">
             <div class="icon3"><img src="~/Images/headercut.jpg" width="27" height="50"></div>
             <div class="icon4">
                 <div class="menyblock">
-                    @if (Context.User.Identities.Any(i => i.IsAuthenticated))
-                    {
-                        <a style="color:white">Welcome: <span style="letter-spacing:1px">@Context.User.Identity.Name</span></a>
+
+                    @{
+                        var currentuser = UserManager.GetUserAsync(User).Result;
+
+                        if (currentuser != null)
+                        {
+                            <a style="color:white">Welcome: <span style="letter-spacing:1px">@currentuser.Name</span></a>
+                        }
+
                     }
+
+         
                     <a>|</a>
                     <a href="tel:+02080904585">Call us: (0208) 0904585</a>
                     <a>|</a>
@@ -163,12 +173,12 @@
         </div><!--headerblockleft-->
     </div>
     @*</header>*@
-   
 
-        @RenderBody()
 
-   
-   
+    @RenderBody()
+
+
+
     @*<footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2022 - FGC_OnBoarding - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

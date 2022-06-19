@@ -47,78 +47,90 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
         public class InputModel
         {
 
-           
-            public string Name { get; set; }
 
-            [Required]
-          
-            [Display(Name = "BuisnessName")]
-            public string BuisnessName { get; set; }
-
-
-            [Required]
+            [Required(ErrorMessage = "Email Required")]
             [EmailAddress]
             [Display(Name = "Email")]
-            public string Email { get; set; }
+            public string UserName { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Your Name Required")]
+            public string Name { get; set; }
+            [Required(ErrorMessage ="BuisnessName Required")]
+            [Display(Name = "BuisnessName")]
+            public string BuisnessName { get; set; }
+            [Required(ErrorMessage = "Password Required")]
+            [StringLength(100, ErrorMessage = "The Password must be at least 8 or more characters long.", MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
+            [Required(ErrorMessage = "Confirm Password Required")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
-
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new FGC_OnBoardingUser {UserName=Input.Name, Email = Input.Email ,Name = Input.Name,BuisnessName=Input.BuisnessName};
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
+                var user = new FGC_OnBoardingUser {UserName= Input.UserName,Email = Input.UserName,  Name = Input.Name,BuisnessName=Input.BuisnessName};
+                var CheckEmail = await _userManager.FindByEmailAsync(Input.UserName);
+                if (CheckEmail == null)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Hi " + Input.Name + " ," + "<br/><br/>" + "Thank you for creating account with FGC-Capital.Please Verify your Email by <a href="+HtmlEncoder.Default.Encode(callbackUrl)+">clicking here</a>."+"<br/><br/> " + "Regards," + "<br/>" + "OnBoarding Team" + "<br/>" + "FGC-Capital" + "<br/><br/>" + " <img src='https://ci4.googleusercontent.com/proxy/Ijy_ufJDMMBULhWYgAsrj0fr2fvZrDS0mpXJWi2JUg0Utl69zaiqiUy5p8-VDLMZvkl3-u_BR_ml_pcVosmrvEfoaoVAug_2WBaMtYPOTFCZGSQwiSclvJWZJFB5=s0-d-e1-ft#https://www.fgc-capital.com/apply-business-application/image/fgc_email.jpg' border='0' width='100' height='35' class='CToWUd'>") ;
-
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    var result = await _userManager.CreateAsync(user, Input.Password);
+                    if (result.Succeeded)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        _logger.LogInformation("User created a new account with password.");
+
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        await _emailSender.SendEmailAsync(Input.UserName, "Confirm your email",
+                            $"Hi " + Input.Name + " ," + "<br/><br/>" + "Thank you for creating account with FGC-Capital.Please Verify your Email by <a href=" + HtmlEncoder.Default.Encode(callbackUrl) + ">clicking here</a>." + "<br/><br/> " + "Regards," + "<br/>" + "OnBoarding Team" + "<br/>" + "FGC-Capital" + "<br/><br/>" + " <img src='https://ci4.googleusercontent.com/proxy/Ijy_ufJDMMBULhWYgAsrj0fr2fvZrDS0mpXJWi2JUg0Utl69zaiqiUy5p8-VDLMZvkl3-u_BR_ml_pcVosmrvEfoaoVAug_2WBaMtYPOTFCZGSQwiSclvJWZJFB5=s0-d-e1-ft#https://www.fgc-capital.com/apply-business-application/image/fgc_email.jpg' border='0' width='100' height='35' class='CToWUd'>");
+
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.UserName, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
-                    else
+                     bool passwordflag = false;
+                    foreach (var error in result.Errors)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if (error.Description.Contains("Password") && passwordflag == false)
+                        {
+                           passwordflag =true;
+                            ModelState.AddModelError(string.Empty, "Password must have atleast one Capital letter, Small letter, Special Character, Numeric value");
+                           
+                        }
+                        else if(!error.Description.Contains("Password"))
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
                     }
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, "This email is already used with another account.please use another email");
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return Page();
         }

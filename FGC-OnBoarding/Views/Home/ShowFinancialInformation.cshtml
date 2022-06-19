@@ -27,7 +27,7 @@
                     <div class="formtx">
                         <div id="curr1">
 
-                            @Html.TextBox("PerMonth","", new {@placeholder = "Provide only numbers" })
+                            @Html.TextBox("PerMonth","", new { @tabindex = "1",@placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext1" placeholder="Provide only numbers" tabindex="1" id="b9" onkeypress="bsuc9();">*@
                             <div id="Validation1" class="errormsg"></div>
                         </div>
@@ -38,7 +38,7 @@
                     <div class="formhe">Per Annum <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr2">
-                            @Html.TextBox("PerAnum","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("PerAnum","", new { @tabindex = "2", @placeholder = "Provide only numbers" })
                             <div id="Validation2" class="errormsg"></div>
                         </div>
                     </div><!--formtx-->
@@ -60,7 +60,7 @@
                     <div class="formhe">Incoming <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr3">
-                            @Html.TextBox("PaymentIncoming","", new { @onkeypress = "checkvalue(PaymentIncoming)", @placeholder = "Provide only numbers" })
+                            @Html.TextBox("PaymentIncoming","", new { @tabindex = "3", @onkeypress = "checkvalue(PaymentIncoming)", @placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext3" placeholder="Provide only numbers" tabindex="3" id="b11" onkeypress="bsuc11();">*@
                             <div id="Validation3" class="errormsg">
                             </div>
@@ -72,7 +72,7 @@
                     <div class="formhe">Outgoing <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr4">
-                            @Html.TextBox("PaymentOutgoing","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("PaymentOutgoing","", new { @tabindex = "4", @placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext4" placeholder="Provide only numbers" tabindex="4" id="b12" onkeypress="bsuc12();">*@
                             <div id="Validation4" class="errormsg">
                             </div>
@@ -97,7 +97,7 @@
                     <div class="formtx">
                         <div id="curr5">
                             @*<input type="text" name="transtext5" placeholder="Provide only numbers" tabindex="5" id="b13" onkeypress="bsuc13();">*@
-                            @Html.TextBox("TransactionIncoming","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("TransactionIncoming","", new { @tabindex = "5", @placeholder = "Provide only numbers" })
                             <div id="Validation5" class="errormsg"></div>
                         </div>
                     </div><!--formtx-->
@@ -107,7 +107,7 @@
                     <div class="formhe">Outgoing <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr6">
-                            @Html.TextBox("TransactionOutgoing","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("TransactionOutgoing","", new { @tabindex = "6", @placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext6" placeholder="Provide only numbers" tabindex="6" id="b14" onkeypress="bsuc14();">*@
                             <div id="Validation6" class="errormsg"></div>
                         </div>
@@ -130,7 +130,7 @@
                     <div class="formhe">Number of payments per month <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr7">
-                            @Html.TextBox("NoOfPaymentsPerMonth","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("NoOfPaymentsPerMonth","", new { @tabindex = "7", @placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext7" placeholder="Provide only numbers" tabindex="7" id="b15" onkeypress="bsuc15();">*@
                             <div id="Validation7" class="errormsg"></div>
                         </div>
@@ -141,7 +141,7 @@
                     <div class="formhe">Volumn per month<span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
                         <div id="curr8">
-                            @Html.TextBox("VolumePermonth","", new { @placeholder = "Provide only numbers" })
+                            @Html.TextBox("VolumePermonth","", new { @tabindex = "8", @placeholder = "Provide only numbers" })
                             @*<input type="text" name="transtext8" placeholder="Provide only numbers" tabindex="8" id="b16" onkeypress="bsuc16();">*@
                             <div id="Validation8" class="errormsg"></div>
                         </div>
@@ -161,7 +161,7 @@
             <label class="container" id="textcon">
                 Please check this box if you have bank account held with other providers.
                 @*<input type="checkbox" name="authormust" id="chkauthob" value="authdone">*@
-                @Html.CheckBoxFor(x => x.AccountDetails, new { @name = "authormust" })
+                @Html.CheckBoxFor(x => x.AccountDetails, new { @tabindex = "9", @name = "authormust" })
                 <span class="checkmark1"></span>
             </label>
         </div>
@@ -173,14 +173,14 @@
                     <div class="formb1">
                         <div class="formhe">Bank Name</div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.BankName, new { @placeholder = "Enter your full bank name" })
+                            @Html.TextBoxFor(x => x.BankName, new { @tabindex = "10", @placeholder = "Enter your full bank name" })
                             @*<input type="text" name="batext1" tabindex="9" id="b17" placeholder="Enter your full bank name">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
                     <div class="formb2">
                         <div class="formhe">Bank Address</div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.BankAddress, new { @placeholder = "Enter your full bank address" })
+                            @Html.TextBoxFor(x => x.BankAddress, new { @tabindex = "11", @placeholder = "Enter your full bank address" })
                             @*<input type="text" name="batext2" tabindex="10" placeholder="Enter your full bank address">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -189,14 +189,14 @@
                     <div class="formb1">
                         <div class="formhe">Sort Code / Transit / ABA No</div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.SortCode, new { @placeholder = "Enter code" })
+                            @Html.TextBoxFor(x => x.SortCode, new { @tabindex = "12", @placeholder = "Enter code" })
                             @*<input type="text" name="batext3" tabindex="11" id="b18" placeholder="Enter code">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
                     <div class="formb2">
                         <div class="formhe">Account Name</div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.AccountName, new { @placeholder = "Enter your full account name" })
+                            @Html.TextBoxFor(x => x.AccountName, new { @tabindex = "13", @placeholder = "Enter your full account name" })
                             @*<input type="text" name="batext4" tabindex="12" id="b19" placeholder="Enter your full account name">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -205,7 +205,7 @@
                     <div class="formb1">
                         <div class="formhe">Account Number (UK)</div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.AccountNumber, new { @placeholder = "Enter your full account number(UK)" })
+                            @Html.TextBoxFor(x => x.AccountNumber, new { @tabindex = "14", @placeholder = "Enter your full account number(UK)" })
                             @*<input type="text" name="batext5" tabindex="13" id="b20" placeholder="Enter your full account number(UK)">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -213,7 +213,7 @@
                         <div class="formhe">IBAN (if applicable)</div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="batext6" tabindex="14" placeholder="Enter your full IBAN number">*@
-                            @Html.TextBoxFor(x => x.IBAN, new { @placeholder = "Enter your full IBAN number" })
+                            @Html.TextBoxFor(x => x.IBAN, new { @tabindex = "15", @placeholder = "Enter your full IBAN number" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -222,14 +222,14 @@
                         <div class="formhe">SWIFT Code / BIC</div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="batext7" tabindex="15" placeholder="Enter code">*@
-                            @Html.TextBoxFor(x => x.SwiftCode, new { @placeholder = "Enter code" })
+                            @Html.TextBoxFor(x => x.SwiftCode, new { @tabindex = "16", @placeholder = "Enter code" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                     <div class="formb2">
                         <div class="formhe">Currency of Account</div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="batext8" tabindex="16" placeholder="Enter your currency of account">*@
-                            @Html.TextBoxFor(x => x.AccountCurrency, new { @placeholder = "Enter your currency of account" })
+                            @Html.TextBoxFor(x => x.AccountCurrency, new { @tabindex = "17", @placeholder = "Enter your currency of account" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -242,15 +242,15 @@
             <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowBuisnessInformation()" tabindex="18">
             @if (ViewBag.BuisnessType == 1)
             {
-                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowOwners()" tabindex="17">
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowOwners()" tabindex="19">
             }
             else if (ViewBag.BuisnessType == 2)
             {
-                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowTrustees()" tabindex="17">
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowTrustees()" tabindex="19">
             }
             else if (ViewBag.BuisnessType == 3 || ViewBag.BuisnessType == 4)
             {
-                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowDirectors()" tabindex="17">
+                <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowDirectors()" tabindex="19">
             }
         </div>
     </div><!--topheader-->
@@ -383,7 +383,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -394,7 +394,11 @@
             }
         })
     })
+
     $('#PerMonth').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "PerMonth": $('#PerMonth').val(),
@@ -408,7 +412,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -420,6 +424,9 @@
         })
     })
     $('#PerAnum').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "PerAnum": $('#PerAnum').val(),
@@ -433,7 +440,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -445,6 +452,9 @@
         })
     })
     $('#PaymentIncoming').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "PaymentIncoming": $('#PaymentIncoming').val(),
@@ -459,7 +469,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -471,6 +481,9 @@
         })
     })
     $('#PaymentOutgoing').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "PaymentOutgoing": $('#PaymentOutgoing').val(),
@@ -484,7 +497,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -496,6 +509,9 @@
         })
     })
     $('#TransactionIncoming').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "TransactionIncoming": $('#TransactionIncoming').val(),
@@ -509,7 +525,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -521,6 +537,9 @@
         })
     })
     $('#TransactionOutgoing').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "TransactionOutgoing": $('#TransactionOutgoing').val(),
@@ -534,7 +553,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -546,6 +565,9 @@
         })
     })
     $('#NoOfPaymentsPerMonth').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         debugger
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
@@ -560,7 +582,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -572,6 +594,9 @@
         })
     })
     $('#VolumePermonth').focusout(function () {
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "VolumePermonth": $('#VolumePermonth').val(),
@@ -585,7 +610,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -597,6 +622,7 @@
         })
     })
     $('#BankName').focusout(function () {
+
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
                "BankName": $('#BankName').val(),
@@ -610,7 +636,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -635,7 +661,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -660,7 +686,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -685,7 +711,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -710,7 +736,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -735,7 +761,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -760,7 +786,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -785,7 +811,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -803,7 +829,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 3 },
+            data: { Form: 3 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -819,6 +845,7 @@
             contentType: 'application/json; charset=utf-8',
             type: 'GET',
             dataType: 'html',
+                data: { BuisnessProfileId: @Model.BuisnessProfileId },
             async: true,
             success: function (data) {
                 $('#myfield').hide()
@@ -876,7 +903,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 5 },
+                    data: { Form: 5 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -892,6 +919,7 @@
                     url: '/Home/ShowDirectors',
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
+                     data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     dataType: 'html',
                     async: false,
                     success: function (data) {
@@ -959,7 +987,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 5 },
+                    data: { Form: 5,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -976,6 +1004,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                     data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()
@@ -1042,7 +1071,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 5 },
+                    data: { Form: 5 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -1059,6 +1088,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                      data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()

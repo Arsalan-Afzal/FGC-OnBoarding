@@ -75,9 +75,10 @@
             contentType: 'application/html ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+            data: { BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
-                $('#myfield').hide()
+                $('#myfield').html("");
                 $('#myfield').html(data);
                 $("#myfield").slideDown("fast", function () {
                     // Animation complete.
@@ -99,7 +100,7 @@
             url: '/Home/GetCurrentForm',
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
-            data: {id : 3},
+            data: { id: 3 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             dataType: 'json',
             async: false,
             success: function (data) {
@@ -113,7 +114,7 @@
                             type: 'Get',
 
                             dataType: 'json',
-                            data: { Form: 3 },
+                            data: { Form: 3 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -130,6 +131,7 @@
                             contentType: 'application/html ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'html',
+                            data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 $('#myfield').hide()
@@ -160,6 +162,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
+               data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -170,7 +173,7 @@
                             contentType: 'application/json ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'json',
-                            data: { Form: 5 },
+                            data: { Form: 5 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -187,6 +190,7 @@
                             type: 'Get',
                             dataType: 'html',
                             async: false,
+                              data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             success: function (data) {
                                 $('#myfield').hide()
                                 $('#myfield').html(data);
@@ -216,6 +220,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
+               data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -226,7 +231,7 @@
                             contentType: 'application/json ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'json',
-                            data: { Form: 5 },
+                            data: { Form: 5 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -242,6 +247,7 @@
                             contentType: 'application/html ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'html',
+                              data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 $('#myfield').hide()
@@ -272,6 +278,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
+            data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -282,7 +289,7 @@
                             contentType: 'application/json ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'json',
-                            data: { Form: 5 },
+                            data: { Form: 5 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -298,6 +305,7 @@
                             contentType: 'application/html ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'html',
+                              data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 $('#myfield').hide()
@@ -330,7 +338,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: {id:8},
+            data: {id:8,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -342,7 +350,7 @@
                             contentType: 'application/json ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'json',
-                            data: { Form: 8 },
+                            data: { Form: 8 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -359,6 +367,7 @@
                             contentType: 'application/html ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'html',
+                              data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 $('#myfield').hide()
@@ -392,7 +401,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { id:6},
+            data: { id:6,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -405,7 +414,7 @@
                             contentType: 'application/json ; charset:ytf-8',
                             type: 'Get',
                             dataType: 'json',
-                            data: { Form: 6 },
+                            data: { Form: 6 ,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                             async: false,
                             success: function (data) {
                                 //$('#myfield').html(data);
@@ -425,6 +434,7 @@
                                 type: 'Get',
                                 dataType: 'html',
                                 async: false,
+                                  data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                                 success: function (data) {
                                     $('#myfield').hide()
                                     $('#myfield').html(data);
@@ -447,6 +457,7 @@
                                 contentType: 'application/html ; charset:ytf-8',
                                 type: 'Get',
                                 dataType: 'html',
+                                  data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                                 async: false,
                                 success: function (data) {
                                     $('#myfield').hide()
@@ -470,6 +481,7 @@
                                 contentType: 'application/html ; charset:ytf-8',
                                 type: 'Get',
                                 dataType: 'html',
+                                  data: {BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                                 async: false,
                                 success: function (data) {
                                     $('#myfield').hide()
@@ -485,7 +497,7 @@
                                 }
                             })
                         }
-                   
+
                     }
                 }
             },
@@ -498,14 +510,15 @@
 
 
     }
-    function showprofile() {
+    function showprofile(BuisnessProfileId) {
         debugger
            $.ajax({
 
                url: '/Home/GetCurrentForm',
                 contentType: 'application/json ; charset:ytf-8',
                 type: 'Get',
-                dataType: 'json',
+               dataType: 'json',
+               data: { BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                 async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
@@ -517,7 +530,7 @@
                                 contentType: 'application/json ; charset:ytf-8',
                                 type: 'Get',
                                 dataType: 'json',
-                                data: { Form: 0 },
+                                data: { Form: 0,BuisnessProfileId:'@ViewBag.BuisnessProfileId'},
                                 async: false,
                                 success: function (data) {
                                     //$('#myfield').html(data);
@@ -534,6 +547,7 @@
                                 contentType: 'application/html ; charset:ytf-8',
                                 type: 'Get',
                                 dataType: 'html',
+                                data: { BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
                                 async: false,
                                 success: function (data) {
                                     $('#myfield').hide()
@@ -557,7 +571,7 @@
                     console.log(xhr);
                 }
             })
-       
+
 
     }
 

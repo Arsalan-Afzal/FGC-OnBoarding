@@ -20,7 +20,8 @@ namespace FGC_OnBoarding.Models.Buisness
         public string Country { get; set; }
         public string Nationality { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DOB { get; set; } = DateTime.Now;
+        [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+        public DateTime? DOB { get; set; } 
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public decimal? ShareHolders_percentage {get;set;}
@@ -29,12 +30,17 @@ namespace FGC_OnBoarding.Models.Buisness
         public bool Isdefault { get; set; }
         [NotMapped]
         public string FieldName { get; set; }
+
+        [NotMapped]
+        public string FieldValue { get; set; }
         [NotMapped]
         public int Formid { get; set; }
 
         [NotMapped]
         public string Dateofbirth { get; set; }
 
-        
+        public bool IsDelete { get; set; }
+
+
     }
 }

@@ -218,45 +218,47 @@
 
     })
 
-     if (("@Model.isPop").toLowerCase() == "true") {
+     if (("@ViewBag.pop").toLowerCase() == "true") {
 
         $(".hidetextbox:radio[value='yes']").prop("checked", "true");
-        $('#text1yn').css('display', 'block');
+         $('#text1yn').css('display', 'block');
+          $('#RelationShip').val("@ViewBag.RelationShip")
     }
     else {
         $(".hidetextbox:radio[value='no']").prop("checked", "true");
         $('#text1yn').css('display', 'none');
     }
 
-   
+
 
 
     $('.BuisnessFile1').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile1').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file1_prev_dir').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='BuisnessPersdiscardupload'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file1_prev_dir').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+          data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+               // var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/BuisnessPersonalFile1',
@@ -267,7 +269,8 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file1_prev_dir').html("");
+                            $('#file1_prev_dir').find('.temp').remove();
+
                         }
                         for (var i = 0; i < result.length; i++) {
 
@@ -295,29 +298,30 @@
     $('.BuisnessFile2').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile2').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file2_prev_dir').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='BuisnessPersdiscardupload'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file2_prev_dir').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+                  data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+                //var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/BuisnessPersonalFile2',
@@ -328,7 +332,8 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file2_prev_dir').html("");
+                            $('#file2_prev_dir').find('.temp').remove();
+
                         }
                         for (var i = 0; i < result.length; i++) {
                             $('#file2_prev_dir').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='BuisnessPersdiscardupload'>(x)</p></span>");
@@ -352,29 +357,30 @@
     $('.BuisnessFile3').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile3').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file3_prev_dir').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='BuisnessPersdiscardupload'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file3_prev_dir').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+          data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+                //var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/BuisnessPersonalFile3',
@@ -385,7 +391,8 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file3_prev_dir').html("");
+                            $('#file3_prev_dir').find('.temp').remove();
+
                         }
                         for (var i = 0; i < result.length; i++) {
                             $('#file3_prev_dir').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='BuisnessPersdiscardupload'>(x)</p></span>");
@@ -435,7 +442,8 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 5 },
+               data: { Form: 5,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
+
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -451,6 +459,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+               data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 $('#myfield').hide()
@@ -470,13 +479,60 @@
 
 
     function showDeclerations() {
-        if ($('#RelationShip').val() != "") {
+        debugger
+
+        if ($('.hidetextbox:checked').val() == "yes") {
+            if ($('#RelationShip').val() != "") {
+                $.ajax({
+                    url: '/Home/SetCurrentForm',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'json',
+                    data: { Form: 8 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
+                    async: false,
+                    success: function (data) {
+                        //$('#myfield').html(data);
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+                $.ajax({
+                    url: '/Home/ShowDecleration',
+                    contentType: 'application/json ; charset:ytf-8',
+                    type: 'Get',
+                    dataType: 'html',
+                       data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
+                    async: false,
+                    success: function (data) {
+                        $('#myfield').hide()
+                        $('#myfield').html(data);
+                        //$("#myfield").show("slow", function () {
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+                    },
+                    error: function (msg, xhr) {
+                        alert("error")
+                        console.log(msg);
+                        console.log(xhr);
+                    }
+                })
+            }
+            else {
+                $('#iiyes').html("This field is mandatory")
+                $('#iiyes').css('display','block')
+            }
+        }
+        else {
             $.ajax({
                 url: '/Home/SetCurrentForm',
                 contentType: 'application/json ; charset:ytf-8',
                 type: 'Get',
                 dataType: 'json',
-                data: { Form: 8 },
+                data: { Form: 8 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
                 async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
@@ -492,6 +548,7 @@
                 contentType: 'application/json ; charset:ytf-8',
                 type: 'Get',
                 dataType: 'html',
+                   data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
                 async: false,
                 success: function (data) {
                     $('#myfield').hide()
@@ -508,9 +565,6 @@
                 }
             })
         }
-        else {
-            $('#iiyes').html("This field is mandatory")
-        }
     }
 
     function ShowBuisnessDocuments() {
@@ -519,7 +573,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 6 },
+            data: { Form: 6,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -535,6 +589,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+            data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 $('#myfield').hide()
@@ -558,7 +613,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 6 },
+            data: { Form: 6,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -573,6 +628,7 @@
             url: '/Home/ShowCharityDocuments',
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
+              data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             dataType: 'html',
             async: false,
             success: function (data) {
@@ -597,7 +653,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 6 },
+            data: { Form: 6,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -613,6 +669,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+              data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 $('#myfield').hide()
@@ -641,15 +698,15 @@
             $('#text1yn').css('display', 'none');
             Flag = false;
         }
-
            var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "isPop": Flag,
+            "Ispep": Flag,
 
         };
+
         debugger
         $.ajax({
-            url: '/Home/SavebuisnessPersonalDocsData',
+            url: '/Home/SaveIspopData',
           /*  contentType: 'application/json ; charset:ytf-8',*/
             type: 'POST',
             dataType: 'json',
@@ -669,6 +726,9 @@
 
     $('#RelationShip').focusout(function () {
         debugger
+        if ($('#RelationShip').val() != "") {
+            $('#iiyes').css('display', 'none');
+        }
         var Flag = false;
         if ($('.hidetextbox:checked').val() == "yes") {
           //  $('#text1yn').css('display', 'block');
@@ -678,16 +738,20 @@
            // $('#text1yn').css('display', 'none');
             Flag = false;
         }
+           var objFields = {
+            "BuisnessProfileId":  "@Model.BuisnessProfileId",
+            "Ispep": Flag,
+            "Peprelationship": $('#RelationShip').val(),
+        };
 
-
-         var objFields = {
+         @*var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "isPop": Flag,
             "RelationShip": $('#RelationShip').val(),
-        };
+        };*@
         debugger
         $.ajax({
-            url: '/Home/SavebuisnessPersonalDocsData',
+            url: '/Home/SaveIspopData',
           /*  contentType: 'application/json ; charset:ytf-8',*/
             type: 'POST',
             dataType: 'json',

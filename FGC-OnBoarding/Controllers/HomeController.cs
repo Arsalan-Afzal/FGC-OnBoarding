@@ -21,10 +21,19 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using FGC_OnBoarding.Helpers;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using FGC_OnBoarding.Models.Users;
+using System.Net;
+using static FGC_OnBoarding.Areas.Identity.Pages.Account.LoginModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace FGC_OnBoarding.Controllers
 {
     [Authorize]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -32,9 +41,12 @@ namespace FGC_OnBoarding.Controllers
         //  private readonly ILogger<UserManager> _userManager;
         private readonly UserManager<FGC_OnBoardingUser> _userManager;
         private readonly FGC_OnBoardingContext _context;
-        public HomeController(ILogger<HomeController> logger, UserManager<FGC_OnBoardingUser> userManager, FGC_OnBoardingContext context, IWebHostEnvironment env)
+        private readonly IEmailSender _emailSender;
+        public int BuisnessProfileSaved = 0;
+        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, UserManager<FGC_OnBoardingUser> userManager, FGC_OnBoardingContext context, IWebHostEnvironment env)
         {
             _logger = logger;
+            _emailSender = emailSender;
             _userManager = userManager;
             _context = context;
             _env = env;
@@ -48,6 +60,12 @@ namespace FGC_OnBoarding.Controllers
         public async Task<IActionResult> BuisnessFile1(IList<IFormFile> filearray)
         {
             var UploadedFiles = Request.Form.Files;
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
+
             List<int> AttachementIds = new List<int>();
             try
             {
@@ -63,9 +81,10 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+
+                    //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Buisness1";
                     obj.Filename = FileName;
@@ -90,6 +109,11 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -104,9 +128,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //  string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Buisness2";
@@ -132,6 +156,11 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -146,9 +175,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //  string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Buisness3";
@@ -175,14 +204,15 @@ namespace FGC_OnBoarding.Controllers
 
             var BuisnessAttachment = _context.BuisnessAttachemtns.Where(x => x.DocumentId == Documentid).FirstOrDefault();
 
-            _context.BuisnessAttachemtns.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;
+            //   _context.BuisnessAttachemtns.Remove(BuisnessAttachment);
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
@@ -202,6 +232,10 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -216,9 +250,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //   string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Charity1";
@@ -244,6 +278,11 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -258,9 +297,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //  string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Charity2";
@@ -286,6 +325,12 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
+
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -300,9 +345,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //  string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Charity3";
@@ -329,14 +374,14 @@ namespace FGC_OnBoarding.Controllers
 
             var BuisnessAttachment = _context.BuisnessAttachemtns.Where(x => x.DocumentId == Documentid).FirstOrDefault();
 
-            _context.BuisnessAttachemtns.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;//_context.BuisnessAttachemtns.(BuisnessAttachment);
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
@@ -362,6 +407,12 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
+
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -376,9 +427,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //   string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Company1";
@@ -404,6 +455,12 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
+
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -418,9 +475,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //   string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Company2";
@@ -446,6 +503,11 @@ namespace FGC_OnBoarding.Controllers
         {
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
+
             try
             {
                 foreach (var formFile in UploadedFiles)
@@ -460,9 +522,9 @@ namespace FGC_OnBoarding.Controllers
                         formFile.CopyTo(fs);
                         fs.Flush();
                     }
-                    IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                    string UserId = applicationUser?.Id; // will give the user's Email
-                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                    //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                    //  string UserId = applicationUser?.Id; // will give the user's Email
+                    var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
 
                     BuisnessAttachemtns obj = new BuisnessAttachemtns();
                     obj.DocumentType = "Company3";
@@ -489,14 +551,14 @@ namespace FGC_OnBoarding.Controllers
 
             var BuisnessAttachment = _context.BuisnessAttachemtns.Where(x => x.DocumentId == Documentid).FirstOrDefault();
 
-            _context.BuisnessAttachemtns.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;//_context.BuisnessAttachemtns.(BuisnessAttachment);
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
@@ -511,11 +573,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //   string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var SoleDocument = _context.SoleDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -557,11 +624,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //  string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var SoleDocument = _context.SoleDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -603,11 +675,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                // string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var SoleDocument = _context.SoleDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -647,14 +724,14 @@ namespace FGC_OnBoarding.Controllers
         public async Task<IActionResult> DeleteSolePersonalFiles(int Documentid)
         {
             var BuisnessAttachment = _context.PersonalDocuments.Where(x => x.DocumentId == Documentid).FirstOrDefault();
-            _context.PersonalDocuments.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;//_context.BuisnessAttachemtns.(BuisnessAttachment);
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
@@ -670,11 +747,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //  string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var CharityDocument = _context.CharityDocument.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -716,11 +798,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //  string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var CharityDocument = _context.CharityDocument.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -762,11 +849,17 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //  string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var CharityDocument = _context.CharityDocument.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -806,14 +899,14 @@ namespace FGC_OnBoarding.Controllers
         public async Task<IActionResult> DeleteCharityPersonalFiles(int Documentid)
         {
             var BuisnessAttachment = _context.PersonalDocuments.Where(x => x.DocumentId == Documentid).FirstOrDefault();
-            _context.PersonalDocuments.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;//_context.BuisnessAttachemtns.(BuisnessAttachment);
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
@@ -831,11 +924,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var BuisnessDocument = _context.BuisnessDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -877,11 +975,16 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var BuisnessDocument = _context.BuisnessDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -923,11 +1026,17 @@ namespace FGC_OnBoarding.Controllers
 
             var UploadedFiles = Request.Form.Files;
             List<int> AttachementIds = new List<int>();
+
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            int buisnessprofileid = Convert.ToInt32(Request.Form.Where(x => x.Key == "buisnessprofileid").FirstOrDefault().Value);
             try
             {
-                IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-                string UserId = applicationUser?.Id; // will give the user's Email
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+                //  string UserId = applicationUser?.Id; // will give the user's Email
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == buisnessprofileid).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var BuisnessDocument = _context.BuisnessDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
 
                 foreach (var formFile in UploadedFiles)
@@ -967,33 +1076,49 @@ namespace FGC_OnBoarding.Controllers
         public async Task<IActionResult> DeleteBuisnessPersonalFiles(int Documentid)
         {
             var BuisnessAttachment = _context.PersonalDocuments.Where(x => x.DocumentId == Documentid).FirstOrDefault();
-            _context.PersonalDocuments.Remove(BuisnessAttachment);
+            BuisnessAttachment.IsDelete = true;
+
             _context.SaveChanges();
 
             var fulPath = Path.Combine(_env.ContentRootPath, "wwwroot\\UploadedDocs", BuisnessAttachment.Filename);
             FileInfo file = new FileInfo(fulPath);
             if (file.Exists)//check file exsit or not  
             {
-                file.Delete();
+                file.MoveTo(fulPath + "(Deleted)");
             }
             return Json(true);
         }
         /////////////////////
         public IActionResult Index()
         {
-            IdentityUser applicationUser =  _userManager.GetUserAsync(User).GetAwaiter().GetResult();
-            string user = applicationUser?.Id;
-            string UserId = applicationUser?.UserName; // will give the user's Email
+            //IdentityUser applicationUser = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            string user = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            string UserId = claims.Where(x => x.Type == "FullName").Select(x => x.Value).FirstOrDefault(); // will give the user's Email
             ViewBag.LoginUserName = UserId;
-            var UsersApplicationCount = _context.BuisnessProfile.Where(x => x.UserId == user && x.IsComplete == true).ToList();
-            if(UsersApplicationCount.Count > 0)
-            {
-                return View();
-            }
-            else
-            {
-              return  RedirectToAction("NewApplication");
-            }
+            //var UsersApplicationCount = _context.BuisnessProfile.Where(x => x.UserId == user && x.IsComplete == true).ToList();
+            //if (UsersApplicationCount.Count > 0)
+            //{
+            //    var PendingApplication = _context.BuisnessProfile.Where(x => x.UserId == user && x.IsComplete == false).FirstOrDefault();
+            //    if (PendingApplication != null)
+            //    {
+            //        return RedirectToAction("NewApplication");
+            //    }
+            //    else
+            //    {
+            //        return View();
+            //    }
+
+            //}
+            //else
+            //{
+
+            //    return RedirectToAction("NewApplication");
+            //}
+
+            return View();
         }
         public IActionResult Privacy()
         {
@@ -1003,21 +1128,31 @@ namespace FGC_OnBoarding.Controllers
         /// ///////////////Forms
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> NewApplication()
+        public async Task<IActionResult> NewApplication(int? BuisnessProfileId)
         {
-            
-            
+            //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+
+
+            //ViewBag.username = applicationUser.Id;
+
+            //var Users =
+            ViewBag.BuisnessProfileId = BuisnessProfileId;
             return View();
         }
-        public async Task<IActionResult> GetCurrentForm(int? id)
+        public async Task<IActionResult> GetCurrentForm(int? id, int? BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email.
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email.
             int CurrentForm = 0;
             var flag = false;
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.Form = BuisnessProfile.CurrentForm;
@@ -1038,20 +1173,20 @@ namespace FGC_OnBoarding.Controllers
                                 return Json(new { form = CurrentForm, flag = flag });
                             }
                         }
-                        if(id == 5 || id== 6 || id == 8)
+                        if (id == 5 || id == 6 || id == 8)
                         {
-                            if(BuisnessProfile.BuisnessTypeId == 1)
+                            if (BuisnessProfile.BuisnessTypeId == 1)
                             {
                                 var OwnerShipInformation = _context.OwnerShip.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
                                 if (OwnerShipInformation != null)
                                 {
                                     flag = true;
-                                    return Json(new { form = CurrentForm, flag = flag ,btid = BuisnessProfile.BuisnessTypeId });
+                                    return Json(new { form = CurrentForm, flag = flag, btid = BuisnessProfile.BuisnessTypeId });
                                 }
                                 else
                                 {
                                     flag = false;
-                                    return Json(new { form = CurrentForm, flag = flag , btid = BuisnessProfile.BuisnessTypeId });
+                                    return Json(new { form = CurrentForm, flag = flag, btid = BuisnessProfile.BuisnessTypeId });
                                 }
                             }
                             else if (BuisnessProfile.BuisnessTypeId == 2)
@@ -1065,7 +1200,7 @@ namespace FGC_OnBoarding.Controllers
                                 else
                                 {
                                     flag = false;
-                                    return Json(new { form = CurrentForm, flag = flag , btid = BuisnessProfile.BuisnessTypeId });
+                                    return Json(new { form = CurrentForm, flag = flag, btid = BuisnessProfile.BuisnessTypeId });
                                 }
                             }
                             else if (BuisnessProfile.BuisnessTypeId == 3 || BuisnessProfile.BuisnessTypeId == 4)
@@ -1074,12 +1209,12 @@ namespace FGC_OnBoarding.Controllers
                                 if (DirectorsInformation != null)
                                 {
                                     flag = true;
-                                    return Json(new { form = CurrentForm, flag = flag , btid = BuisnessProfile.BuisnessTypeId });
+                                    return Json(new { form = CurrentForm, flag = flag, btid = BuisnessProfile.BuisnessTypeId });
                                 }
                                 else
                                 {
                                     flag = false;
-                                    return Json(new { form = CurrentForm, flag = flag , btid = BuisnessProfile.BuisnessTypeId });
+                                    return Json(new { form = CurrentForm, flag = flag, btid = BuisnessProfile.BuisnessTypeId });
                                 }
                             }
                         }
@@ -1087,7 +1222,7 @@ namespace FGC_OnBoarding.Controllers
                     else
                     {
                         flag = true;
-                        return Json(new { form = CurrentForm , flag = flag });
+                        return Json(new { form = CurrentForm, flag = flag });
                     }
                 }
             }
@@ -1099,25 +1234,38 @@ namespace FGC_OnBoarding.Controllers
         }
         public async Task<IActionResult> BrowseOldApplications()
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
-            var BuisnessApplications = _context.BuisnessProfile.Where(x => x.UserId == UserId && x.IsComplete == true).ToList();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
+            var BuisnessApplications = _context.BuisnessProfile.Where(x => x.UserId == UserId).OrderByDescending(x => x.BuisnessProfileId).ToList();
 
             return View(BuisnessApplications);
         }
-        public async Task<IActionResult> ServiceRequirment()
+        public async Task<IActionResult> ServiceRequirment(int? BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
             string Currency = "";
             int BuisnessSector = 0;
             int BuisnessType = 0;
-            int BuisnessProfileId = 0;
             int CurrentForm = 0;
-
+            BuisnessProfile BuisnessProfile = new BuisnessProfile();
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+
+                if (BuisnessProfileId != null)
+                {
+                    BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
+                }
+
+
                 if (BuisnessProfile != null)
                 {
                     ViewBag.Form = BuisnessProfile.CurrentForm;
@@ -1142,24 +1290,44 @@ namespace FGC_OnBoarding.Controllers
             ViewBag.BuisnessProfileId = BuisnessProfileId;
             ViewBag.CurrentForm = CurrentForm;
 
+            if (BuisnessProfile != null)
+            {
+                return View(BuisnessProfile);
+            }
+            else
+            {
+                return View();
+            }
 
-            return View();
         }
         public async Task<IActionResult> ShowBuisnessProfile(int BuisnessProfileId, string CurrencyIds, int BuisnessType, int BuisnessSector)
         {
-
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
 
             //var MyBuisnessProfileId = BuisnessProfileId;
             int BuisnessTypeId = 0;
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
             if (BuisnessProfileId != 0) //Check If It is Existing Buisness Profile 
             {
                 if (UserId != null)
                 {
                     var BuisnessProfile = _context.BuisnessProfile.Where(x => x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
 
-                    if (BuisnessProfile != null)
+                    var AuthorizeRepresentatives = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.IsDelete == false && x.Isdefault == false).ToList();
+                    foreach (var Auth in AuthorizeRepresentatives)
+                    {
+                        if (Auth.FirstName == null && Auth.LastName == null && Auth.Address1 == null && Auth.Address2 == null && Auth.City == null && Auth.PostCode == null && Auth.County == null && Auth.Country == null && Auth.DOB == null && Auth.PhoneNumber == null && Auth.Email == null && Auth.City == null && Auth.PositionInBuisness == null && Auth.PositionInComany == null && Auth.RoleIncharity == null)
+                        {
+                            _context.AuthorizedRepresentative.Remove(Auth);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
+
+                    if (BuisnessType == BuisnessProfile.BuisnessTypeId)
                     {
                         if (CurrencyIds != null && BuisnessType != 0 && BuisnessSector != 0)
                         {
@@ -1170,22 +1338,44 @@ namespace FGC_OnBoarding.Controllers
                                 BuisnessProfile.BuisnessSectorId = BuisnessSector;
                             }
                             //BuisnessProfile.CurrentForm = 1;
-                            _context.SaveChanges();
-                        }
-                        BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        // ViewBag.BuisnessId = MyBuisnessProfileId;
-                        var TodayDAte = DateTime.Now.ToString("dd-MM-yyyy");
+                            await _context.SaveChangesAsync();
 
-                        //BuisnessProfile.RegistrationDate =Convert.ToDateTime(TodayDAte);
-                        //BuisnessProfile.TradeStartingDate = Convert.ToDateTime(TodayDAte);
-                        ViewBag.BuisnessType = BuisnessTypeId;
+
+                        }
                         return View(BuisnessProfile);
                     }
                     else
                     {
-                        //ViewBag.BuisnessId = MyBuisnessProfileId;
-                        return View(new BuisnessProfile());
+                        _context.BuisnessProfile.Remove(BuisnessProfile);
+                        await _context.SaveChangesAsync();
+
+                        BuisnessProfile objBuisnessProfile = new BuisnessProfile();
+                        objBuisnessProfile.UserId = UserId;
+                        if (BuisnessSector != 0)
+                        {
+                            objBuisnessProfile.BuisnessSectorId = BuisnessSector;
+                        }
+                        objBuisnessProfile.BuisnessTypeId = BuisnessType;
+
+                        objBuisnessProfile.CurrencyId = CurrencyIds;
+                        _context.BuisnessProfile.Add(objBuisnessProfile);
+                        await _context.SaveChangesAsync();
+
+                        BuisnessProfileSaved = objBuisnessProfile.BuisnessProfileId;
+                        // MyBuisnessProfileId = objBuisnessProfile.BuisnessProfileId;
+                        // ViewBag.BuisnessId = MyBuisnessProfileId;
+                        return View(objBuisnessProfile);
                     }
+                    //BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
+                    //// ViewBag.BuisnessId = MyBuisnessProfileId;
+                    //var TodayDAte = DateTime.Now.ToString("dd-MM-yyyy");
+
+                    ////BuisnessProfile.RegistrationDate =Convert.ToDateTime(TodayDAte);
+                    ////BuisnessProfile.TradeStartingDate = Convert.ToDateTime(TodayDAte);
+                    //ViewBag.BuisnessType = BuisnessTypeId;
+                    //return View(BuisnessProfile);
+
+
                 }
                 else
                 {
@@ -1204,7 +1394,9 @@ namespace FGC_OnBoarding.Controllers
                 }
                 objBuisnessProfile.BuisnessTypeId = BuisnessType;
 
+                objBuisnessProfile.CurrencyId = CurrencyIds;
                 _context.BuisnessProfile.Add(objBuisnessProfile);
+                BuisnessProfileSaved = objBuisnessProfile.BuisnessProfileId;
                 _context.SaveChanges();
                 // MyBuisnessProfileId = objBuisnessProfile.BuisnessProfileId;
                 // ViewBag.BuisnessId = MyBuisnessProfileId;
@@ -1213,14 +1405,19 @@ namespace FGC_OnBoarding.Controllers
 
             }
         }
-        public async Task<IActionResult> ShowAuthorizeRepresentatives()
+        public async Task<IActionResult> ShowAuthorizeRepresentatives(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
-                                                 // var BuisnessType = 0;
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
+            // var BuisnessType = 0;
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
@@ -1255,17 +1452,33 @@ namespace FGC_OnBoarding.Controllers
             }
 
         }
-        public async Task<IActionResult> ShowBuisnessInformation()
+        public async Task<IActionResult> ShowBuisnessInformation(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
-                                                 // var BuisnessType = 0;
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
+            // var BuisnessType = 0;
 
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
+                    var AuthorizeRepresentatives = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.IsDelete == false && x.Isdefault == false).ToList();
+                    foreach (var Auth in AuthorizeRepresentatives)
+                    {
+                        if (Auth.FirstName == null && Auth.LastName == null && Auth.Address1 == null && Auth.Address2 == null && Auth.City == null && Auth.PostCode == null && Auth.County == null && Auth.Country == null && Auth.DOB == null && Auth.PhoneNumber == null && Auth.Email == null && Auth.City == null && Auth.PositionInBuisness == null && Auth.PositionInComany == null && Auth.RoleIncharity == null)
+                        {
+                            _context.AuthorizedRepresentative.Remove(Auth);
+                          await  _context.SaveChangesAsync();
+                        }
+                    }
+
+
+
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
                     ViewBag.BuisnessProfileId = BuisnessProfile.BuisnessProfileId;
                     var BuisnessInformations = _context.BuisnessInformation.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId && x.BuisnessTypeId == BuisnessProfile.BuisnessTypeId).FirstOrDefault();
@@ -1295,13 +1508,18 @@ namespace FGC_OnBoarding.Controllers
                 return Redirect("~/identity/account/login");
             }
         }
-        public async Task<IActionResult> ShowFinancialInformation()
+        public async Task<IActionResult> ShowFinancialInformation(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id;
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //   string UserId = applicationUser?.Id;
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
@@ -1332,14 +1550,19 @@ namespace FGC_OnBoarding.Controllers
                 return Redirect("~/identity/account/login");
             }
         }
-        public async Task<IActionResult> ShowDirectors()
+        public async Task<IActionResult> ShowDirectors(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
-                                                 // var BuisnessType = 0;
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
+            // var BuisnessType = 0;
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
@@ -1373,14 +1596,18 @@ namespace FGC_OnBoarding.Controllers
             }
 
         }
-        public async Task<IActionResult> ShowTrustees()
+        public async Task<IActionResult> ShowTrustees(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
-                                                 // var BuisnessType = 0;
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
+            // var BuisnessType = 0;
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
@@ -1413,13 +1640,18 @@ namespace FGC_OnBoarding.Controllers
                 return Redirect("~/identity/account/login");
             }
         }
-        public async Task<IActionResult> ShowOwners()
+        public async Task<IActionResult> ShowOwners(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
@@ -1438,6 +1670,7 @@ namespace FGC_OnBoarding.Controllers
                     else
                     {
                         ViewBag.directorId = Owners.OwnerShipID;
+                        Owners.Mydob = Owners.DOB?.ToString("yyyy-MM-dd");
                         return View(Owners);
                     }
                 }
@@ -1456,20 +1689,25 @@ namespace FGC_OnBoarding.Controllers
         /// ///////////////Forms Documents///////////
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> ShowCharityDocuments()
+        public async Task<IActionResult> ShowCharityDocuments(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //  IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     var CharityDocs = _context.BuisnessAttachemtns.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).ToList();
 
-                    var Charity1Files = CharityDocs.Where(x => x.DocumentType == "Charity1").ToList();
-                    var Charity2Files = CharityDocs.Where(x => x.DocumentType == "Charity2").ToList();
-                    var Charity3Files = CharityDocs.Where(x => x.DocumentType == "Charity3").ToList();
+                    var Charity1Files = CharityDocs.Where(x => x.DocumentType == "Charity1" && x.IsDelete == false).ToList();
+                    var Charity2Files = CharityDocs.Where(x => x.DocumentType == "Charity2" && x.IsDelete == false).ToList();
+                    var Charity3Files = CharityDocs.Where(x => x.DocumentType == "Charity3" && x.IsDelete == false).ToList();
 
                     ViewBag.Charity1 = Charity1Files;
                     ViewBag.Charity2 = Charity2Files;
@@ -1482,20 +1720,25 @@ namespace FGC_OnBoarding.Controllers
             return View();
 
         }
-        public async Task<IActionResult> ShowBuisnessDocuments()
+        public async Task<IActionResult> ShowBuisnessDocuments(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
 
                     var BusinessDocs = _context.BuisnessAttachemtns.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).ToList();
-                    var Buisness1Files = BusinessDocs.Where(x => x.DocumentType == "Buisness1").ToList();
-                    var Buisness2Files = BusinessDocs.Where(x => x.DocumentType == "Buisness2").ToList();
-                    var Buisness3Files = BusinessDocs.Where(x => x.DocumentType == "Buisness3").ToList();
+                    var Buisness1Files = BusinessDocs.Where(x => x.DocumentType == "Buisness1" && x.IsDelete == false).ToList();
+                    var Buisness2Files = BusinessDocs.Where(x => x.DocumentType == "Buisness2" && x.IsDelete == false).ToList();
+                    var Buisness3Files = BusinessDocs.Where(x => x.DocumentType == "Buisness3" && x.IsDelete == false).ToList();
                     ViewBag.Buisness1 = Buisness1Files;
                     ViewBag.Buisness2 = Buisness2Files;
                     ViewBag.Buisness3 = Buisness3Files;
@@ -1508,22 +1751,24 @@ namespace FGC_OnBoarding.Controllers
             return View();
 
         }
-        public async Task<IActionResult> ShowCompanyDocuments()
+        public async Task<IActionResult> ShowCompanyDocuments(int BuisnessProfileId)
         {
-
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     var CompanyDocs = _context.BuisnessAttachemtns.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).ToList();
-                   
-                    var Compnay1Files = CompanyDocs.Where(x => x.DocumentType == "Company1").ToList();
-                    var Compnay2Files = CompanyDocs.Where(x => x.DocumentType == "Company2").ToList();
-                    var Compnay3Files = CompanyDocs.Where(x => x.DocumentType == "Company3").ToList();
-                    
+
+                    var Compnay1Files = CompanyDocs.Where(x => x.DocumentType == "Company1" && x.IsDelete == false).ToList();
+                    var Compnay2Files = CompanyDocs.Where(x => x.DocumentType == "Company2" && x.IsDelete == false).ToList();
+                    var Compnay3Files = CompanyDocs.Where(x => x.DocumentType == "Company3" && x.IsDelete == false).ToList();
+
                     ViewBag.Company1 = Compnay1Files;
                     ViewBag.Company2 = Compnay2Files;
                     ViewBag.Company3 = Compnay3Files;
@@ -1533,22 +1778,29 @@ namespace FGC_OnBoarding.Controllers
                 }
             }
 
-                    return View();
+            return View();
         }
         /// <summary>
         /// ///////////////Forms Documents End///////////
         /// </summary>
         /// <returns></returns>
         /// 
-        public async Task<IActionResult> ShowSoloPersonalDocuments()
+        public async Task<IActionResult> ShowSoloPersonalDocuments(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
+                    ViewBag.pop = BuisnessProfile.Ispep;
+                    ViewBag.RelationShip = BuisnessProfile.Peprelationship;
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
                     ViewBag.BuisnessProfileId = BuisnessProfile.BuisnessProfileId;
                     var soleDoc = _context.SoleDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
@@ -1565,9 +1817,9 @@ namespace FGC_OnBoarding.Controllers
                     else
                     {
                         ViewBag.soleDocId = soleDoc.Id;
-                        var SoloPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType=="Sole1").ToList();
-                        var SoloPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole2").ToList();
-                        var SoloPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole3").ToList();
+                        var SoloPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole1" && x.IsDelete == false).ToList();
+                        var SoloPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole2" && x.IsDelete == false).ToList();
+                        var SoloPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole3" && x.IsDelete == false).ToList();
                         ViewBag.SoloPersonalDocs1 = SoloPersonalDocs1;
                         ViewBag.SoloPersonalDocs2 = SoloPersonalDocs2;
                         ViewBag.SoloPersonalDocs3 = SoloPersonalDocs3;
@@ -1584,17 +1836,24 @@ namespace FGC_OnBoarding.Controllers
                 return Redirect("~/identity/account/login");
             }
         }
-        public async Task<IActionResult> ShowcharityPersonalDocuments()
+        public async Task<IActionResult> ShowcharityPersonalDocuments(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
 
 
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
+                    ViewBag.pop = BuisnessProfile.Ispep;
+                    ViewBag.RelationShip = BuisnessProfile.Peprelationship;
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
                     ViewBag.BuisnessProfileId = BuisnessProfile.BuisnessProfileId;
                     var CharityDoc = _context.CharityDocument.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
@@ -1611,9 +1870,9 @@ namespace FGC_OnBoarding.Controllers
                     {
                         ViewBag.charotyDocId = CharityDoc.Id;
 
-                        var CharityPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity1").ToList();
-                        var CharityPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity1").ToList();
-                        var CharityPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity1").ToList();
+                        var CharityPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity1" && x.IsDelete == false).ToList();
+                        var CharityPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity2" && x.IsDelete == false).ToList();
+                        var CharityPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity3" && x.IsDelete == false).ToList();
                         ViewBag.charityPersonalDocs1 = CharityPersonalDocs1;
                         ViewBag.charityPersonalDocs2 = CharityPersonalDocs2;
                         ViewBag.charityPersonalDocs3 = CharityPersonalDocs3;
@@ -1632,16 +1891,23 @@ namespace FGC_OnBoarding.Controllers
                 return Redirect("~/identity/account/login");
             }
         }
-        public async Task<IActionResult> ShowBuisnessPersonalDocuments()
+        public async Task<IActionResult> ShowBuisnessPersonalDocuments(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            // IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
 
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
+                    ViewBag.pop = BuisnessProfile.Ispep;
+                    ViewBag.RelationShip = BuisnessProfile.Peprelationship;
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
                     ViewBag.BuisnessProfileId = BuisnessProfile.BuisnessProfileId;
                     var BuisnessDoc = _context.BuisnessDocuments.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
@@ -1659,9 +1925,9 @@ namespace FGC_OnBoarding.Controllers
                         ViewBag.BuisnessDocId = BuisnessDoc.Id;
 
 
-                        var BuisnessPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness1").ToList();
-                        var BuisnessPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness2").ToList();
-                        var BuisnessPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness3").ToList();
+                        var BuisnessPersonalDocs1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness1" && x.IsDelete == false).ToList();
+                        var BuisnessPersonalDocs2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness2" && x.IsDelete == false).ToList();
+                        var BuisnessPersonalDocs3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness3" && x.IsDelete == false).ToList();
                         ViewBag.BuisnessPersonalDocs1 = BuisnessPersonalDocs1;
                         ViewBag.BuisnessPersonalDocs2 = BuisnessPersonalDocs2;
                         ViewBag.BuisnessPersonalDocs3 = BuisnessPersonalDocs3;
@@ -1688,34 +1954,82 @@ namespace FGC_OnBoarding.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
-        public async Task<IActionResult> ShowDecleration()
+        public async Task<IActionResult> ShowDecleration(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     ViewBag.BuisnessType = BuisnessProfile.BuisnessTypeId;
                     ViewBag.BuisnessProfileId = BuisnessProfile.BuisnessProfileId;
                 }
             }
-                    return View();
+            return View();
         }
         public async Task<IActionResult> SubmitApplication(int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            string UserEmail = claims.Where(x => x.Type == "Email").Select(x => x.Value).FirstOrDefault();
+            string UserName = claims.Where(x => x.Type == "FullName").Select(x => x.Value).FirstOrDefault();
+            string Role = claims.Where(x => x.Type == "Role").Select(x => x.Value).FirstOrDefault();
+
+            //   IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //   string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     BuisnessProfile.IsComplete = true;
-                    BuisnessProfile.SubmitDate = DateTime.Now;
+                    BuisnessProfile.CurrentStatus = "New";
+                    BuisnessProfile.IsOnboarded = true;
+                    BuisnessProfile.SubmitDate = DateTime.Now.DateTime_UK();
                     _context.SaveChanges();
                 }
+                var Emails = _context.EventsEmails.Where(x => x.EmailEventsId == 1).Select(x => x.Email).ToList();
+                foreach (var itm in Emails)
+                {
+                    //EmailsString += itm + ",";
+                    await _emailSender.SendEmailAsync(itm, "New Application (" + BuisnessProfile.BuisnessName + ")",
+                        $"Hi onboarding Team, <br/><br/>A new customer <b>(" + BuisnessProfile.BuisnessName + ")</b> submitted onboarding application, Please check admin page to see for further processing of the application.<br/><br/><br/><br/>" +
+                        //"<b>Customer Name: </b>" + UserName + "<br/>" +
+                        //"<b>Customer Email: </b>" + UserEmail + "<br/>" +
+                        ////"<b>Section Name: </b>PEP DECLERATION<br/>" +
+                        ////"<b>Field Name: </b>Is Pep<br/>" +
+                        ////"<b>Old Value: </b>" + OldPepYesNo + "<br/>" +
+                        ////"<b>New Value: </b>" + NewPepYesNo + "<br/><br/><br/>" +
+                        "Thanks<br/>" +
+                          "FGC,<br/>" +
+                          "IT Team" +
+                        "");
+                }
+                string ip = GetClientIPAddress(HttpContext);
+                string Country = GetUserCountryByIp(ip);
+
+                CustomerLogs objnewLogs = new CustomerLogs();
+                objnewLogs.CustomerName = UserName;
+                //objnewLogs.OldValue = OldPepYesNo;
+                //objnewLogs.NewValue = NewPepYesNo;
+                //objnewLogs.FormName = "Pep Decleration";
+                //objnewLogs.FieldName = "Is Pep";
+                objnewLogs.IPAdress = ip;
+                objnewLogs.Action = "New Application Submitted";
+                objnewLogs.Email = UserEmail;
+                objnewLogs.CustomerId = UserId;
+                objnewLogs.ActionTime = DateTime.Now.DateTime_UK();
+                objnewLogs.CountryName = Country;
+                _context.CustomerLogs.Add(objnewLogs);
+                _context.SaveChanges();
             }
 
             return RedirectToAction("ConfirmationMessage");
@@ -1733,44 +2047,49 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveBuisnessFields(BuisnessProfile objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //  string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Where(x => x.UserId == UserId && x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
                 //BuisnessProfile.BuisnessName
                 ///////////Buisness Name Update//////////
-                if (objFields.BuisnessName != null)
+                if (objFields.BuisnessName != null && objFields.BuisnessName != BuisnessProfile.BuisnessName)
                 {
                     BuisnessProfile.BuisnessName = objFields.BuisnessName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "Buisnessname")
+                    if (objFields.FieldName == "Buisnessname" && objFields.BuisnessName != BuisnessProfile.BuisnessName)
                     {
                         BuisnessProfile.BuisnessName = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
                 /////////////////
                 ///  ///////////Buisness Address Update//////////
-                if (objFields.Address != null)
+                if (objFields.Address != null && objFields.Address != BuisnessProfile.Address)
                 {
                     BuisnessProfile.Address = objFields.Address;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "address")
+                    if (objFields.FieldName == "address" && objFields.Address != BuisnessProfile.Address)
                     {
                         BuisnessProfile.Address = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1778,18 +2097,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness City Update//////////
-                if (objFields.City != null)
+                if (objFields.City != null && objFields.City != BuisnessProfile.City)
                 {
                     BuisnessProfile.City = objFields.City;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "city")
+                    if (objFields.FieldName == "city" && objFields.City != BuisnessProfile.City)
                     {
                         BuisnessProfile.City = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1797,18 +2116,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness County Update//////////
-                if (objFields.County != null)
+                if (objFields.County != null && objFields.County != BuisnessProfile.County)
                 {
                     BuisnessProfile.County = objFields.County;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "county")
+                    if (objFields.FieldName == "county" && objFields.County != BuisnessProfile.County)
                     {
                         BuisnessProfile.County = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1816,18 +2135,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness PostCode Update//////////
-                if (objFields.PostCode != null)
+                if (objFields.PostCode != null && objFields.PostCode != BuisnessProfile.PostCode)
                 {
                     BuisnessProfile.PostCode = objFields.PostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "postcode")
+                    if (objFields.FieldName == "postcode" && objFields.PostCode != BuisnessProfile.PostCode)
                     {
                         BuisnessProfile.PostCode = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1835,18 +2154,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness Country Update//////////
-                if (objFields.Country != null)
+                if (objFields.Country != null && objFields.Country != BuisnessProfile.Country)
                 {
                     BuisnessProfile.Country = objFields.Country;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "country")
+                    if (objFields.FieldName == "country" && objFields.Country != BuisnessProfile.Country)
                     {
                         BuisnessProfile.Country = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1863,7 +2182,7 @@ namespace FGC_OnBoarding.Controllers
                     if (match.Success == true)
                     {
                         BuisnessProfile.BuisnessWebsite = objFields.BuisnessWebsite;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                     }
                     else
                     {
@@ -1875,7 +2194,7 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "buisnesswebsite")
                     {
                         BuisnessProfile.BuisnessWebsite = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1883,7 +2202,7 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness BuisnessEmail Update//////////
-                if (objFields.BuisnessEmail != null)
+                if (objFields.BuisnessEmail != null && objFields.BuisnessEmail != BuisnessProfile.BuisnessEmail)
                 {
 
                     try
@@ -1896,7 +2215,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is invalid");
                             BuisnessProfile.BuisnessEmail = objFields.BuisnessEmail;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
 
                             return Json(new { flag = true, validation = "Invalid Email Address" });
                         }
@@ -1904,7 +2223,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is valid");
                             BuisnessProfile.BuisnessEmail = objFields.BuisnessEmail;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
                         }
                         //  Console.ReadLine();
                     }
@@ -1916,10 +2235,10 @@ namespace FGC_OnBoarding.Controllers
                 }
                 else
                 {
-                    if (objFields.FieldName == "buisnessemail")
+                    if (objFields.FieldName == "buisnessemail" && objFields.BuisnessEmail != BuisnessProfile.BuisnessEmail)
                     {
                         BuisnessProfile.BuisnessEmail = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1927,18 +2246,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness UTR Update//////////
-                if (objFields.UTR != null)
+                if (objFields.UTR != null && objFields.UTR != BuisnessProfile.UTR)
                 {
                     BuisnessProfile.UTR = objFields.UTR;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "utr")
+                    if (objFields.FieldName == "utr" && objFields.UTR != BuisnessProfile.UTR)
                     {
                         BuisnessProfile.UTR = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1946,37 +2265,36 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness CharityNumber Update//////////
-                if (objFields.CharityNumber != null)
+                if (objFields.CharityNumber != null && objFields.CharityNumber != BuisnessProfile.CharityNumber)
                 {
                     BuisnessProfile.CharityNumber = objFields.CharityNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "charitynumber")
+                    if (objFields.FieldName == "charitynumber" && objFields.CharityNumber != BuisnessProfile.CharityNumber)
                     {
                         BuisnessProfile.CharityNumber = string.Empty;
-                        _context.SaveChanges();
-
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
                 /////////////////
                 ///
                 ///  ///////////Buisness IncorporationNumber Update//////////
-                if (objFields.IncorporationNumber != null)
+                if (objFields.IncorporationNumber != null && objFields.IncorporationNumber != BuisnessProfile.IncorporationNumber)
                 {
                     BuisnessProfile.IncorporationNumber = objFields.IncorporationNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "incopnumber")
+                    if (objFields.FieldName == "incopnumber" && objFields.IncorporationNumber != BuisnessProfile.IncorporationNumber)
                     {
                         BuisnessProfile.IncorporationNumber = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -1984,18 +2302,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness NoOfDirectors_Partners Update//////////
-                if (objFields.NoOfDirectors_Partners != null)
+                if (objFields.NoOfDirectors_Partners != null && objFields.NoOfDirectors_Partners != BuisnessProfile.NoOfDirectors_Partners)
                 {
                     BuisnessProfile.NoOfDirectors_Partners = objFields.NoOfDirectors_Partners;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "noofdirectors")
+                    if (objFields.FieldName == "noofdirectors" && objFields.NoOfDirectors_Partners != BuisnessProfile.NoOfDirectors_Partners)
                     {
                         BuisnessProfile.NoOfDirectors_Partners = null;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2003,18 +2321,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness NoOfTrustees Update//////////
-                if (objFields.NoOfTrustees != null)
+                if (objFields.NoOfTrustees != null && objFields.NoOfTrustees != BuisnessProfile.NoOfTrustees)
                 {
                     BuisnessProfile.NoOfTrustees = objFields.NoOfTrustees;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "nooftrustees")
+                    if (objFields.FieldName == "nooftrustees" && objFields.NoOfTrustees != BuisnessProfile.NoOfTrustees)
                     {
                         BuisnessProfile.NoOfTrustees = null;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2022,37 +2340,37 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness RegistrationDate Update//////////
-                if (objFields.RegistrationDate != null)
+                if (objFields.RegistrationDate != BuisnessProfile.RegistrationDate)
                 {
                     BuisnessProfile.RegistrationDate = objFields.RegistrationDate;
-                    _context.SaveChanges();
-
+                    await _context.SaveChangesAsync();
+                    return Json(true);
                 }
                 /////////////////
                 ///
                 ///  ///////////Buisness TradeStartingDate Update//////////
-                if (objFields.TradeStartingDate != null)
+                if (objFields.TradeStartingDate != BuisnessProfile.TradeStartingDate)
                 {
                     BuisnessProfile.TradeStartingDate = objFields.TradeStartingDate;
-                    _context.SaveChanges();
-
+                    await _context.SaveChangesAsync();
+                    return Json(true);
                 }
 
                 /////////////////
                 ///
                 ///  ///////////Buisness RegisteredAdresss Update//////////
-                if (objFields.RegisteredAdresss != null)
+                if (objFields.RegisteredAdresss != null && objFields.RegisteredAdresss != BuisnessProfile.RegisteredAdresss)
                 {
                     BuisnessProfile.RegisteredAdresss = objFields.RegisteredAdresss;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "raddress")
+                    if (objFields.FieldName == "raddress" && objFields.RegisteredAdresss != BuisnessProfile.RegisteredAdresss)
                     {
                         BuisnessProfile.RegisteredAdresss = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2060,18 +2378,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness RegisteredCity Update//////////
-                if (objFields.RegisteredCity != null)
+                if (objFields.RegisteredCity != null && objFields.RegisteredCity != BuisnessProfile.RegisteredCity)
                 {
                     BuisnessProfile.RegisteredCity = objFields.RegisteredCity;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "rcity")
+                    if (objFields.FieldName == "rcity" && objFields.RegisteredCity != BuisnessProfile.RegisteredCity)
                     {
                         BuisnessProfile.RegisteredCity = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2079,18 +2397,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness RegisteredCounty Update//////////
-                if (objFields.RegisteredCounty != null)
+                if (objFields.RegisteredCounty != null && objFields.RegisteredCounty != BuisnessProfile.RegisteredCounty)
                 {
                     BuisnessProfile.RegisteredCounty = objFields.RegisteredCounty;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "rcounty")
+                    if (objFields.FieldName == "rcounty" && objFields.RegisteredCounty != BuisnessProfile.RegisteredCounty)
                     {
                         BuisnessProfile.RegisteredCounty = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2098,18 +2416,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness RegisteredPostCode Update//////////
-                if (objFields.RegisteredPostCode != null)
+                if (objFields.RegisteredPostCode != null && objFields.RegisteredPostCode != BuisnessProfile.RegisteredPostCode)
                 {
                     BuisnessProfile.RegisteredPostCode = objFields.RegisteredPostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "rpost")
+                    if (objFields.FieldName == "rpost" && objFields.RegisteredPostCode != BuisnessProfile.RegisteredPostCode)
                     {
                         BuisnessProfile.RegisteredPostCode = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2117,18 +2435,18 @@ namespace FGC_OnBoarding.Controllers
                 /////////////////
                 ///
                 ///  ///////////Buisness RegisteredCountry Update//////////
-                if (objFields.RegisteredCountry != null)
+                if (objFields.RegisteredCountry != null && objFields.RegisteredCountry != BuisnessProfile.RegisteredCountry)
                 {
                     BuisnessProfile.RegisteredCountry = objFields.RegisteredCountry;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "rcountry")
+                    if (objFields.FieldName == "rcountry" && objFields.RegisteredCountry != BuisnessProfile.RegisteredCountry)
                     {
                         BuisnessProfile.RegisteredCountry = string.Empty;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -2139,13 +2457,13 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.RegisteredAdress)
                 {
                     BuisnessProfile.RegisteredAdress = objFields.RegisteredAdress;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
                     BuisnessProfile.RegisteredAdress = false;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 //////////////////////////////////
@@ -2158,8 +2476,13 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveRepresentativeFields(AuthorizedRepresentative objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            // string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 //var BuisnessProfile = _context.BuisnessProfile.Where(x => x.UserId == UserId && x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
@@ -2167,45 +2490,45 @@ namespace FGC_OnBoarding.Controllers
                 ///////////Buisness Name Update//////////
                 ///
                 var AuthorizedRepresentative = _context.AuthorizedRepresentative.Where(x => x.RepresentativeId == objFields.Formid).FirstOrDefault();
-                if (objFields.FirstName != null && objFields.FirstName != "")
+                if (objFields.FirstName != null && objFields.FirstName != AuthorizedRepresentative.FirstName)
                 {
                     AuthorizedRepresentative.FirstName = objFields.FirstName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "firstname")
+                    if (objFields.FieldName == "firstname" && objFields.FirstName != AuthorizedRepresentative.FirstName)
                     {
                         AuthorizedRepresentative.FirstName = objFields.FirstName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
 
-                if (objFields.LastName != null && objFields.LastName != "")
+                if (objFields.LastName != null && objFields.LastName != AuthorizedRepresentative.LastName)
                 {
                     AuthorizedRepresentative.LastName = objFields.LastName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "lastname")
+                    if (objFields.FieldName == "lastname" && objFields.LastName != AuthorizedRepresentative.LastName)
                     {
                         AuthorizedRepresentative.LastName = objFields.LastName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Country != null && objFields.Country != "")
+                if (objFields.Country != null && objFields.Country != AuthorizedRepresentative.Country)
                 {
                     AuthorizedRepresentative.Country = objFields.Country;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
@@ -2213,101 +2536,99 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "country")
                     {
                         AuthorizedRepresentative.Country = objFields.Country;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Address1 != null && objFields.Address1 != "")
+                if (objFields.Address1 != null && objFields.Address1 != AuthorizedRepresentative.Address1)
                 {
                     AuthorizedRepresentative.Address1 = objFields.Address1;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "address1")
+                    if (objFields.FieldName == "address1" && objFields.Address1 != AuthorizedRepresentative.Address1)
                     {
                         AuthorizedRepresentative.Address1 = objFields.Address1;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Address2 != null && objFields.Address2 != "")
+                if (objFields.Address2 != null && objFields.Address2 != AuthorizedRepresentative.Address2)
                 {
                     AuthorizedRepresentative.Address2 = objFields.Address2;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "address2")
+                    if (objFields.FieldName == "address2" && objFields.Address2 != AuthorizedRepresentative.Address2)
                     {
                         AuthorizedRepresentative.Address2 = objFields.Address2;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.City != null && objFields.City != "")
+                if (objFields.City != null && objFields.City != AuthorizedRepresentative.City)
                 {
                     AuthorizedRepresentative.City = objFields.City;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "city")
+                    if (objFields.FieldName == "city" && objFields.City != AuthorizedRepresentative.City)
                     {
                         AuthorizedRepresentative.City = objFields.City;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.PostCode != null && objFields.PostCode != "")
+                if (objFields.PostCode != null && objFields.PostCode != AuthorizedRepresentative.PostCode)
                 {
                     AuthorizedRepresentative.PostCode = objFields.PostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "postcode")
+                    if (objFields.FieldName == "postcode" && objFields.PostCode != AuthorizedRepresentative.PostCode)
                     {
                         AuthorizedRepresentative.PostCode = objFields.PostCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.County != null && objFields.County != "")
+                if (objFields.County != null && objFields.County != AuthorizedRepresentative.County)
                 {
                     AuthorizedRepresentative.County = objFields.County;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "county")
+                    if (objFields.FieldName == "county" && objFields.County != AuthorizedRepresentative.County)
                     {
                         AuthorizedRepresentative.County = objFields.County;
-                        _context.SaveChanges();
-
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.DOB != null)
+                if (objFields.DOB != AuthorizedRepresentative.DOB)
                 {
                     AuthorizedRepresentative.DOB = objFields.DOB;
-                    _context.SaveChanges();
-
+                    await _context.SaveChangesAsync();
                     //return Json(true);
                 }
                 else
@@ -2315,29 +2636,29 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "dob")
                     {
                         AuthorizedRepresentative.DOB = objFields.DOB;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.PhoneNumber != null)
+                if (objFields.PhoneNumber != null && objFields.PhoneNumber != AuthorizedRepresentative.PhoneNumber)
                 {
                     AuthorizedRepresentative.PhoneNumber = objFields.PhoneNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "phonenumber")
+                    if (objFields.FieldName == "phonenumber" && objFields.PhoneNumber != AuthorizedRepresentative.PhoneNumber)
                     {
                         AuthorizedRepresentative.PhoneNumber = objFields.PhoneNumber;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Email != null && objFields.Email != "")
+                if (objFields.Email != null && objFields.Email != AuthorizedRepresentative.Email)
                 {
 
 
@@ -2351,7 +2672,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is invalid");
                             AuthorizedRepresentative.Email = objFields.Email;
-                           // _context.SaveChanges();
+                            // _context.SaveChanges();
 
                             return Json(new { flag = true, validation = "Invalid Email Address" });
                         }
@@ -2359,7 +2680,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is valid");
                             AuthorizedRepresentative.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
                         }
                         //  Console.ReadLine();
                     }
@@ -2377,7 +2698,7 @@ namespace FGC_OnBoarding.Controllers
                 }
                 else
                 {
-                    if (objFields.FieldName == "email")
+                    if (objFields.FieldName == "email" && objFields.Email != AuthorizedRepresentative.Email)
                     {
                         try
                         {
@@ -2391,7 +2712,7 @@ namespace FGC_OnBoarding.Controllers
                             else
                             {
                                 AuthorizedRepresentative.Email = objFields.Email;
-                                _context.SaveChanges();
+                                await _context.SaveChangesAsync();
                             }
                         }
                         catch (Exception)
@@ -2400,24 +2721,24 @@ namespace FGC_OnBoarding.Controllers
                         }
                     }
                 }
-                if (objFields.PositionInBuisness != null && objFields.PositionInBuisness != "")
+                if (objFields.PositionInBuisness != null && objFields.PositionInBuisness != AuthorizedRepresentative.PositionInBuisness)
                 {
                     AuthorizedRepresentative.PositionInBuisness = objFields.PositionInBuisness;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "positioninbuisness")
+                    if (objFields.FieldName == "positioninbuisness" && objFields.PositionInBuisness != AuthorizedRepresentative.PositionInBuisness)
                     {
                         AuthorizedRepresentative.PositionInBuisness = objFields.PositionInBuisness;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.RoleIncharity != null && objFields.RoleIncharity != "")
+                if (objFields.RoleIncharity != null && objFields.RoleIncharity != AuthorizedRepresentative.RoleIncharity)
                 {
                     AuthorizedRepresentative.RoleIncharity = objFields.RoleIncharity;
                     _context.SaveChanges();
@@ -2426,27 +2747,27 @@ namespace FGC_OnBoarding.Controllers
                 }
                 else
                 {
-                    if (objFields.FieldName == "roleincharity")
+                    if (objFields.FieldName == "roleincharity" && objFields.RoleIncharity != AuthorizedRepresentative.RoleIncharity)
                     {
                         AuthorizedRepresentative.RoleIncharity = objFields.RoleIncharity;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.PositionInComany != null && objFields.PositionInComany != "")
+                if (objFields.PositionInComany != null && objFields.PositionInComany != AuthorizedRepresentative.PositionInComany)
                 {
                     AuthorizedRepresentative.PositionInComany = objFields.PositionInComany;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "positionincompany")
+                    if (objFields.FieldName == "positionincompany" && objFields.PositionInComany != AuthorizedRepresentative.PositionInComany)
                     {
                         AuthorizedRepresentative.PositionInComany = objFields.PositionInComany;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
@@ -2457,162 +2778,167 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveBuisnessInformationFields(BuisnessInformation objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var BuisnessInformations = _context.BuisnessInformation.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId && x.BuisnessTypeId == BuisnessProfile.BuisnessTypeId).FirstOrDefault();
-                if (objFields.Answer1 != null && objFields.Answer1 != "")
+                if (objFields.Answer1 != null && objFields.Answer1 != BuisnessInformations.Answer1)
                 {
                     BuisnessInformations.Answer1 = objFields.Answer1;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "1")
+                    if (objFields.FieldName == "1" && objFields.Answer1 != BuisnessInformations.Answer1)
                     {
                         BuisnessInformations.Answer1 = objFields.Answer1;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer2 != null && objFields.Answer2 != "")
+                if (objFields.Answer2 != null && objFields.Answer2 != BuisnessInformations.Answer2)
                 {
                     BuisnessInformations.Answer2 = objFields.Answer2;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "2")
+                    if (objFields.FieldName == "2" && objFields.Answer2 != BuisnessInformations.Answer2)
                     {
                         BuisnessInformations.Answer2 = objFields.Answer2;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer3 != null && objFields.Answer3 != "")
+                if (objFields.Answer3 != null && objFields.Answer3 != BuisnessInformations.Answer3)
                 {
                     BuisnessInformations.Answer3 = objFields.Answer3;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "3")
+                    if (objFields.FieldName == "3" && objFields.Answer3 != BuisnessInformations.Answer3)
                     {
                         BuisnessInformations.Answer3 = objFields.Answer3;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer4 != null && objFields.Answer4 != "")
+                if (objFields.Answer4 != null && objFields.Answer4 != BuisnessInformations.Answer4)
                 {
                     BuisnessInformations.Answer4 = objFields.Answer4;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "4")
+                    if (objFields.FieldName == "4" && objFields.Answer4 != BuisnessInformations.Answer4)
                     {
                         BuisnessInformations.Answer4 = objFields.Answer4;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer5 != null && objFields.Answer5 != "")
+                if (objFields.Answer5 != null && objFields.Answer5 != BuisnessInformations.Answer5)
                 {
                     BuisnessInformations.Answer5 = objFields.Answer5;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "5")
+                    if (objFields.FieldName == "5" && objFields.Answer5 != BuisnessInformations.Answer5)
                     {
                         BuisnessInformations.Answer5 = objFields.Answer5;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer6 != null && objFields.Answer6 != "")
+                if (objFields.Answer6 != null && objFields.Answer6 != BuisnessInformations.Answer6)
                 {
                     BuisnessInformations.Answer6 = objFields.Answer6;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "6")
+                    if (objFields.FieldName == "6" && objFields.Answer6 != BuisnessInformations.Answer6)
                     {
                         BuisnessInformations.Answer6 = objFields.Answer6;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer7 != null && objFields.Answer7 != "")
+                if (objFields.Answer7 != null && objFields.Answer7 != BuisnessInformations.Answer7)
                 {
                     BuisnessInformations.Answer7 = objFields.Answer7;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "7")
+                    if (objFields.FieldName == "7" && objFields.Answer7 != BuisnessInformations.Answer7)
                     {
                         BuisnessInformations.Answer7 = objFields.Answer7;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer8 != null && objFields.Answer8 != "")
+                if (objFields.Answer8 != null && objFields.Answer8 != BuisnessInformations.Answer8)
                 {
                     BuisnessInformations.Answer8 = objFields.Answer8;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "8")
+                    if (objFields.FieldName == "8" && objFields.Answer8 != BuisnessInformations.Answer8)
                     {
                         BuisnessInformations.Answer8 = objFields.Answer8;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Answer9 != null && objFields.Answer9 != "")
+                if (objFields.Answer9 != null && objFields.Answer9 != BuisnessInformations.Answer9)
                 {
                     BuisnessInformations.Answer9 = objFields.Answer9;
                     BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "9")
+                    if (objFields.FieldName == "9" && objFields.Answer9 != BuisnessInformations.Answer9)
                     {
                         BuisnessInformations.Answer9 = objFields.Answer9;
                         BuisnessInformations.BuisnessTypeId = BuisnessProfile.BuisnessTypeId;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
@@ -2622,250 +2948,255 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveFinancialInformationFields(FinancialInformation objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var FinancialInformation = _context.FinancialInformation.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
 
-                if (objFields.PerMonth != null)
+                if (objFields.PerMonth != null && objFields.PerMonth != FinancialInformation.PerMonth)
                 {
                     FinancialInformation.PerMonth = objFields.PerMonth;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "1")
+                    if (objFields.FieldName == "1" && objFields.PerMonth != FinancialInformation.PerMonth)
                     {
                         FinancialInformation.PerMonth = objFields.PerMonth;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PerAnum != null)
+                if (objFields.PerAnum != null && objFields.PerAnum != FinancialInformation.PerAnum)
                 {
                     FinancialInformation.PerAnum = objFields.PerAnum;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "2")
+                    if (objFields.FieldName == "2" && objFields.PerAnum != FinancialInformation.PerAnum)
                     {
                         FinancialInformation.PerAnum = objFields.PerAnum;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PaymentIncoming != null)
+                if (objFields.PaymentIncoming != null && objFields.PaymentIncoming != FinancialInformation.PaymentIncoming)
                 {
                     FinancialInformation.PaymentIncoming = objFields.PaymentIncoming;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "3")
+                    if (objFields.FieldName == "3" && objFields.PaymentIncoming != FinancialInformation.PaymentIncoming)
                     {
                         FinancialInformation.PaymentIncoming = objFields.PaymentIncoming;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PaymentOutgoing != null)
+                if (objFields.PaymentOutgoing != null && objFields.PaymentOutgoing != FinancialInformation.PaymentOutgoing)
                 {
                     FinancialInformation.PaymentOutgoing = objFields.PaymentOutgoing;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "4")
+                    if (objFields.FieldName == "4" && objFields.PaymentOutgoing != FinancialInformation.PaymentOutgoing)
                     {
                         FinancialInformation.PaymentOutgoing = objFields.PaymentOutgoing;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.TransactionIncoming != null)
+                if (objFields.TransactionIncoming != null && objFields.TransactionIncoming != FinancialInformation.TransactionIncoming)
                 {
                     FinancialInformation.TransactionIncoming = objFields.TransactionIncoming;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "5")
+                    if (objFields.FieldName == "5" && objFields.TransactionIncoming != FinancialInformation.TransactionIncoming)
                     {
                         FinancialInformation.TransactionIncoming = objFields.TransactionIncoming;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.TransactionOutgoing != null)
+                if (objFields.TransactionOutgoing != null && objFields.TransactionOutgoing != FinancialInformation.TransactionOutgoing)
                 {
                     FinancialInformation.TransactionOutgoing = objFields.TransactionOutgoing;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "6")
+                    if (objFields.FieldName == "6" && objFields.TransactionOutgoing != FinancialInformation.TransactionOutgoing)
                     {
                         FinancialInformation.TransactionOutgoing = objFields.TransactionOutgoing;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.NoOfPaymentsPerMonth != null)
+                if (objFields.NoOfPaymentsPerMonth != null && objFields.NoOfPaymentsPerMonth != FinancialInformation.NoOfPaymentsPerMonth)
                 {
                     FinancialInformation.NoOfPaymentsPerMonth = objFields.NoOfPaymentsPerMonth;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "7")
+                    if (objFields.FieldName == "7" && objFields.NoOfPaymentsPerMonth != FinancialInformation.NoOfPaymentsPerMonth)
                     {
                         FinancialInformation.NoOfPaymentsPerMonth = objFields.NoOfPaymentsPerMonth;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.VolumePermonth != null)
+                if (objFields.VolumePermonth != null && objFields.VolumePermonth != FinancialInformation.VolumePermonth)
                 {
                     FinancialInformation.VolumePermonth = objFields.VolumePermonth;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "8")
+                    if (objFields.FieldName == "8" && objFields.VolumePermonth != FinancialInformation.VolumePermonth)
                     {
                         FinancialInformation.VolumePermonth = objFields.VolumePermonth;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.BankName != null)
+                if (objFields.BankName != null && objFields.BankName != FinancialInformation.BankName)
                 {
                     FinancialInformation.BankName = objFields.BankName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "9")
+                    if (objFields.FieldName == "9" && objFields.BankName != FinancialInformation.BankName)
                     {
                         FinancialInformation.BankName = objFields.BankName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.BankAddress != null)
+                if (objFields.BankAddress != null && objFields.BankAddress != FinancialInformation.BankAddress)
                 {
                     FinancialInformation.BankAddress = objFields.BankAddress;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "10")
+                    if (objFields.FieldName == "10" && objFields.BankAddress != FinancialInformation.BankAddress)
                     {
                         FinancialInformation.BankAddress = objFields.BankAddress;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.SortCode != null)
+                if (objFields.SortCode != null && objFields.SortCode != FinancialInformation.SortCode)
                 {
                     FinancialInformation.SortCode = objFields.SortCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "11")
+                    if (objFields.FieldName == "11" && objFields.SortCode != FinancialInformation.SortCode)
                     {
                         FinancialInformation.SortCode = objFields.SortCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.AccountName != null)
+                if (objFields.AccountName != null && objFields.AccountName != FinancialInformation.AccountName)
                 {
                     FinancialInformation.AccountName = objFields.AccountName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "12")
+                    if (objFields.FieldName == "12" && objFields.AccountName != FinancialInformation.AccountName)
                     {
                         FinancialInformation.AccountName = objFields.AccountName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.AccountNumber != null)
+                if (objFields.AccountNumber != null && objFields.AccountNumber != FinancialInformation.AccountNumber)
                 {
                     FinancialInformation.AccountNumber = objFields.AccountNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "13")
+                    if (objFields.FieldName == "13" && objFields.AccountNumber != FinancialInformation.AccountNumber)
                     {
                         FinancialInformation.AccountNumber = objFields.AccountNumber;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.IBAN != null)
+                if (objFields.IBAN != null && objFields.IBAN != FinancialInformation.IBAN)
                 {
                     FinancialInformation.IBAN = objFields.IBAN;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "14")
+                    if (objFields.FieldName == "14" && objFields.IBAN != FinancialInformation.IBAN)
                     {
                         FinancialInformation.IBAN = objFields.IBAN;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.SwiftCode != null)
+                if (objFields.SwiftCode != null && objFields.SwiftCode != FinancialInformation.SwiftCode)
                 {
                     FinancialInformation.SwiftCode = objFields.SwiftCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "15")
+                    if (objFields.FieldName == "15" && objFields.SwiftCode != FinancialInformation.SwiftCode)
                     {
                         FinancialInformation.SwiftCode = objFields.SwiftCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.AccountCurrency != null)
+                if (objFields.AccountCurrency != null && objFields.AccountCurrency != FinancialInformation.AccountCurrency)
                 {
                     FinancialInformation.AccountCurrency = objFields.AccountCurrency;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "16")
+                    if (objFields.FieldName == "16" && objFields.AccountCurrency != FinancialInformation.AccountCurrency)
                     {
                         FinancialInformation.AccountCurrency = objFields.AccountCurrency;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
@@ -2873,13 +3204,13 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.AccountDetails)
                 {
                     FinancialInformation.AccountDetails = objFields.AccountDetails;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
                     FinancialInformation.AccountDetails = false;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
             }
@@ -2891,135 +3222,140 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveDirectorsFields(DirectorAndShareHolders objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var Director = _context.DirectorAndShareHolders.Where(x => x.DirectorId == objFields.Formid).FirstOrDefault();
-                if (objFields.FirstName != null && objFields.FirstName != "")
+                if (objFields.FirstName != null && objFields.FirstName != Director.FirstName)
                 {
                     Director.FirstName = objFields.FirstName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "firstname")
+                    if (objFields.FieldName == "firstname" && objFields.FirstName != Director.FirstName)
                     {
                         Director.FirstName = objFields.FirstName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.LastName != null && objFields.LastName != "")
+                if (objFields.LastName != null && objFields.LastName != Director.LastName)
                 {
                     Director.LastName = objFields.LastName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "lastname")
+                    if (objFields.FieldName == "lastname" && objFields.LastName != Director.LastName)
                     {
                         Director.LastName = objFields.LastName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Address != null && objFields.Address != "")
+                if (objFields.Address != null && objFields.Address != Director.Address)
                 {
                     Director.Address = objFields.Address;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "address")
+                    if (objFields.FieldName == "address" && objFields.Address != Director.Address)
                     {
                         Director.Address = objFields.Address;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.City != null && objFields.City != "")
+                if (objFields.City != null && objFields.City != Director.City)
                 {
                     Director.City = objFields.City;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "city")
+                    if (objFields.FieldName == "city" && objFields.City != Director.City)
                     {
                         Director.City = objFields.City;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PostCode != null && objFields.PostCode != "")
+                if (objFields.PostCode != null && objFields.PostCode != Director.PostCode)
                 {
                     Director.PostCode = objFields.PostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "postcode")
+                    if (objFields.FieldName == "postcode" && objFields.PostCode != Director.PostCode)
                     {
                         Director.PostCode = objFields.PostCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Country != null && objFields.Country != "")
+                if (objFields.Country != null && objFields.Country != Director.Country)
                 {
                     Director.Country = objFields.Country;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "country")
+                    if (objFields.FieldName == "country" && objFields.Country != Director.Country)
                     {
                         Director.Country = objFields.Country;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Nationality != null && objFields.Nationality != "")
+                if (objFields.Nationality != null && objFields.Nationality != Director.Nationality)
                 {
                     Director.Nationality = objFields.Nationality;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "nationality")
+                    if (objFields.FieldName == "nationality" && objFields.Nationality != Director.Nationality)
                     {
                         Director.Nationality = objFields.Nationality;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.County != null && objFields.County != "")
+                if (objFields.County != null && objFields.County != Director.County)
                 {
                     Director.County = objFields.County;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "county")
+                    if (objFields.FieldName == "county" && objFields.County != Director.County)
                     {
                         Director.County = objFields.County;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.DOB != null)
+                if (objFields.DOB != Director.DOB)
                 {
                     Director.DOB = objFields.DOB;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     //return Json(true);
                 }
@@ -3028,7 +3364,7 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "dob")
                     {
                         Director.DOB = objFields.DOB;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -3036,21 +3372,21 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.PhoneNumber != null && objFields.PhoneNumber != "")
                 {
                     Director.PhoneNumber = objFields.PhoneNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "phonenumber")
+                    if (objFields.FieldName == "phonenumber" && objFields.PhoneNumber != Director.PhoneNumber)
                     {
                         Director.PhoneNumber = objFields.PhoneNumber;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Email != null && objFields.Email != "")
+                if (objFields.Email != null && objFields.Email != Director.Email)
                 {
                     try
                     {
@@ -3062,7 +3398,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is invalid");
                             Director.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
 
                             return Json(new { flag = true, validation = "Invalid Email Address" });
                         }
@@ -3070,12 +3406,14 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is valid");
                             Director.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
                         }
                         //  Console.ReadLine();
                     }
                     catch (Exception)
                     {
+                        Director.Email = objFields.Email;
+                        await _context.SaveChangesAsync();
                         return Json(new { flag = true, validation = "Invalid Email Address" });
                         //  Console.ReadLine();
                     }
@@ -3085,10 +3423,10 @@ namespace FGC_OnBoarding.Controllers
                 }
                 else
                 {
-                    if (objFields.FieldName == "email")
+                    if (objFields.FieldName == "email" && objFields.Email != Director.Email)
                     {
                         Director.Email = objFields.Email;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -3096,16 +3434,16 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.ShareHolders_percentage != null)
                 {
                     Director.ShareHolders_percentage = objFields.ShareHolders_percentage;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "shareholders")
+                    if (objFields.FieldName == "shareholders" && objFields.FieldName != Director.FieldName)
                     {
                         Director.ShareHolders_percentage = objFields.ShareHolders_percentage;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -3120,135 +3458,139 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveTrusteesFields(Trustees objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var Trustees = _context.Trustees.Where(x => x.TrusteeId == objFields.Formid).FirstOrDefault();
-                if (objFields.FirstName != null && objFields.FirstName != "")
+                if (objFields.FirstName != null && objFields.FirstName != Trustees.FirstName)
                 {
                     Trustees.FirstName = objFields.FirstName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "firstname")
+                    if (objFields.FieldName == "firstname" && objFields.FirstName != Trustees.FirstName)
                     {
                         Trustees.FirstName = objFields.FirstName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.LastName != null && objFields.LastName != "")
+                if (objFields.LastName != null && objFields.LastName != Trustees.LastName)
                 {
                     Trustees.LastName = objFields.LastName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "lastname")
+                    if (objFields.FieldName == "lastname" && objFields.LastName != Trustees.LastName)
                     {
                         Trustees.LastName = objFields.LastName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Address != null && objFields.Address != "")
+                if (objFields.Address != null && objFields.Address != Trustees.Address)
                 {
                     Trustees.Address = objFields.Address;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "address")
+                    if (objFields.FieldName == "address" && objFields.Address != Trustees.Address)
                     {
                         Trustees.Address = objFields.Address;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.City != null && objFields.City != "")
+                if (objFields.City != null && objFields.City != Trustees.City)
                 {
                     Trustees.City = objFields.City;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "city")
+                    if (objFields.FieldName == "city" && objFields.City != Trustees.City)
                     {
                         Trustees.City = objFields.City;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PostCode != null && objFields.PostCode != "")
+                if (objFields.PostCode != null && objFields.PostCode != Trustees.PostCode)
                 {
                     Trustees.PostCode = objFields.PostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "postcode")
+                    if (objFields.FieldName == "postcode" && objFields.PostCode != Trustees.PostCode)
                     {
                         Trustees.PostCode = objFields.PostCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Country != null && objFields.Country != "")
+                if (objFields.Country != null && objFields.Country != Trustees.Country)
                 {
                     Trustees.Country = objFields.Country;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "country")
+                    if (objFields.FieldName == "country" && objFields.Country != Trustees.Country)
                     {
                         Trustees.Country = objFields.Country;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Nationality != null && objFields.Nationality != "")
+                if (objFields.Nationality != null && objFields.Nationality != Trustees.Nationality)
                 {
                     Trustees.Nationality = objFields.Nationality;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "nationality")
+                    if (objFields.FieldName == "nationality" && objFields.Nationality != Trustees.Nationality)
                     {
                         Trustees.Nationality = objFields.Nationality;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.County != null && objFields.County != "")
+                if (objFields.County != null && objFields.County != Trustees.County)
                 {
                     Trustees.County = objFields.County;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "county")
+                    if (objFields.FieldName == "county" && objFields.County != Trustees.County)
                     {
                         Trustees.County = objFields.County;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.DOB != null)
+                if (objFields.DOB != Trustees.DOB)
                 {
                     Trustees.DOB = objFields.DOB;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     //return Json(true);
                 }
@@ -3257,15 +3599,15 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "dob")
                     {
                         Trustees.DOB = objFields.DOB;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.AppointmentDate != null)
+                if (objFields.AppointmentDate != Trustees.AppointmentDate)
                 {
                     Trustees.AppointmentDate = objFields.AppointmentDate;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     //return Json(true);
                 }
@@ -3274,28 +3616,28 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "appdate")
                     {
                         Trustees.AppointmentDate = objFields.AppointmentDate;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PhoneNumber != null && objFields.PhoneNumber != "")
+                if (objFields.PhoneNumber != null && objFields.PhoneNumber != Trustees.PhoneNumber)
                 {
                     Trustees.PhoneNumber = objFields.PhoneNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "phonenumber")
+                    if (objFields.FieldName == "phonenumber" && objFields.PhoneNumber != Trustees.PhoneNumber)
                     {
                         Trustees.PhoneNumber = objFields.PhoneNumber;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Email != null && objFields.Email != "")
+                if (objFields.Email != null && objFields.Email != Trustees.Email)
                 {
                     try
                     {
@@ -3307,7 +3649,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is invalid");
                             Trustees.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
 
                             return Json(new { flag = true, validation = "Invalid Email Address" });
                         }
@@ -3315,12 +3657,15 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is valid");
                             Trustees.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
                         }
                         //  Console.ReadLine();
                     }
                     catch (Exception)
                     {
+
+                        Trustees.Email = objFields.Email;
+                        await _context.SaveChangesAsync();
                         return Json(new { flag = true, validation = "Invalid Email Address" });
                         //  Console.ReadLine();
                     }
@@ -3330,27 +3675,27 @@ namespace FGC_OnBoarding.Controllers
                 }
                 else
                 {
-                    if (objFields.FieldName == "email")
+                    if (objFields.FieldName == "email" && objFields.Email != Trustees.Email)
                     {
                         Trustees.Email = objFields.Email;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
                 }
-                if (objFields.Role != null || objFields.Role != "")
+                if (objFields.Role != null && objFields.Role != Trustees.Role)
                 {
                     Trustees.Role = objFields.Role;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "role")
+                    if (objFields.FieldName == "role" && Trustees.Role != objFields.Role)
                     {
                         Trustees.Role = objFields.Role;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
 
                         return Json(true);
                     }
@@ -3365,137 +3710,141 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOwnersFields(OwnerShip objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 var Owner = _context.OwnerShip.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
 
-                if (objFields.FirstName != null)
+                if (objFields.FirstName != null && objFields.FirstName != Owner.FirstName)
                 {
                     Owner.FirstName = objFields.FirstName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "1")
+                    if (objFields.FieldName == "1" && objFields.FirstName != Owner.FirstName)
                     {
                         Owner.FirstName = objFields.FirstName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.LastName != null)
+                if (objFields.LastName != null && objFields.LastName != Owner.LastName)
                 {
                     Owner.LastName = objFields.LastName;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "2")
+                    if (objFields.FieldName == "2" && objFields.LastName != Owner.LastName)
                     {
                         Owner.LastName = objFields.LastName;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Address != null)
+                if (objFields.Address != null && objFields.Address != Owner.Address)
                 {
                     Owner.Address = objFields.Address;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "3")
+                    if (objFields.FieldName == "3" && objFields.Address != Owner.Address)
                     {
                         Owner.Address = objFields.Address;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.City != null)
+                if (objFields.City != null && objFields.City != Owner.City)
                 {
                     Owner.City = objFields.City;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "4")
+                    if (objFields.FieldName == "4" && objFields.City != Owner.City)
                     {
                         Owner.City = objFields.City;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PostCode != null)
+                if (objFields.PostCode != null && objFields.PostCode != Owner.PostCode)
                 {
                     Owner.PostCode = objFields.PostCode;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "5")
+                    if (objFields.FieldName == "5" && objFields.PostCode != Owner.PostCode)
                     {
                         Owner.PostCode = objFields.PostCode;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.County != null)
+                if (objFields.County != null && objFields.County != Owner.County)
                 {
                     Owner.County = objFields.County;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "6")
+                    if (objFields.FieldName == "6" && objFields.County != Owner.County)
                     {
                         Owner.County = objFields.County;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Country != null)
+                if (objFields.Country != null && objFields.Country != Owner.Country)
                 {
                     Owner.Country = objFields.Country;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "7")
+                    if (objFields.FieldName == "7" && objFields.Country != Owner.Country)
                     {
                         Owner.Country = objFields.Country;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Nationality != null)
+                if (objFields.Nationality != null && objFields.Nationality != Owner.Nationality)
                 {
                     Owner.Nationality = objFields.Nationality;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "8")
+                    if (objFields.FieldName == "8" && objFields.Nationality != Owner.Nationality)
                     {
                         Owner.Nationality = objFields.Nationality;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.DOB != null)
+                if (objFields.DOB != Owner.DOB)
                 {
                     Owner.DOB = objFields.DOB;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     // return Json(true);
                 }
                 else
@@ -3503,26 +3852,26 @@ namespace FGC_OnBoarding.Controllers
                     if (objFields.FieldName == "9")
                     {
                         Owner.DOB = objFields.DOB;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.PhoneNumber != null)
+                if (objFields.PhoneNumber != null && objFields.PhoneNumber != Owner.PhoneNumber)
                 {
                     Owner.PhoneNumber = objFields.PhoneNumber;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "10")
+                    if (objFields.FieldName == "10" && objFields.PhoneNumber != Owner.PhoneNumber)
                     {
                         Owner.PhoneNumber = objFields.PhoneNumber;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                         return Json(true);
                     }
                 }
-                if (objFields.Email != null)
+                if (objFields.Email != null && objFields.Email != Owner.Email)
                 {
                     try
                     {
@@ -3534,7 +3883,7 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is invalid");
                             Owner.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
 
                             return Json(new { flag = true, validation = "Invalid Email Address" });
                         }
@@ -3542,72 +3891,99 @@ namespace FGC_OnBoarding.Controllers
                         {
                             // Console.WriteLine($"The email is valid");
                             Owner.Email = objFields.Email;
-                            _context.SaveChanges();
+                            await _context.SaveChangesAsync();
                         }
                         //  Console.ReadLine();
                     }
                     catch (Exception)
                     {
+
+                        Owner.Email = objFields.Email;
+                        await _context.SaveChangesAsync();
                         return Json(new { flag = true, validation = "Invalid Email Address" });
                         //  Console.ReadLine();
                     }
 
                     Owner.Email = objFields.Email;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
                 else
                 {
-                    if (objFields.FieldName == "11")
+                    if (objFields.FieldName == "11" && objFields.Email != Owner.Email)
                     {
-                        Owner.Email = string.Empty;
-                        _context.SaveChanges();
-                        return Json(true);
+                        try
+                        {
+                            var mail = new MailAddress(objFields.Email);
+                            bool isValidEmail = mail.Host.Contains(".");
+                            if (!isValidEmail)
+                            {
+                                Owner.Email = string.Empty;
+                                return Json(new { flag = true, validation = "Invalid Email Address" });
+                            }
+                            else
+                            {
+                                Owner.Email = string.Empty;
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            return Json(new { flag = true, validation = "Invalid Email Address" });
+                        }
                     }
                 }
             }
             return Json(false);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveSolePersonalDocsData(SoleDocuments objFields)
+        public async Task<IActionResult> SaveIspopData(BuisnessProfile objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
-                var SoleDoc = _context.SoleDocuments.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
-
-                if (objFields.isPop)
+                var BuisnessProfile = _context.BuisnessProfile.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
+                // var SoleDoc = _context.SoleDocuments.Where(x => x.BuisnessProfileId == objFields.BuisnessProfileId).FirstOrDefault();
+                if (objFields.Ispep)
                 {
-                    SoleDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
+                    BuisnessProfile.Ispep = objFields.Ispep;
+                    await _context.SaveChangesAsync();
                     //return Json(true);
                 }
                 else
                 {
-                    SoleDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
-                 //   return Json(true);
+                    BuisnessProfile.Ispep = objFields.Ispep;
+                    await _context.SaveChangesAsync();
+                    //   return Json(true);
                 }
-               if(objFields.RelationShip != null && objFields.RelationShip != "")
+                if (objFields.Peprelationship != null)
                 {
 
-                    SoleDoc.RelationShip = objFields.RelationShip;
-                    _context.SaveChanges();
+                    BuisnessProfile.Peprelationship = objFields.Peprelationship;
+                    await _context.SaveChangesAsync();
                     return Json(true);
-                   
+
                 }
             }
 
-                return Json(false);
+            return Json(false);
 
         }
         [HttpPost]
         public async Task<IActionResult> SaveCharityPersonalDocsData(CharityDocument objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
@@ -3616,20 +3992,20 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.isPop)
                 {
                     CharityDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     //return Json(true);
                 }
                 else
                 {
                     CharityDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     //   return Json(true);
                 }
                 if (objFields.RelationShip != null && objFields.RelationShip != "")
                 {
 
                     CharityDoc.RelationShip = objFields.RelationShip;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
 
                 }
@@ -3641,8 +4017,12 @@ namespace FGC_OnBoarding.Controllers
         [HttpPost]
         public async Task<IActionResult> SavebuisnessPersonalDocsData(BuisnessDocuments objFields)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
             if (UserId != null)
             {
                 var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
@@ -3651,28 +4031,26 @@ namespace FGC_OnBoarding.Controllers
                 if (objFields.isPop)
                 {
                     buisnessDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     //return Json(true);
                 }
                 else
                 {
                     buisnessDoc.isPop = objFields.isPop;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     //   return Json(true);
                 }
                 if (objFields.RelationShip != null && objFields.RelationShip != "")
                 {
 
                     buisnessDoc.RelationShip = objFields.RelationShip;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return Json(true);
                 }
             }
             return Json(false);
 
         }
-
-
         /// <summary>
         /// ///////////////Saving Forms Data On FocusOut End
         /// </summary>
@@ -3706,6 +4084,14 @@ namespace FGC_OnBoarding.Controllers
             if (BuisnessProfile.Country == null || BuisnessProfile.Country == "")
             {
                 objValidations.Add(new ModelValidations { Validationid = "Validation5", Message = "Select Country" });
+            }
+            if (BuisnessProfile.TradeStartingDate == null)
+            {
+                objValidations.Add(new ModelValidations { Validationid = "Validation11", Message = "Select Date" });
+            }
+            if (BuisnessProfile.RegistrationDate == null)
+            {
+                objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Select Date" });
             }
             //if (BuisnessProfile.BuisnessEmail != null)
             //{
@@ -3749,12 +4135,17 @@ namespace FGC_OnBoarding.Controllers
                 {
                     objValidations.Add(new ModelValidations { Validationid = "Validation7", Message = "Enter UTR" });
                 }
+
             }
             else if (BuisnessProfile.BuisnessTypeId == 2)
             {
                 if (BuisnessProfile.CharityNumber == null || BuisnessProfile.CharityNumber == "")
                 {
                     objValidations.Add(new ModelValidations { Validationid = "Validation8", Message = "Enter Charity Number" });
+                }
+                if (BuisnessProfile.NoOfTrustees == null)
+                {
+                    objValidations.Add(new ModelValidations { Validationid = "Validation12", Message = "Enter Trustees Number" });
                 }
             }
             else if (BuisnessProfile.BuisnessTypeId == 3 || BuisnessProfile.BuisnessTypeId == 4)
@@ -3764,7 +4155,12 @@ namespace FGC_OnBoarding.Controllers
                     objValidations.Add(new ModelValidations { Validationid = "Validation9", Message = "Enter Incorporation Number" });
 
                 }
+                if (BuisnessProfile.NoOfDirectors_Partners == null)
+                {
+                    objValidations.Add(new ModelValidations { Validationid = "Validation12", Message = "Enter Directors Number" });
+                }
             }
+
             return Json(objValidations);
         }
         public async Task<IActionResult> ValidateBuisnessInfoFields(int BuisnessProfileId)
@@ -3863,7 +4259,7 @@ namespace FGC_OnBoarding.Controllers
         {
             List<ModelValidations> objValidations = new List<ModelValidations>();
             var BuisnessProfile = _context.BuisnessProfile.Where(x => x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
-            var DirectorsInformations = _context.DirectorAndShareHolders.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).ToList();
+            var DirectorsInformations = _context.DirectorAndShareHolders.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId && x.IsDelete == false).ToList();
             foreach (var Director in DirectorsInformations)
             {
                 if (Director.FirstName == null || Director.FirstName == "")
@@ -3904,7 +4300,39 @@ namespace FGC_OnBoarding.Controllers
                 }
                 if (Director.Email == null || Director.Email == "")
                 {
+
+
+
+
+
                     objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "This field is mandatory", FormId = Director.DirectorId });
+                }
+                else
+                {
+
+                    try
+                    {
+                        var mail = new MailAddress(Director.Email);
+                        bool isValidEmail = mail.Host.Contains(".");
+                        if (!isValidEmail)
+                        {
+                            objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address", FormId = Director.DirectorId });
+
+                            // return Json(new { flag = true, validation = "Invalid Email Address" });
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address", FormId = Director.DirectorId });
+                        //  Console.ReadLine();
+                    }
+
+
+
+                    // Console.WriteLine($"The email is invalid");
+
+
                 }
                 if (Director.ShareHolders_percentage == null)
                 {
@@ -3917,7 +4345,7 @@ namespace FGC_OnBoarding.Controllers
         {
             List<ModelValidations> objValidations = new List<ModelValidations>();
             var BuisnessProfile = _context.BuisnessProfile.Where(x => x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
-            var OwnersInformation = _context.OwnerShip.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).FirstOrDefault();
+            var OwnersInformation = _context.OwnerShip.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId && x.IsDelete == false).FirstOrDefault();
 
             if (OwnersInformation.FirstName == null || OwnersInformation.FirstName == "")
             {
@@ -3959,13 +4387,33 @@ namespace FGC_OnBoarding.Controllers
             {
                 objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "This field is mandatory" });
             }
+            else
+            {
+                try
+                {
+                    var mail = new MailAddress(OwnersInformation.Email);
+                    bool isValidEmail = mail.Host.Contains(".");
+                    if (!isValidEmail)
+                    {
+                        objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address" });
+                        // return Json(new { flag = true, validation = "Invalid Email Address" });
+                    }
+                }
+                catch (Exception)
+                {
+
+                    objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address" });
+                    //  Console.ReadLine();
+                }
+                // Console.WriteLine($"The email is invalid");
+            }
             return Json(objValidations);
         }
         public async Task<IActionResult> ValidateTrusteeFields(int BuisnessProfileId)
         {
             List<ModelValidations> objValidations = new List<ModelValidations>();
             var BuisnessProfile = _context.BuisnessProfile.Where(x => x.BuisnessProfileId == BuisnessProfileId).FirstOrDefault();
-            var TrusteesInformations = _context.Trustees.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId).ToList();
+            var TrusteesInformations = _context.Trustees.Where(x => x.BuisnessProfileId == BuisnessProfile.BuisnessProfileId && x.IsDelete == false).ToList();
             foreach (var Trustee in TrusteesInformations)
             {
                 if (Trustee.FirstName == null || Trustee.FirstName == "")
@@ -4006,7 +4454,37 @@ namespace FGC_OnBoarding.Controllers
                 }
                 if (Trustee.Email == null || Trustee.Email == "")
                 {
+
                     objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "This field is mandatory", FormId = Trustee.TrusteeId });
+                }
+                else
+                {
+
+                    try
+                    {
+                        var mail = new MailAddress(Trustee.Email);
+                        bool isValidEmail = mail.Host.Contains(".");
+                        if (!isValidEmail)
+                        {
+                            // Console.WriteLine($"The email is invalid");
+                            //Trustees.Email = objFields.Email;
+                            //await _context.SaveChangesAsync();
+                            objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address", FormId = Trustee.TrusteeId });
+                            // return Json(new { flag = true, validation = "Invalid Email Address" });
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        objValidations.Add(new ModelValidations { Validationid = "Validation10", Message = "Invalid Email Address", FormId = Trustee.TrusteeId });
+                        //  Console.ReadLine();
+                    }
+
+
+
+                    // Console.WriteLine($"The email is invalid");
+
+
                 }
                 if (Trustee.Role == null || Trustee.Role == "")
                 {
@@ -4027,14 +4505,17 @@ namespace FGC_OnBoarding.Controllers
         /// ///////////////Setting Current Form Index so User Can See That Form which he was filling last time
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> SetCurrentForm(int Form)
+        public async Task<IActionResult> SetCurrentForm(int Form, int BuisnessProfileId)
         {
-            IdentityUser applicationUser = await _userManager.GetUserAsync(User);
-            string UserId = applicationUser?.Id; // will give the user's Email
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            string UserId = claims.Where(x => x.Type == "UserId").Select(x => x.Value).FirstOrDefault();
+            //IdentityUser applicationUser = await _userManager.GetUserAsync(User);
+            //string UserId = applicationUser?.Id; // will give the user's Email
 
             if (UserId != null)
             {
-                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.IsComplete == false).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
+                var BuisnessProfile = _context.BuisnessProfile.Include(s => s.BuisnessTypes).Include(s => s.BuisnessSector).Where(x => x.UserId == UserId && x.BuisnessProfileId == BuisnessProfileId).OrderByDescending(x => x.BuisnessProfileId).FirstOrDefault();
                 if (BuisnessProfile != null)
                 {
                     BuisnessProfile.CurrentForm = Form;
@@ -4068,19 +4549,19 @@ namespace FGC_OnBoarding.Controllers
 
             var Authorized = _context.AuthorizedRepresentative.Where(x => x.RepresentativeId == RepresentativeId).FirstOrDefault();
 
-            _context.AuthorizedRepresentative.Remove(Authorized);
+            Authorized.IsDelete = true;
             _context.SaveChanges();
             return Json(true);
         }
         public async Task<IActionResult> GetAllRepresentative(int BuisnessProfileId)
         {
-           
-            var Authorized = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false).ToList();
-           foreach(var auth in Authorized)
+
+            var Authorized = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false && x.IsDelete == false).ToList();
+            foreach (var auth in Authorized)
             {
                 if (auth.DOB != null)
                 {
-                    auth.DateOfBirth = auth.DOB.ToString("yyyy-MM-dd");
+                    auth.DateOfBirth = auth.DOB?.ToString("yyyy-MM-dd");
                 }
                 else
 
@@ -4096,7 +4577,6 @@ namespace FGC_OnBoarding.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
-
         /// <summary>
         /// ///////////////Directors Form Related Data
         /// </summary>
@@ -4116,7 +4596,7 @@ namespace FGC_OnBoarding.Controllers
 
             var Director = _context.DirectorAndShareHolders.Where(x => x.DirectorId == DirectorId).FirstOrDefault();
 
-            _context.DirectorAndShareHolders.Remove(Director);
+            Director.IsDelete = true;
             _context.SaveChanges();
 
             var LastDirector = _context.DirectorAndShareHolders.OrderByDescending(x => x.DirectorId).FirstOrDefault();
@@ -4132,20 +4612,21 @@ namespace FGC_OnBoarding.Controllers
         }
         public async Task<IActionResult> GetAllDirectors(int BuisnessProfileId)
         {
-            var Directors = _context.DirectorAndShareHolders.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false).ToList();
-          
-            foreach(var dir in Directors)
+            var Directors = _context.DirectorAndShareHolders.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false && x.IsDelete == false).ToList();
+
+            foreach (var dir in Directors)
             {
-                if(dir.DOB != null)
+                if (dir.DOB != null)
                 {
-                    dir.Dateofbirth = dir.DOB.ToString("yyyy-MM-dd");
-                }else
+                    dir.Dateofbirth = dir.DOB?.ToString("yyyy-MM-dd");
+                }
+                else
                 {
                     dir.Dateofbirth = "yyyy-MM-dd";
                 }
             }
-            
-            
+
+
             return Json(Directors);
         }
         /// <summary>
@@ -4153,7 +4634,6 @@ namespace FGC_OnBoarding.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
-
         /// <summary>
         /// ///////////////Trustees Form Related Data
         /// </summary>
@@ -4173,7 +4653,7 @@ namespace FGC_OnBoarding.Controllers
 
             var Trustee = _context.Trustees.Where(x => x.TrusteeId == TrusteeId).FirstOrDefault();
 
-            _context.Trustees.Remove(Trustee);
+            Trustee.IsDelete = true;
             _context.SaveChanges();
             var LastTrustee = _context.Trustees.OrderByDescending(x => x.TrusteeId).FirstOrDefault();
             if (LastTrustee != null)
@@ -4187,16 +4667,24 @@ namespace FGC_OnBoarding.Controllers
         }
         public async Task<IActionResult> GetAllTrustees(int BuisnessProfileId)
         {
-            var Trustees = _context.Trustees.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false).ToList();
+            var Trustees = _context.Trustees.Where(x => x.BuisnessProfileId == BuisnessProfileId && x.Isdefault == false && x.IsDelete == false).ToList();
             foreach (var dir in Trustees)
             {
                 if (dir.DOB != null)
                 {
-                    dir.Dateofbirth = dir.DOB.ToString("yyyy-MM-dd");
+                    dir.Dateofbirth = dir.DOB?.ToString("yyyy-MM-dd");
                 }
                 else
                 {
                     dir.Dateofbirth = "yyyy-MM-dd";
+                }
+                if (dir.AppointmentDate != null)
+                {
+                    dir.DateofAppointment = dir.AppointmentDate?.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    dir.DateofAppointment = "yyyy-MM-dd";
                 }
             }
             return Json(Trustees);
@@ -4211,6 +4699,172 @@ namespace FGC_OnBoarding.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public async Task<IActionResult> EditApplication(int BuisnessProfileId, string Link)
+        {
+            var profileid = Convert.ToInt32(BuisnessProfileId);
+            var Application = _context.BuisnessProfile.Include(s => s.BuisnessSector).Where(x => x.BuisnessProfileId == profileid).FirstOrDefault();
+
+            ViewBag.link = Link;
+            var CountriesList = _context.Countries.Select(x => x.CountryName).ToList();
+
+
+            ViewBag.Countries = CountriesList;
+            var AuthorizedRepresentatives = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+
+            var buisnessType = _context.BuisnessTypes.Where(x => x.BuisnessTypeId == Application.BuisnessTypeId).FirstOrDefault();
+
+
+            var ApplicationData = (from info in _context.BuisnessProfile
+                                   where info.BuisnessProfileId == profileid
+                                   select new ParentProfile
+                                   {
+                                       objBuisness = info,
+                                       Authorzels = _context.AuthorizedRepresentative.Where(x => x.BuisnessProfileId == profileid && x.IsDelete == false).ToList(),
+                                       BuisnessInformation = _context.BuisnessInformation.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault(),
+                                       FinancialInformation = _context.FinancialInformation.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault(),
+                                       DirectorAndShareHoldersls = _context.DirectorAndShareHolders.Where(x => x.BuisnessProfileId == profileid && x.IsDelete == false).ToList(),
+                                       Trusteesls = _context.Trustees.Where(x => x.BuisnessProfileId == profileid && x.IsDelete == false && x.IsDelete == false).ToList(),
+                                       //   OwnerShip = _context.OwnerShip.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault(),
+
+                                   }).FirstOrDefault();
+
+
+            if (ApplicationData.objBuisness.BuisnessTypeId == 1)
+            {
+                ApplicationData.Buisness1 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Buisness1" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness2 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Buisness2" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness3 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Buisness3" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+
+                var soleDoc = _context.SoleDocuments.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault();
+
+                ApplicationData.Personal1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole1" && x.IsDelete == false).ToList();
+                ApplicationData.Personal2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole2" && x.IsDelete == false).ToList();
+                ApplicationData.Personal3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == soleDoc.Id && x.DocumentType == "Sole3" && x.IsDelete == false).ToList();
+
+                ApplicationData.OwnerShip = _context.OwnerShip.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault();
+
+            }
+            else if (ApplicationData.objBuisness.BuisnessTypeId == 2)
+            {
+                var CharityDoc = _context.CharityDocument.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault();
+
+                ApplicationData.Personal1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity1" && x.IsDelete == false).ToList();
+                ApplicationData.Personal2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity2" && x.IsDelete == false).ToList();
+                ApplicationData.Personal3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == CharityDoc.Id && x.DocumentType == "Charity3" && x.IsDelete == false).ToList();
+
+                ApplicationData.Buisness1 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Charity1" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness2 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Charity2" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness3 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Charity3" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+            }
+            else if (ApplicationData.objBuisness.BuisnessTypeId == 3 || ApplicationData.objBuisness.BuisnessTypeId == 4)
+            {
+                var BuisnessDoc = _context.BuisnessDocuments.Where(x => x.BuisnessProfileId == profileid).FirstOrDefault();
+
+                ApplicationData.Personal1 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness1" && x.IsDelete == false).ToList();
+                ApplicationData.Personal2 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness2" && x.IsDelete == false).ToList();
+                ApplicationData.Personal3 = _context.PersonalDocuments.Where(x => x.DocumentTypeId == BuisnessDoc.Id && x.DocumentType == "Buisness3" && x.IsDelete == false).ToList();
+
+                ApplicationData.Buisness1 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Company1" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness2 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Company2" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+                ApplicationData.Buisness3 = _context.BuisnessAttachemtns.Where(x => x.DocumentType == "Company3" && x.BuisnessProfileId == profileid && x.IsDelete == false).ToList();
+            }
+
+            ApplicationData.AuthorizedRepresentative = new AuthorizedRepresentative();
+            ApplicationData.DirectorAndShareHolders = new DirectorAndShareHolders();
+            ApplicationData.Trustees = new Trustees();
+
+            ViewBag.BuisnessTypeName = buisnessType.Name;
+
+            ViewBag.BuisnesssTypeId = Application.BuisnessTypeId;
+            ViewBag.BuisnesssProfileId = Application.BuisnessProfileId;
+            ViewBag.BuisnessName = Application.BuisnessName;
+            ViewBag.SubmitDate = Application.BuisnessName;
+            var CurrencyIds = (dynamic)null;
+            var Currencies = "";
+            if (Application.CurrencyId.Contains(','))
+            {
+                CurrencyIds = Application.CurrencyId.Split(',');
+                foreach (var curr in CurrencyIds)
+                {
+                    int CurrencyId = Convert.ToInt32(curr);
+                    var CurrencyName = _context.Currency.Where(x => x.CurrencyId == CurrencyId).Select(x => x.Name).FirstOrDefault();
+
+                    Currencies += CurrencyName + ",";
+                }
+
+            }
+            else
+            {
+                int CurrencyId = Convert.ToInt32(Application.CurrencyId);
+                var CurrencyName = _context.Currency.Where(x => x.CurrencyId == CurrencyId).Select(x => x.Name).FirstOrDefault();
+                Currencies = CurrencyName;
+            }
+
+            ViewBag.currency = Currencies;
+            return View(ApplicationData);
+        }
+
+        public async Task<IActionResult> ChangePassword()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetProfileComments(int BuisnessProfileId)
+        {
+
+
+
+            //  var ProfileComments = _context.ProfileComments.Where(x => x.BuisneesProfileId == BuisnessProfileId).ToList();
+
+
+            var ProfileComments = (from comments in _context.ProfileComments
+                                   where comments.BuisneesProfileId == BuisnessProfileId
+                                   select new ProfileComments()
+                                   {
+                                       BuisneesProfileId = comments.BuisneesProfileId,
+                                       Id=comments.Id,
+                                       ActionBy=comments.ActionBy,
+                                       ActionDateStr=comments.ActionDate.Value.ToString("dd-MMM-yyyy"),
+                                       Comments=comments.Comments
+                                   }).ToList();
+
+
+
+            return Json(ProfileComments);
+        }
+
+
+        public static string GetUserCountryByIp(string ip)
+        {
+            IpInfo ipInfo = new IpInfo();
+
+            try
+            {
+                string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
+                ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
+                RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
+                ipInfo.Country = myRI1.EnglishName;
+            }
+            catch (Exception)
+            {
+                ipInfo.Country = null;
+            }
+
+            return ipInfo.Country;
+        }
+        public static string GetClientIPAddress(HttpContext context)
+        {
+            string ip = string.Empty;
+            if (!string.IsNullOrEmpty(context.Request.Headers["X-Forwarded-For"]))
+            {
+                ip = context.Request.Headers["X-Forwarded-For"];
+            }
+            else
+            {
+                ip = context.Request.HttpContext.Features.Get<IHttpConnectionFeature>().RemoteIpAddress.ToString();
+            }
+            return ip;
         }
     }
 }

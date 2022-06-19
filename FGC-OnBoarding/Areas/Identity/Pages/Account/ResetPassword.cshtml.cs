@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using FGC_OnBoarding.Data;
 
 namespace FGC_OnBoarding.Areas.Identity.Pages.Account
 {
@@ -18,9 +19,12 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
     {
         private readonly UserManager<FGC_OnBoardingUser> _userManager;
 
-        public ResetPasswordModel(UserManager<FGC_OnBoardingUser> userManager)
+        private readonly FGC_OnBoardingContext _context;
+
+        public ResetPasswordModel(UserManager<FGC_OnBoardingUser> userManager, FGC_OnBoardingContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -28,7 +32,6 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -43,9 +46,11 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
+
+            public string userId { get; set; }
         }
 
-        public IActionResult OnGet(string code = null)
+        public IActionResult OnGet(string code = null,string Id = null)
         {
             if (code == null)
             {
@@ -55,7 +60,8 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
+                    userId = Id
                 };
                 return Page();
             }
@@ -67,8 +73,8 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
             {
                 return Page();
             }
-
-            var user = await _userManager.FindByEmailAsync(Input.Email);
+            
+            var user = await _userManager.FindByIdAsync(Input.userId);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

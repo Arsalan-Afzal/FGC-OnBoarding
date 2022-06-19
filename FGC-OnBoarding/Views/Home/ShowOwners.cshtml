@@ -23,7 +23,7 @@
                     <div class="formb1">
                         <div class="formhe">First Name <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                         @Html.TextBoxFor(x=>x.FirstName , new { @tabindex = "1", @placeholder = "Enter your first name" })
+                         @Html.TextBoxFor(x=>x.FirstName , new {@class="OwnerFirstName", @tabindex = "1", @placeholder = "Enter your first name" })
                             @*<input type="text" name="directorfname[]" id="d1" onkeypress="dir1();" tabindex="1" placeholder="Enter your first name">*@
                             <div id="Validation1" class="errormsg"></div>
                         </div><!--formtx-->
@@ -32,7 +32,7 @@
                     <div class="formb2">
                         <div class="formhe">Last Name <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.LastName, new { @tabindex = "2", @placeholder = "Enter your last name" })
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "OwnerLastName", @tabindex = "2", @placeholder = "Enter your last name" })
                             @*<input type="text" name="directorlname[]" id="d2" onkeypress="dir2();" tabindex="2" placeholder="Enter your last name">*@
                             <div id="Validation2" class="errormsg"></div>
                         </div><!--formtx-->
@@ -43,7 +43,7 @@
                     <div class="formb1">
                         <div class="formhe">Address <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.Address, new { @tabindex = "3", @placeholder = "Enter your full address" })
+                            @Html.TextBoxFor(x => x.Address, new { @class = "OwnerAddress", @tabindex = "3", @placeholder = "Enter your full address" })
                             @*<input type="text" name="directorcadd[]" id="d3" onkeypress="dir3();" tabindex="3" placeholder="Enter your full address">*@
                             <div id="Validation3" class="errormsg"></div>
                         </div><!--formtx-->
@@ -52,7 +52,7 @@
                     <div class="formb2">
                         <div class="formhe">City <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.City, new { @tabindex = "4", @placeholder = "Enter your city" })
+                            @Html.TextBoxFor(x => x.City, new { @class = "OwnerCity", @tabindex = "4", @placeholder = "Enter your city" })
                             @*<input type="text" name="directorcity[]" id="d4" onkeypress="dir4();" tabindex="4" placeholder="Enter your city">*@
                             <div id="Validation4" class="errormsg"></div>
                         </div><!--formtx-->
@@ -63,7 +63,7 @@
                     <div class="formb1">
                         <div class="formhe">Postcode <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.PostCode, new { @tabindex = "5", @placeholder = "Enter your postcode" })
+                            @Html.TextBoxFor(x => x.PostCode, new { @class = "OwnerPostCode", @tabindex = "5", @placeholder = "Enter your postcode" })
                             @*<input type="text" min="1" name="directorpost[]" id="d5" onkeypress="dir5();" tabindex="5" placeholder="Enter your postcode">*@
                             <div id="Validation5" class="errormsg"></div>
                         </div><!--formtx-->
@@ -73,7 +73,7 @@
                         <div class="formhe">County</div><!--formhe-->
                        
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.County, new { @tabindex = "6", @placeholder = "Enter your county" })
+                            @Html.TextBoxFor(x => x.County, new { @class = "OwnerCounty", @tabindex = "6", @placeholder = "Enter your county" })
                             @*<input type="text" name="directorcounty[]" tabindex="6" id="d6" placeholder="Enter your county">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -83,7 +83,7 @@
                     <div class="formb1">
                         <div class="formhe">Country <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            <select style="color:black"  id="Mycountry" name="directorcountry[]"  tabindex="7">
+                            <select style="color:black"  id="Ownercountry" name="directorcountry[]"  tabindex="7">
                                 <option value="Select country" disabled="" selected="">Select country</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Aland Islands">Aland Islands</option>
@@ -337,7 +337,7 @@
                     <div class="formb2">
                         <div class="formhe">Nationality <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            <select style="color:black" name="directornationality[]" id="Mynationality" onchange="dir8(this);" tabindex="8">
+                            <select style="color:black" name="directornationality[]" id="Ownernationality"  tabindex="8">
                                 <option value="Select nationality">Select nationality</option>
                                 <option value="afghan">Afghan</option>
                                 <option value="albanian">Albanian</option>
@@ -541,9 +541,10 @@
                     <div class="formb1">
                         <div class="formhe">Date of Birth <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            <div class="input-group4 date" tabindex = "9"  data-date-format="dd-mm-yyyy">
+                            <div class="input-group4 date"   data-date-format="dd-mm-yyyy">
                                 @*<input type="text" class="form-control" placeholder="Enter you date of birth (dd-mm-yyyy)" name="directordob[]" id="datepicker4" onchange="dir14();" tabindex="9">*@
-                                @Html.EditorFor(x => x.DOB, new { @tabindex = "9", @placeholder = "Enter you date of birth (dd-mm-yyyy)" })
+                                @*@Html.EditorFor(x => x.DOB, new { @tabindex = "9", @placeholder = "Enter you date of birth (dd-mm-yyyy)" })*@
+                                <input type="date" asp-for="DOB"  class="form-control OwnerDOB" tabindex = "9" /> 
                                 @*<div class="input-group-addon">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </div>*@
@@ -555,7 +556,7 @@
                     <div class="formb2">
                         <div class="formhe">Phone no <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.PhoneNumber, new { @tabindex = "10", @placeholder = "Enter your contact no" })
+                            @Html.TextBoxFor(x => x.PhoneNumber, new {@class= "OwnerPhoneNumber", @tabindex = "10", @placeholder = "Enter your contact no" })
                             @*<input type="text" name="directorphono[]" id="d9" onkeypress="dir9();" tabindex="10" placeholder="Enter your contact no">*@
                             <div id="Validation9" class="errormsg"></div>
                         </div><!--formtx-->
@@ -569,7 +570,7 @@
                         <div class="formhe">Email <span class="asteric">*</span></div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="directoreadd[]" id="d10" onkeypress="dir10();" tabindex="11" placeholder="Enter your valid email address">*@
-                            @Html.TextBoxFor(x => x.Email, new { @tabindex = "11", @placeholder = "Enter your valid email address" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "OwnerEmail", @tabindex = "11", @placeholder = "Enter your valid email address" })
                             <div id="Validation10" class="errormsg"></div>
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -610,6 +611,16 @@
     var EmailFlag = false;
     $(document).ready(function () {
 
+
+           if ("@Model.Country" != "" && "@Model.Country" != null) {
+               $('#Ownercountry').val("@Model.Country");
+        }
+        if ("@Model.Nationality" != "" && "@Model.Nationality" != null) {
+            $('#Ownernationality').val("@Model.Nationality");
+        }
+
+
+
         debugger
         $('.menu1').find('#header1').prop('class', 'menuheader2');
         $('.menu1').find('.mneuline').find('img').prop('src', '../Images/greenline.png')
@@ -631,8 +642,8 @@
 
         $('.menu5').find('#header5').prop('class', 'menuheader1');
         $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
-
-
+        debugger
+       // $('#DOB').val("@Model.Mydob");
            debugger
            if ("@Model.Country" != "" && "@Model.Country" != null) {
                $('#Mycountry').val("@Model.Country");
@@ -648,7 +659,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 4 },
+            data: { Form: 4 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -663,6 +674,7 @@
             url: '/Home/ShowFinancialInformation',
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
+             data: { BuisnessProfileId: @Model.BuisnessProfileId },
             dataType: 'html',
             async: false,
             success: function (data) {
@@ -686,11 +698,15 @@
             }
         })
     }
-    $('#FirstName').focusout(function () {
+    $('.OwnerFirstName').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "FirstName": $('#FirstName').val(),
+            "FirstName": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "1"
         };
         debugger
@@ -699,7 +715,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -710,11 +726,15 @@
             }
         })
     })
-    $('#LastName').focusout(function () {
+    $('.OwnerLastName').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "LastName": $('#LastName').val(),
+            "LastName": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "2"
         };
         debugger
@@ -723,7 +743,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -734,11 +754,15 @@
             }
         })
     })
-    $('#Address').focusout(function () {
+    $('.OwnerAddress').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "Address": $('#Address').val(),
+            "Address": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "3"
         };
         debugger
@@ -747,7 +771,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -758,11 +782,15 @@
             }
         })
     })
-    $('#City').focusout(function () {
+    $('.OwnerCity').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "City": $('#City').val(),
+            "City": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "4"
         };
         debugger
@@ -771,7 +799,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -782,11 +810,15 @@
             }
         })
     })
-    $('#PostCode').focusout(function () {
+    $('.OwnerPostCode').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "PostCode": $('#PostCode').val(),
+            "PostCode": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "5"
         };
         debugger
@@ -795,7 +827,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -806,11 +838,15 @@
             }
         })
     })
-    $('#County').focusout(function () {
+    $('.OwnerCounty').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "County": $('#County').val(),
+            "County": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "6"
         };
         debugger
@@ -819,7 +855,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -830,11 +866,15 @@
             }
         })
     })
-    $('#Mycountry').on('change', function () {
+    $('#Ownercountry').on('change', function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "Country": $('#Mycountry').val(),
+            "Country": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "7"
         };
         debugger
@@ -843,7 +883,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -854,12 +894,15 @@
             }
         })
     })
-    $('#Mynationality').on('change', function () {
+    $('#Ownernationality').on('change', function () {
         debugger
-
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "Nationality": $('#Mynationality').val(),
+            "Nationality": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "8"
         };
         debugger
@@ -868,7 +911,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -879,11 +922,14 @@
             }
         })
     })
-    $('#DOB').focusout(function () {
+    $('.OwnerDOB').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "DOB": $('#DOB').val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "9"
         };
         debugger
@@ -892,7 +938,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -903,11 +949,15 @@
             }
         })
     })
-    $('#PhoneNumber').focusout(function () {
+    $('.OwnerPhoneNumber').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "PhoneNumber": $('#PhoneNumber').val(),
+            "PhoneNumber": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "10"
         };
         debugger
@@ -916,7 +966,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -927,11 +977,15 @@
             }
         })
     })
-    $('#Email').focusout(function () {
+    $('.OwnerEmail').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-            "Email": $('#Email').val(),
+            "Email": $(this).val(),
+            "DOB": $('.OwnerDOB').val(),
               "FieldName": "11"
         };
         debugger
@@ -940,7 +994,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 if (data.flag) {
                     $('#Validation10').html(data.validation)
@@ -981,12 +1035,12 @@
                     else {
                         window.scrollTo(0, 0);
                     }
-                    if (EmailFlag == true) {
-                        $('#Validation10').html("Invalid Email Address")
-                        flag = true;
-                        window.scrollTo(0, 0);
+                    //if (EmailFlag == true) {
+                    //    $('#Validation10').html("Invalid Email Address")
+                    //    flag = true;
+                    //    window.scrollTo(0, 0);
 
-                    }
+                    //}
                     for (var i = 0; i < data.length; i++) {
                         debugger
                         flag = true;
@@ -1009,7 +1063,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 6 },
+                    data: { Form: 6,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -1026,6 +1080,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                       data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()
@@ -1095,7 +1150,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 6 },
+                    data: { Form: 6 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -1112,6 +1167,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                     data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()
@@ -1180,7 +1236,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 6 },
+                    data: { Form: 6 ,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -1197,6 +1253,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                     data: { BuisnessProfileId: @Model.BuisnessProfileId },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()

@@ -16,7 +16,7 @@ namespace FGC_OnBoarding.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("dbo")
-                .HasAnnotation("ProductVersion", "3.1.21")
+                .HasAnnotation("ProductVersion", "3.1.25")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,7 +29,7 @@ namespace FGC_OnBoarding.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("BuisnessName")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -49,7 +49,7 @@ namespace FGC_OnBoarding.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
@@ -116,7 +116,7 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -124,6 +124,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Isdefault")
                         .HasColumnType("bit");
@@ -175,6 +178,9 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("Filename")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.HasKey("DocumentId");
 
                     b.ToTable("BuisnessAttachemtns");
@@ -189,6 +195,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<int>("BuisnessProfileId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("RelationShip")
                         .HasColumnType("nvarchar(max)");
@@ -241,6 +250,9 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<int>("BuisnessTypeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.HasKey("BuisnessInformationId");
 
                     b.HasIndex("BuisnessProfileId");
@@ -257,6 +269,15 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ApprovedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("AutomatedKycrecieved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("AutomatedKycsent")
+                        .HasColumnType("bit");
 
                     b.Property<string>("BuisnessEmail")
                         .HasColumnType("nvarchar(max)");
@@ -282,6 +303,12 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ClientDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("ClientRiskScore")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
@@ -294,10 +321,40 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<int>("CurrentForm")
                         .HasColumnType("int");
 
+                    b.Property<string>("CurrentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeclinedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeclinedReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("IncorporationNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsClient")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCompliance")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsComplianceCommitee")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeclined")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDelete")
@@ -306,11 +363,29 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<bool>("IsDiscarded")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsMlro")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnboarded")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Ispep")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("NoOfDirectors_Partners")
                         .HasColumnType("int");
 
                     b.Property<int?>("NoOfTrustees")
                         .HasColumnType("int");
+
+                    b.Property<bool>("OfferLetter")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("OnboardingFee")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Peprelationship")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(max)");
@@ -333,13 +408,22 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("RegisteredPostCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RegistrationDate")
+                    b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SubmitDate")
+                    b.Property<string>("RiskIndicator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SendBackReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SignOfferLetter")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("SubmitDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TradeStartingDate")
+                    b.Property<DateTime?>("TradeStartingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UTR")
@@ -367,6 +451,9 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<int>("BuisnessProfileId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("RelationShip")
                         .HasColumnType("nvarchar(max)");
 
@@ -376,6 +463,96 @@ namespace FGC_OnBoarding.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CharityDocument");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.Countries", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.Customers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BuisnessName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.DirectorAndShareHolders", b =>
@@ -400,7 +577,7 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -408,6 +585,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Isdefault")
                         .HasColumnType("bit");
@@ -432,6 +612,84 @@ namespace FGC_OnBoarding.Migrations
                     b.HasIndex("BuisnessProfileId");
 
                     b.ToTable("DirectorAndShareHolders");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.ExternalAttachmentComments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActionBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AttachementsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuisnessProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExternalSearchId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Isdelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExternalAttachmentComments");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.ExternalSearches", b =>
+                {
+                    b.Property<int>("ExternalsearchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExternalsearchId");
+
+                    b.ToTable("ExternalSearches");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.ExternalSearchesAttachments", b =>
+                {
+                    b.Property<int>("AttachementsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CommentsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ExternalsearchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AttachementsId");
+
+                    b.ToTable("ExternalSearchesAttachments");
                 });
 
             modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.FinancialInformation", b =>
@@ -524,7 +782,7 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -532,6 +790,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Isdefault")
                         .HasColumnType("bit");
@@ -583,12 +844,45 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<bool>("ISpep")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("RelationShip")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DocumentId");
 
                     b.ToTable("PersonalDocuments");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.ProfileComments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActionBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ActionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ActorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuisneesProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProfileComments");
                 });
 
             modelBuilder.Entity("FGC_OnBoarding.Models.Buisness.SoleDocuments", b =>
@@ -600,6 +894,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<int>("BuisnessProfileId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("RelationShip")
                         .HasColumnType("nvarchar(max)");
@@ -622,7 +919,7 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("AppointmentDate")
+                    b.Property<DateTime?>("AppointmentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("BuisnessProfileId")
@@ -637,7 +934,7 @@ namespace FGC_OnBoarding.Migrations
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -645,6 +942,9 @@ namespace FGC_OnBoarding.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Isdefault")
                         .HasColumnType("bit");
@@ -671,12 +971,135 @@ namespace FGC_OnBoarding.Migrations
                     b.ToTable("Trustees");
                 });
 
+            modelBuilder.Entity("FGC_OnBoarding.Models.EmailModels.EmailEvents", b =>
+                {
+                    b.Property<int>("EmailEventsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmailEventsId");
+
+                    b.ToTable("EmailEvents");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.EmailModels.EventsEmails", b =>
+                {
+                    b.Property<int>("EventsEmailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmailEventsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventsEmailsId");
+
+                    b.HasIndex("EmailEventsId");
+
+                    b.ToTable("EventsEmails");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.IntroducersModels.IntroducerUsers", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IntroducerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IntroducersIntroducerId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserRoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("IntroducersIntroducerId");
+
+                    b.HasIndex("UserRoleId");
+
+                    b.ToTable("IntroducerUsers");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.IntroducersModels.Introducers", b =>
+                {
+                    b.Property<int>("IntroducerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("IntroducerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IntroducerId");
+
+                    b.ToTable("Introducers");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.IntroducersModels.IntroducersUsersApplications", b =>
+                {
+                    b.Property<int>("IntroducersApplicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IntroducerUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IntroducersApplicationId");
+
+                    b.ToTable("IntroducersUsersApplications");
+                });
+
             modelBuilder.Entity("FGC_OnBoarding.Models.ServiceRequirment.BuisnessSector", b =>
                 {
                     b.Property<int>("BuisnessSectorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -693,6 +1116,9 @@ namespace FGC_OnBoarding.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -708,12 +1134,204 @@ namespace FGC_OnBoarding.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CurrencyId");
 
                     b.ToTable("Currency");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Users.CustomerLogs", b =>
+                {
+                    b.Property<int>("CustomerLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ActionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Activity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IPAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LogOutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogOutTimeStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoginTimeStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerLogId");
+
+                    b.ToTable("CustomerLogs");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Users.IntroducerLogs", b =>
+                {
+                    b.Property<int>("IntrouducersLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ActionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Activity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IPAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntroducerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntroducerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LogOutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogOutTimeStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoginTimeStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IntrouducersLogId");
+
+                    b.ToTable("IntroducerLogs");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Users.IntroducerUserRole", b =>
+                {
+                    b.Property<int>("UserRoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserRoleId");
+
+                    b.ToTable("IntroducerUserRole");
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.Users.UserLogs", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IPAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogDateStr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("UserLogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -912,6 +1530,28 @@ namespace FGC_OnBoarding.Migrations
                     b.HasOne("FGC_OnBoarding.Models.Buisness.BuisnessProfile", "BuisnessProfile")
                         .WithMany()
                         .HasForeignKey("BuisnessProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.EmailModels.EventsEmails", b =>
+                {
+                    b.HasOne("FGC_OnBoarding.Models.EmailModels.EmailEvents", "EmailEvents")
+                        .WithMany()
+                        .HasForeignKey("EmailEventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FGC_OnBoarding.Models.IntroducersModels.IntroducerUsers", b =>
+                {
+                    b.HasOne("FGC_OnBoarding.Models.IntroducersModels.Introducers", "Introducers")
+                        .WithMany()
+                        .HasForeignKey("IntroducersIntroducerId");
+
+                    b.HasOne("FGC_OnBoarding.Models.Users.IntroducerUserRole", "UserRole")
+                        .WithMany()
+                        .HasForeignKey("UserRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

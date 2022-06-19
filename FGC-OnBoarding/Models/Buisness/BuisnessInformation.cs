@@ -38,5 +38,13 @@ namespace FGC_OnBoarding.Models.Buisness
         [NotMapped]
         public string FieldName { get; set; }
 
+        [NotMapped]
+        public string FieldValue { get; set; }
+
+        [NotMapped]
+        public string Question { get; set; }
+
+        public bool IsDelete { get; set; }
+
     }
 }

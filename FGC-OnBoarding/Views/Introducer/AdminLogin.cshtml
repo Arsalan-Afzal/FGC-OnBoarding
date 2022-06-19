@@ -1,0 +1,133 @@
+﻿@model FGC_OnBoarding.Models.IntroducersModels.IntroducerUsers
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("../Images/4.jpg");
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="refresh" content="10;url=signout.c.php?okmsg2=" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../wwwroot/Images/icon.jpg">
+
+    <title>FGC-Capital FORM ADMIN</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Data Tables</title>
+
+
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+
+    @*<link href="~/css/font-awesome.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">*@
+
+    @*<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">*@
+
+    <link href="~/css/animate.css" rel="stylesheet" />
+    @*<link href="~/css/style.css" rel="stylesheet" />*@
+    <link href="~/css/styless.css" rel="stylesheet" />
+
+    <style>
+        .cke {
+            visibility: hidden;
+        }
+    </style>
+    @*<script src="ckeditor/sample.js"></script>*@
+
+
+
+
+
+</head>
+
+<body>
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+
+                <h4><img src="../Images/fgc_logo.png" width="150" height="40"></h4>
+
+            </div>
+            <h3>FGC-Capital Onboarding Portal</h3>
+            <p></p>
+            <form asp-action="AdminLogin" method="post" class="m-t">
+
+
+                <div class="form-group">
+                    <input asp-for="@Model.UserName" type="text" class="form-control" placeholder="Username" >
+                </div>
+                <div class="form-group">
+                    <input asp-for="@Model.Password" id="password-field" type="password" class="form-control"  placeholder="Password" required="">
+                    <span class="show-btn field-icon"><i id="myeye" class="fa fa-eye"></i></span>
+                </div>
+                <div class="form-group no-border margin-top-20">
+                    <button class="btn btn-primary block full-width m-b" type="submit" name="submit">Login</button>
+                </div>
+                @if (ViewBag.message != "" && ViewBag.message != null)
+                {
+            <p style="color:red">@ViewBag.message</p>
+                }
+                <!--<p><a href="forgot.php">Forgot Password?</a></p>-->
+
+
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    @*<script src="js/jquery-2.1.1.js"></script>
+        <script src="js/bootstrap.min.js"></script>*@
+    <style>
+        .field-icon {
+            float: right;
+            margin-top: -25px;
+            margin-right: 10px;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+    <script>
+        $('#myeye').click(function () {
+            debugger
+            var PasswordField = document.getElementById('password-field')
+
+            if (PasswordField.type == "password") {
+
+                PasswordField.type = "text";
+            }
+            else {
+                PasswordField.type = "password";
+            }
+        })
+        $(".toggle-password").click(function () {
+        debugger
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
+
+
+
+
+</body>
+</html>

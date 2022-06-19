@@ -79,7 +79,7 @@
                 <div class="formb2">
                     <div class="formhe">Country <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
-                        <select style="color:black" id="countrySelect" name="pcountry" onchange="psuc6(this);" tabindex="6">
+                        <select style="color:black" id="countrySelect" name="pcountry"  tabindex="6">
                             <option value="Select country" disabled selected>Select country</option>
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Aland Islands">Aland Islands</option>
@@ -411,12 +411,14 @@
 
                     <div class="formhe" id="char4">Date of Registration <span class="asteric">*</span></div><!--formhe-->
                     <div class="formtx">
-                        <div class="input-group date" tabindex = 10  data-date-format="dd-MM-yyyy">
-                            @Html.EditorFor(x => x.RegistrationDate, new { @tabindex = 10, @name = "cincordate", @id = "datepicker1", @class = "form-control", @placeholder = "Date of Registration (dd-mm-yyyy)" })
+                        <div class="input-group date" data-date-format="dd-MM-yyyy">
+                            <input type="date" asp-for="RegistrationDate" class="form-control" tabindex="10" />
+                            <div id="Validation10" class="errormsg"></div>
+                            @*@Html.EditorFor(x => x.RegistrationDate, new { @tabindex = 10, @name = "cincordate", @id = "datepicker1", @class = "form-control", @placeholder = "Date of Registration (dd-mm-yyyy)" })*@
                             @*<input type="text" class="form-control" name="cincordate" id="datepicker1" onchange="psucd1();" placeholder="Enter date (dd-mm-yyyy)" tabindex="10">*@
                             @*<div class="input-group-addon">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                             <div id="de1" class="errormsg"></div>
                         </div>
                     </div>
@@ -441,43 +443,41 @@
 
 
                     <div class="formtx">
-                        <div class="input-group1 date" tabindex = 11 data-date-format="dd-mm-yyyy">
-                            @Html.EditorFor(x => x.TradeStartingDate, new { @tabindex = 11, @name = "cdatebegan", @id = "datepicker2", @class = "form-control", @placeholder = "Date began trading (dd-mm-yyyy)" })
+                        <div class="input-group1 date" data-date-format="dd-mm-yyyy">
+                            <input type="date" asp-for="TradeStartingDate" class="form-control" tabindex="11" />
+                            <div id="Validation11" class="errormsg"></div>
+                            @*@Html.EditorFor(x => x.TradeStartingDate, new { @tabindex = 11, @name = "cdatebegan", @id = "datepicker2", @class = "form-control", @placeholder = "Date began trading (dd-mm-yyyy)" })*@
                             @*<input type="text" class="form-control" placeholder="Date began trading (dd-mm-yyyy)" name="cdatebegan" id="datepicker2" onchange="psucd2();" tabindex="11">*@
                             @*<div class="input-group-addon">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                             <div id="de2" class="errormsg"></div>
                         </div>
                     </div>
-
                 </div><!--formb1-->
-
                 <div class="formb2" id="dirpart">
                     @if (Model.BuisnessTypeId == 3 || Model.BuisnessTypeId == 4)
                     {
                         <div class="formhe" id="all6">Number of Directors / Partners <span class="asteric">*</span></div><!--formhe-->
-                        <div class="formtx">
-                            @Html.TextBoxFor(x => x.NoOfDirectors_Partners, null, new { @tabindex = 12, @type ="number", @placeholder = "Enter total number" })
-                            @*<input type="number" min="1" name="cnoofdirectors" placeholder="Enter total number" id="p10"
-                                onchange="psuc10();" tabindex="12" /><div id="pe10" class="errormsg"></div>*@
-                        </div>
+                <div class="formtx">
+                    @Html.TextBoxFor(x => x.NoOfDirectors_Partners, null, new { @tabindex = 12, @type = "number", @placeholder = "Enter total number" })
+                    <div id="Validation12" class="errormsg"></div>
+                    @*<input type="number" min="1" name="cnoofdirectors" placeholder="Enter total number" id="p10"
+        onchange="psuc10();" tabindex="12" /><div id="pe10" class="errormsg"></div>*@
+                </div>
                     }
                     @if (Model.BuisnessTypeId == 2)
                     {
                         <div class="formhe" id="char6">Number of Trustees <span class="asteric">*</span></div><!--formhe-->
-                        <div class="formtx">
-                            @Html.TextBoxFor(x => x.NoOfTrustees, null, new { @tabindex = 12, @placeholder = "Enter total number" })
-                            @*<input type="number" min="1" name="cnoofdirectors" placeholder="Enter total number" id="p10"
-                                onchange="psuc10();" tabindex="12" /><div id="pe10" class="errormsg"></div>*@
-                        </div>
+                <div class="formtx">
+                    @Html.TextBoxFor(x => x.NoOfTrustees, null, new { @tabindex = 12, @placeholder = "Enter total number" })
+                    <div id="Validation12" class="errormsg"></div>
+                    @*<input type="number" min="1" name="cnoofdirectors" placeholder="Enter total number" id="p10"
+        onchange="psuc10();" tabindex="12" /><div id="pe10" class="errormsg"></div>*@
+                </div>
                     }
-
                 </div><!--formb1-->
-
             </div><!--textformblock-->
-
-
         </div>
     </div><!--topheader-->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -501,9 +501,9 @@
 
     <div class="topheader11">
         <div class="topheader2">
-            <label class="container" id="textcon">
+            <label class="container" id="textcon" >
                 Please check this box if your registered business address is different from the above.
-                @Html.CheckBoxFor(x => x.RegisteredAdress, new { @tabindex = 13, @name = "authormust" })
+                @Html.CheckBoxFor(x => x.RegisteredAdress, new { tabindex = 13,@name = "authormust" })
                 @*<input type="checkbox" name="authormust" id="chkautho" value="authdone" />*@
                 <span class="checkmark1"></span>
             </label>
@@ -815,7 +815,7 @@
     <div class="topheader11">
         <div class="topheader2" style="text-align:center;">
             <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowServiceRequirments()" tabindex="19" />
-            <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowAuthorizeRepresentatives()" tabindex="18" />
+            <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowAuthorizeRepresentatives()" tabindex="20" />
         </div>
     </div><!--topheader-->
 
@@ -849,7 +849,7 @@
 
 
 
-          
+
 
 
            if ("@Model.Country" != "" && "@Model.Country" != null) {
@@ -874,7 +874,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form : 0},
+            data: { Form: 0, BuisnessProfileId:"@Model.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -893,6 +893,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+            data: { BuisnessProfileId: '@Model.BuisnessProfileId' },
             async: false,
             success: function (data) {
                 $('#myfield').hide()
@@ -926,6 +927,7 @@
                 url: '/Home/ValidateBuisnessFields',
                 contentType: 'application/json ; charset:ytf-8',
                 type: 'Get',
+
                 dataType: 'json',
                 data: { BuisnessProfileId: @Model.BuisnessProfileId },
                 async: false,
@@ -967,7 +969,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'json',
-                    data: { Form: 2 },
+                    data: { Form: 2, BuisnessProfileId:"@Model.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         //$('#myfield').html(data);
@@ -984,6 +986,7 @@
                     contentType: 'application/json ; charset:ytf-8',
                     type: 'Get',
                     dataType: 'html',
+                     data: { BuisnessProfileId:"@Model.BuisnessProfileId" },
                     async: false,
                     success: function (data) {
                         $('#myfield').hide()
@@ -1011,12 +1014,15 @@
 
     $('#RegisteredAdress').click(function () {
         debugger
+
         if ($(this).is(":checked")) {
 
             $('.bussinopen').css('display', '')
                   var objFields = {
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
-              "RegisteredAdress":true
+                      "RegisteredAdress": true,
+                      "TradeStartingDate": $('#TradeStartingDate').val(),
+                      "RegistrationDate": $('#RegistrationDate').val()
         };
 
 
@@ -1035,7 +1041,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1048,6 +1054,10 @@
     })
     $('#BuisnessName').focusout(function () {
         debugger
+
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1060,7 +1070,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "BuisnessName": $('#BuisnessName').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName":"Buisnessname"
+            "FieldName": "Buisnessname",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
 
         };
         debugger
@@ -1070,7 +1082,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1085,6 +1097,11 @@
     })
     $('#Address').focusout(function () {
         debugger
+
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
+
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1096,7 +1113,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "Address": $('#Address').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "address"
+            "FieldName": "address",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1105,9 +1124,10 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
+
             },
             error: function (msg, xhr) {
                 alert("error")
@@ -1120,6 +1140,9 @@
     })
     $('#City').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1131,7 +1154,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "City": $('#City').val(),
             "RegisteredAdress": RegisterFlag,
-              "FieldName": "city"
+            "FieldName": "city",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1140,7 +1165,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1155,6 +1180,9 @@
     })
     $('#County').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1166,7 +1194,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "County": $('#County').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "county"
+            "FieldName": "county",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1175,7 +1205,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1190,6 +1220,9 @@
     })
     $('#PostCode').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1201,7 +1234,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "PostCode": $('#PostCode').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "postcode"
+            "FieldName": "postcode",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1210,7 +1245,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1225,6 +1260,9 @@
                                  })
     $('#countrySelect').on('change',function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1236,7 +1274,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "Country": $('#countrySelect').val(),
             "RegisteredAdress": RegisterFlag,
-             "FieldName": "country"
+            "FieldName": "country",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1245,7 +1285,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1260,6 +1300,9 @@
                                  })
     $('#BuisnessWebsite').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1271,7 +1314,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "BuisnessWebsite": $('#BuisnessWebsite').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "buisnesswebsite"
+            "FieldName": "buisnesswebsite",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1280,7 +1325,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
                 debugger
@@ -1303,6 +1348,9 @@
                                  })
     $('#BuisnessEmail').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1314,7 +1362,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "BuisnessEmail": $('#BuisnessEmail').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "buisnessemail"
+            "FieldName": "buisnessemail",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1323,7 +1373,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
                 if (data.flag) {
@@ -1352,6 +1402,9 @@
                                  })
     $('#UTR').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1363,7 +1416,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "UTR": $('#UTR').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "utr"
+            "FieldName": "utr",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1372,7 +1427,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1387,6 +1442,9 @@
                                  })
     $('#CharityNumber').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1398,7 +1456,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "CharityNumber": $('#CharityNumber').val(),
             "RegisteredAdress": RegisterFlag,
-             "FieldName": "charitynumber"
+            "FieldName": "charitynumber",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1407,7 +1467,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1422,6 +1482,9 @@
                                  })
     $('#IncorporationNumber').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1433,7 +1496,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "IncorporationNumber": $('#IncorporationNumber').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "incopnumber"
+            "FieldName": "incopnumber",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1442,7 +1507,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1457,6 +1522,9 @@
                                  })
     $('#NoOfDirectors_Partners').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1468,7 +1536,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "NoOfDirectors_Partners": $('#NoOfDirectors_Partners').val(),
             "RegisteredAdress": RegisterFlag,
-             "FieldName": "noofdirectors"
+            "FieldName": "noofdirectors",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1477,7 +1547,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1492,6 +1562,9 @@
                                  })
     $('#NoOfTrustees').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1503,7 +1576,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "NoOfTrustees": $('#NoOfTrustees').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "nooftrustees"
+            "FieldName": "nooftrustees",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1512,7 +1587,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1527,6 +1602,9 @@
                                  })
     $('#RegistrationDate').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1547,7 +1625,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1562,6 +1640,9 @@
                                  })
     $('#TradeStartingDate').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1582,7 +1663,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1597,6 +1678,9 @@
                                  })
     $('#RegisteredAdresss').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1608,7 +1692,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "RegisteredAdresss": $('#RegisteredAdresss').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "raddress"
+            "FieldName": "raddress",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1617,7 +1703,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1632,6 +1718,9 @@
                                  })
     $('#RegisteredCity').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1643,7 +1732,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "RegisteredCity": $('#RegisteredCity').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "rcity"
+            "FieldName": "rcity",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1652,7 +1743,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1667,6 +1758,9 @@
     })
     $('#RegisteredCounty').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1678,7 +1772,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "RegisteredCounty": $('#RegisteredCounty').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "rcounty"
+            "FieldName": "rcounty",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1687,7 +1783,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1702,6 +1798,9 @@
     })
     $('#RegisteredPostCode').focusout(function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1713,7 +1812,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "RegisteredPostCode": $('#RegisteredPostCode').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "rpost"
+            "FieldName": "rpost",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1722,7 +1823,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1737,6 +1838,9 @@
                                  })
     $('#RegisteredcountrySelect').on('change',function () {
         debugger
+        if ($(this).val() != "") {
+            $(this).closest('.formtx').find('.errormsg').html("");
+        }
         var RegisterFlag = false;
         if ($('#RegisteredAdress').is(":checked")) {
             RegisterFlag = true;
@@ -1748,7 +1852,9 @@
             "BuisnessProfileId":  "@Model.BuisnessProfileId",
             "RegisteredCountry": $('#RegisteredcountrySelect').val(),
             "RegisteredAdress": RegisterFlag,
-            "FieldName": "rcountry"
+            "FieldName": "rcountry",
+            "TradeStartingDate": $('#TradeStartingDate').val(),
+            "RegistrationDate": $('#RegistrationDate').val()
         };
         debugger
         $.ajax({
@@ -1757,7 +1863,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },

@@ -1,0 +1,218 @@
+﻿@using FGC_OnBoarding.Helpers;
+@model IEnumerable<FGC_OnBoarding.Models.Buisness.BuisnessProfile>
+@{
+    Layout = "IntroducerLayout";
+}
+@*<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-6">
+            <h2>Scandi Trade</h2>
+        </div>
+        <div class="col-lg-6">
+            <a href="introduceruserppro.php?page=introduceruserpp&amp;introduceraid=27&amp;introduceruserid=42">
+                <button type="button" class="btn btn-w-m btn-info" style="margin:auto; float:right; margin-top:30px; display:inline">Approved Applications</button>
+            </a>
+            <a href="introduceruserapp.php?page=introducerapp&amp;introduceraid=27&amp;introduceruserid=42" class="topmenumargin">
+                <button type="button" class="btn btn-w-m btn-success" style="margin:auto; float:right; margin-right:10px;   margin-top:30px; display:inline;">New Applications</button>
+            </a>
+        </div>
+    </div>*@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-lg-6">
+                <h2>@ViewBag.introducerName</h2>
+            </div>
+            <div class="col-lg-6">
+                @if (ViewBag.ComingIntroudcerId != null)
+                {
+                    <a href="/Introducer/ApprovedApplications/?ComingIntroducerId=@ViewBag.ComingIntroudcerId">
+                        <button type="button" class="btn btn-w-m btn-success" style="margin:auto; float:right; margin-top:30px; display:inline">Approved Applications</button>
+                    </a>
+                    <a href="/Introducer/NewApplications/?ComingIntroducerId=@ViewBag.ComingIntroudcerId" class="topmenumargin">
+                        <button type="button" class="btn btn-w-m btn-info " style="margin:auto; float:right; margin-right:10px;   margin-top:30px; display:inline;">New Applications</button>
+                    </a>
+                }
+                else
+                {
+                    <a href="/Introducer/ApprovedApplications">
+                        <button type="button" class="btn btn-w-m btn-success" style="margin:auto; float:right; margin-top:30px; display:inline">Approved Applications</button>
+                    </a>
+                    <a href="/Introducer/NewApplications" class="topmenumargin">
+                        <button type="button" class="btn btn-w-m btn-info " style="margin:auto; float:right; margin-right:10px;   margin-top:30px; display:inline;">New Applications</button>
+                    </a>
+                }
+
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+@*@{
+        var UserClaims = User.Identities.Select(x => x.Claims).FirstOrDefault();
+        var Username = UserClaims.Where(x => x.Type == "FullName").FirstOrDefault().Value;
+        //var currentuser = UserManager.GetUserAsync(User).Result;
+    }*@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.introducerUserName Applications</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            <div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none">BuisnessId</th>
+                                            <th>Buisness Name</th>
+                                            <th>Type Of Buisness</th>
+                                            <th>Submitted Date</th>
+                                            <th>Expiry Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var app in Model)
+                                        {
+                                            var Color = "black";
+                                            if (DateTime.Now.DateTime_UK() > app.SubmitDate.Value.AddDays(30))
+                                            {
+                                                Color = "red";
+                                            }
+                                            var RowColor = "black";
+                                            if (app.ActionCount > 0)
+                                            {
+                                                RowColor = "blue";
+                                            }
+                                            <tr>
+                                                <td style="display:none">@app.BuisnessProfileId</td>
+                                                <td style="color:@RowColor">@app.BuisnessName</td>
+                                                <td style="color:@RowColor"> @app.BuisnessTypeName</td>
+                                                <td style="color:@RowColor">@app.SubmitDate.Value.ToString("dd-MMM-yyyy hh:mm:ss")</td>
+                                                <td style="color:@Color">@app.SubmitDate.Value.AddDays(30).ToString("dd-MMM-yyyy")</td>
+                                                <td style="text-align:center">
+                                                    <i onclick="myfun()" id="ShowComments" class="fa fa-edit" data-toggle="modal" style="color:#e56d38; margin-left:2px; margin-right:2px; cursor:pointer" data-target="#modal-lg" title="add comments"></i>
+                                                    <a href="/Home/EditApplication/?BuisnessProfileId=@app.BuisnessProfileId" title="view">
+                                                        <i class="fa fa-eye" aria-hidden="true" style="color:#1f7a42; margin-left:2px; margin-right:2px; cursor:pointer"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- /.container-fluid -->
+</section>
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="text-cemter">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <textarea  id="Description" class="ckeditor" name="Description"></textarea>
+                @*<textarea name="editor1" style="width:100%; height:100px;" autofocus tabindex="1" required></textarea>*@
+                <div style="margin:auto; float:right; margin: 15px 40px 10px 10px;" class="addbuton">
+                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" onclick="openaddc()"><strong>Add Comments</strong></button>
+                </div>
+
+                <table class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Action By</th>
+                            <th>Comments</th>
+                            <th>Action Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mytablebody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button onclick="SubmitComment" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('#Description');
+    });
+    function myfun() {
+        debugger
+        var BuisnessName = $("#ShowComments").closest('tr').find("td:eq(1)").text();
+        var BuisnessProfileID = $("#ShowComments").closest('tr').find("td:eq(0)").text();
+        $('.modal-title').text("Buisness Name : " + BuisnessName)
+
+        $.ajax({
+            url: '/Home/GetProfileComments',
+            contentType: 'application/json ; charset:ytf-8',
+            type: 'Get',
+            dataType: 'json',
+            data: { BuisnessProfileId: BuisnessProfileID },
+            async: false,
+            success: function (data) {
+                debugger
+                if (data.length > 0) {
+                    $('#mytablebody').html("");
+                    var counter = data.length - 1;
+                    for (var i = 1; i < data.length - 1; i++) {
+                        var Serial = counter - i;
+                        // $('#mytablebody').append('<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>');
+                        $('#mytablebody').append('<tr><td>' + Serial + '</td><td>' + data[i].actionBy + '</td><td>' + data[i].comments + '</td><td>' + data[i].actionDateStr + '</td><td></td></tr>');
+
+                    }
+
+
+                }
+            },
+            error: function (msg, xhr) {
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+
+
+    }
+
+
+    $(function () {
+        $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+

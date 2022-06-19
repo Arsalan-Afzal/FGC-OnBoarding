@@ -1,36 +1,277 @@
-﻿@model IEnumerable<FGC_OnBoarding.Models.Buisness.BuisnessProfile> 
+﻿@model IEnumerable<FGC_OnBoarding.Models.Buisness.BuisnessProfile>
 @{
-    Layout = "_FormLayout";
+    Layout = "BrowseApplicationLayout";
 }
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="card card-success">
+            <div style="background-image: linear-gradient(to right,#19663c, #258e48);" class="card-header">
+                <h3 class="card-title">Browse Old Applications</h3>
+                <div class="float-right">
+                    <a class=" action-button1" style="cursor: pointer;color:white;" href="@Url.Action("Index", "Home")">
+                        Back
+                    </a>
+                </div>
+               
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline collapsed" aria-describedby="example2_info">
+                                <thead>
+                                    <tr>
+                                        <th>Buisness Name</th>
+                                        <th>Status</th>
+                                        <th>Submitted Date</th>
+                                        <th>Expiry Date for Edit</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var Profile in Model)
+                                    {
+                                    <tr>
+                                        <td>@Profile.BuisnessName</td>
+                                        @if (Profile.SubmitDate != null)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Partial Complete</td>
+                                        }
+                                        <td>@Profile.SubmitDate?.ToString("dd MMMM,yyyy")</td>
+                                        <td>@Profile.SubmitDate?.AddDays(15).ToString("dd MMMM,yyyy")</td>
+                                        @*<div class="hhh4">@Profile.SubmitDate?.AddDays(15).ToString("dd MMMM,yyyy")</div>*@
+                                        @if (Profile.SubmitDate != null)
+                                        {
+                                            @if (Profile.SubmitDate?.AddDays(15).Date >= DateTime.Now.Date && Profile.SubmitDate?.AddDays(15).Month >= DateTime.Now.Month && Profile.SubmitDate?.AddDays(15).Year >= DateTime.Now.Year)
+                                            {
+                                                <td>
+                                                    <a style="cursor:pointer" href="@Url.Action("EditApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">
+                                                        @*onclick="EditApplication(@Profile.BuisnessProfileId)"*@
+                                                        <i class="fa fa-pencil" aria-hidden="true" style="color:#060;"></i>
+                                                    </a>
+                                                </td>
+                                            }
+                                            else
+                    {
+                        <td></td>
+                    }
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a class=" action-button1" style="cursor: pointer;color:white;font-size:12px;" href="@Url.Action("NewApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">
+                                                    Continue
+                                                </a>
+                                            </td>
+                                        }
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
 
-<div class="blockselct">
+
+<!--<div class="blockselct">
+    <div class="blockselct1">
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Buisness Name</th>
+                    <th>Status</th>
+                    <th>Submitted Date</th>
+                    <th>Expiry Date for Edit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                foreach (var Profile in Model)
+                {
+                <tr>
+                    <td>Profile.BuisnessName</td>
+                    if (Profile.SubmitDate != null)
+                    {
+                        <td>Completed</td>
+                    }
+                    else
+                    {
+                        <td>Partial</td>
+                    }
+                    <td>Profile.SubmitDate?.ToString("dd MMMM,yyyy")</td>
+                    if (Profile.SubmitDate != null)
+                    {
+                        if (Profile.SubmitDate?.AddDays(15).Date >= DateTime.Now.Date && Profile.SubmitDate?.AddDays(15).Month >= DateTime.Now.Month && Profile.SubmitDate?.AddDays(15).Year >= DateTime.Now.Year)
+                        {
+                            <td>
+                                <a style="cursor:pointer" href="Url.Action("EditApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">-->
+@*onclick="EditApplication(@Profile.BuisnessProfileId)"*@
+<!--<i class="fa fa-pencil" aria-hidden="true" style="color:#060;"></i>
+                                </a>
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        <td>
+                            <a class=" action-button1" style="cursor: pointer;color:white;font-size:12px;" href="Url.Action("NewApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">
+                                Continue
+                            </a>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>-->
+@*<div class="blockselct">
     <div class="blockselct1">
         <div class="addnewblockbut1">
             Browse Old Applications
             <div class="mainback">
                 <a href="~/Home/Index">Back</a>
             </div>
-        </div><!--addnewblockbut-->
+        </div>
         <div class="headerblockbut">
-            <div class="hhh1">Bussiness Name</div><!--hh1-->
-            <div class="hhh2">Submitted Date</div><!--hh1-->
-            <div class="hhh2">Expiry Date for Edit</div><!--hh1-->
-            <div class="hhh22">Action</div><!--hh1-->
-        </div><!--heaeingb-->
+            <div class="hhh1">Bussiness Name</div>
+            <div class="hhh1">Status</div>
+            <div class="hhh2">Submitted Date</div>
+            <div class="hhh2">Expiry Date for Edit</div>
+            <div class="hhh22">Action</div>
+        </div>
 
-    @foreach (var Profile in Model)
-    {
-    <div class="headerblockbut">
+        foreach (var Profile in Model)
+        {
 
-        <div class="hhh3">@Profile.BuisnessName</div><!--hh1-->
-        <div class="hhh4">@Profile.SubmitDate.ToString("dd MMMM,yyyy")</div><!--hh1-->
-        <div class="hhh4">@Profile.SubmitDate.AddDays(15).ToString("dd MMMM,yyyy")</div><!--hh1-->
-        <div class="hhh22">
-            <a href="clientaccount/clientview.php?page=client&amp;accountid=281&amp;appid=364">
-                <i class="fa fa-pencil" aria-hidden="true" style="color:#060;"></i>
-            </a>
-        </div><!--hh1-->
-    </div><!--heaeingb-->
+            <div class="headerblockbut">
+
+                div class="hhh3">Profile.BuisnessName</div>
+                if (Profile.SubmitDate != null)
+                {
+                    <div class="hhh4">Completed</div>
+                }
+                else
+                {
+                    <div class="hhh4">Part</div>
+                }
+                <div class="hhh4">@Profile.SubmitDate?.ToString("dd MMMM,yyyy")</div>
+                <div class="hhh4">@Profile.SubmitDate?.AddDays(15).ToString("dd MMMM,yyyy")</div>
+                <div class="hhh22">
+                    if (Profile.SubmitDate != null)
+                    {
+                        if (Profile.SubmitDate?.AddDays(15).Date >= DateTime.Now.Date && Profile.SubmitDate?.AddDays(15).Month >= DateTime.Now.Month && Profile.SubmitDate?.AddDays(15).Year >= DateTime.Now.Year)
+                        {
+                            <a style="cursor:pointer" href="@Url.Action("EditApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">
+
+                                <i class="fa fa-pencil" aria-hidden="true" style="color:#060;"></i>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+
+
+                        <a class=" action-button1" style="cursor: pointer;color:white;font-size:12px;" href="@Url.Action("NewApplication", "Home", new { BuisnessProfileId = Profile.BuisnessProfileId })">
+                            Continue
+                        </a>
+
+
+
+                    }
+
+                </div>
+            </div>
+        }
+    </div>*@
+
+<style>
+    .action-button1 {
+        width: 100px;
+        /* background: #5e8c21; */
+        background-image: linear-gradient(to right,#19663c, #258e48);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        letter-spacing: 1px;
+        font-family: montserrat, arial, verdana;
     }
-    </div><!--selct2-->
-</div>
+</style>
+<script>
+    function EditApplication(buisnessprofileId) {
+            $.ajax({
+
+                url: '/Home/EditApplication',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'Get',
+                    dataType: 'json',
+                async: false,
+                /*data: JSON.stringify(buisnessprofileId),*/
+                    data: { BuisnessProfileId: buisnessprofileId},
+                    success: function (data) {
+
+            },
+            error: function (msg, xhr) {
+                debugger
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })
+    }
+
+              @*$.ajax({
+
+            url: '/Home/ShowBuisnessProfile',
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    async:true,
+             data: { BuisnessProfileId: "@ViewBag.BuisnessProfileId", CurrencyIds: CurrencyIds, BuisnessType: BuisnessType, BuisnessSector: BuisnessSector},
+
+                    success: function (data) {
+                        $('#myfield').hide()
+                $('#myfield').html(data)
+
+                        //$("#myfield").fadeIn("slow", function () {
+                        //    // Animation complete
+                        //});
+                        $("#myfield").slideDown("fast", function () {
+                            // Animation complete.
+                        });
+
+                //$("#myfield").show("slow", function () {
+                //    // Animation complete.
+                //});
+
+
+            },
+            error: function (msg, xhr) {
+                debugger
+                alert("error")
+                console.log(msg);
+                console.log(xhr);
+            }
+        })*@
+
+</script>

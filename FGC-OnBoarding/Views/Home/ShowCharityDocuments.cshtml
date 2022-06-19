@@ -112,14 +112,16 @@
 
 </div>
 <style>
-    .discardcharityupload {
+    .discardcharityupload, .discardupload2 {
         font-size: 10px;
         font-weight: bolder;
         display: inline;
         margin-left: 15px;
         color: #F00;
         cursor: pointer;
+      
     }
+ 
 </style>
 <script>
     $(document).ready(function () {
@@ -148,9 +150,9 @@
     })
     //var FilesList1 =[];
 
-   
+
     //$(document).on('click', '.discardcharityupload', function () {
-      
+
 
     //})
 
@@ -158,29 +160,30 @@
     $('.BuisnessFile1').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile1').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file1_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='discardupload1'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file1_prev').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+          data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+                //var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/CharityFile1',
@@ -191,7 +194,7 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file1_prev').html("");
+                            $('#file1_prev').find('.temp').remove();
                         }
                         for (var i = 0; i < result.length; i++) {
                             $('#file1_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='discardcharityupload'>(x)</p></span>");
@@ -217,29 +220,30 @@
     $('.BuisnessFile2').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile2').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file1_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='discardcharityupload'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file2_prev').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+          data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+                //var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/CharityFile2',
@@ -250,7 +254,7 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file2_prev').html("");
+                            $('#file2_prev').find('.temp').remove();
                         }
                         for (var i = 0; i < result.length; i++) {
                             $('#file2_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name + "</p><p id=" + result[i] + " class='discardcharityupload'>(x)</p></span>");
@@ -276,29 +280,30 @@
     $('.BuisnessFile3').on('change', function () {
         /*    $('.BuisnessFile1').on('change', function () {*/
         debugger
-
+        var data = new FormData();
         var files = $('#FormFile3').prop('files');// $('#file').files[0];// e.target.files;
         for (var i = 0; i < files.length; i++) {
             //if (FilesList1.indexOf(files[i].name) > -1) {
             //    delete FilesList1[FilesList1.indexOf(files[i].name)]
             //}
-            $('#file3_prev').append("<span class='filenamedis'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p><p class='discardcharityupload'>(x)</p></span>");
+            data.append(files[i].name, files[i]);
+            $('#file3_prev').append("<span class='filenamedis temp'>" + files[i].name + "<p id='filename' style='display:none'>" + files[i].name +"</p></span>");
         }
-
+         data.append("buisnessprofileid", "@ViewBag.BuisnessProfileId");
         // var files = $('.myfiles').files;// $('#file').files[0];// e.target.files;
         if (files.length > 0) {
             if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    // if (FilesList1.length > 0) {
-                    //  if (!FilesList1.indexOf(files[x].name) > -1) {
-                    //  data.append("file" + x, files[x]);
-                    //  }
-                    // }
-                    // else {
-                    data.append("file" + x, files[x]);
-                    // }
-                }
+                //var data = new FormData();
+                //for (var x = 0; x < files.length; x++) {
+                //    // if (FilesList1.length > 0) {
+                //    //  if (!FilesList1.indexOf(files[x].name) > -1) {
+                //    //  data.append("file" + x, files[x]);
+                //    //  }
+                //    // }
+                //    // else {
+                //    data.append("file" + x, files[x]);
+                //    // }
+                //}
                 $.ajax({
                     type: "POST",
                     url: '/Home/CharityFile3',
@@ -309,7 +314,7 @@
                     success: function (result) {
                         debugger
                         if (result.length > 0) {
-                            $('#file3_prev').html("");
+                            $('#file3_prev').find('.temp').remove();
                         }
                         for (var i = 0; i < result.length; i++) {
 
@@ -358,7 +363,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 7 },
+            data: { Form: 7,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -374,6 +379,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+              data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 $('#myfield').hide()
@@ -404,7 +410,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 5 },
+            data: { Form: 5,BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -420,6 +426,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'html',
+              data: {BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 $('#myfield').hide()

@@ -250,7 +250,7 @@
     </style>
 
 </head>
-<body style="overflow: hidden; background-color:#F2F2F2;font-family:ProximaNova-Regular">
+<body style=" background-color:#F2F2F2;font-family:ProximaNova-Regular">
     @{
         await Html.RenderPartialAsync("TopNavbarIdentity");
     }
@@ -268,7 +268,7 @@
                             <div class="formb3">
                                 <div class="formhe" style="color:#597489;">Your Name</div><!--formhe-->
                                 <div class="formtx1">
-                                    <input asp-for="Input.Name" type="text" class="form-control" tabindex="1" required="" autofocus="" placeholder="Name">
+                                    <input asp-for="Input.Name" type="text" class="form-control" tabindex="1"  placeholder="Name">
                                     @*<input type="text" name="signupname" id="signupname" placeholder="Write your full name" tabindex="1" required="" autofocus="">*@
                                 </div><!--formtx-->
                             </div><!--formb1-->
@@ -288,7 +288,7 @@
                             <div class="formb3">
                                 <div class="formhe" style="color:#597489;">Business Email Address</div><!--formhe-->
                                 <div class="formtx1">
-                                    <input asp-for="Input.Email" type="email" class="form-control" tabindex="3" placeholder="Write your business email">
+                                    <input asp-for="Input.UserName" type="email" class="form-control" tabindex="3" placeholder="Write your business email">
                                     @*<input type="email" name="sigupadess" id="sigupadess" placeholder="Write your business email" tabindex="3" required="">*@
                                 </div><!--formtx-->
                             </div><!--formb1-->

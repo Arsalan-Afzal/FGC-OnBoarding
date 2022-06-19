@@ -15,5 +15,7 @@ namespace FGC_OnBoarding.Models.Buisness
         public int BuisnessProfileId { get; set; }
         public int BuisnessTypeId { get; set; }
         public string DocumentType { get; set; }
+
+        public bool IsDelete { get; set; }
     }
 }

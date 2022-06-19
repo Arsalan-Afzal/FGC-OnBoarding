@@ -13,5 +13,7 @@ namespace FGC_OnBoarding.Models.Buisness
         public bool isPop { get; set; }
         public string RelationShip { set; get; }
         public int BuisnessProfileId { get; set; }
+
+        public bool IsDelete { get; set; }
     }
 }

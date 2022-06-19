@@ -44,27 +44,30 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
+                    ModelState.AddModelError(string.Empty, "User Not Registered.");
+                    return Page();
+                }
+                else
+                {
+                    // For more information on how to enable account confirmation and password reset please 
+                    // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                    var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", code, user.Id },
+                        protocol: Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(
+                        Input.Email,
+                        "Reset Password",
+                    $"Hi " + user.Name + " ," + "<br/><br/>" + "Please reset your password by <a href=" + HtmlEncoder.Default.Encode(callbackUrl) + ">clicking here</a>." + "<br/><br/> " + "Regards," + "<br/>" + "OnBoarding Team" + "<br/>" + "FGC-Capital" + "<br/><br/>" + " <img src='https://ci4.googleusercontent.com/proxy/Ijy_ufJDMMBULhWYgAsrj0fr2fvZrDS0mpXJWi2JUg0Utl69zaiqiUy5p8-VDLMZvkl3-u_BR_ml_pcVosmrvEfoaoVAug_2WBaMtYPOTFCZGSQwiSclvJWZJFB5=s0-d-e1-ft#https://www.fgc-capital.com/apply-business-application/image/fgc_email.jpg' border='0' width='100' height='35' class='CToWUd'>");
+
+
+
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please 
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Page(
-                    "/Account/ResetPassword",
-                    pageHandler: null,
-                    values: new { area = "Identity", code },
-                    protocol: Request.Scheme);
-
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                $"Hi " + user.Name + " ," + "<br/><br/>" + "Please reset your password by <a href=" + HtmlEncoder.Default.Encode(callbackUrl) + ">clicking here</a>." + "<br/><br/> " + "Regards," + "<br/>" + "OnBoarding Team" + "<br/>" + "FGC-Capital" + "<br/><br/>" + " <img src='https://ci4.googleusercontent.com/proxy/Ijy_ufJDMMBULhWYgAsrj0fr2fvZrDS0mpXJWi2JUg0Utl69zaiqiUy5p8-VDLMZvkl3-u_BR_ml_pcVosmrvEfoaoVAug_2WBaMtYPOTFCZGSQwiSclvJWZJFB5=s0-d-e1-ft#https://www.fgc-capital.com/apply-business-application/image/fgc_email.jpg' border='0' width='100' height='35' class='CToWUd'>") ;
-
-
-
-                return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();

@@ -29,8 +29,8 @@ namespace FGC_OnBoarding.Models.Buisness
 
         public string Country { get; set; }
         [DataType(DataType.Date)]
-        //[DisplayFormat( DataFormatString = "{dd-MM-yyyy}",ApplyFormatInEditMode =false)]
-        public DateTime DOB { get; set; } = DateTime.Now;
+        [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+        public DateTime? DOB { get; set; } 
 
         public string PhoneNumber { get; set; }
 
@@ -57,8 +57,15 @@ namespace FGC_OnBoarding.Models.Buisness
         [NotMapped]
         public string FieldName { get; set; }
 
+        [NotMapped]
+        public string FieldValue { get; set; }
+
 
         [NotMapped]
         public string DateOfBirth { get; set; }
+
+
+
+        public bool IsDelete { get; set; }
     }
 }

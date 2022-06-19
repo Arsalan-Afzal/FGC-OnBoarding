@@ -22,6 +22,21 @@ namespace FGC_OnBoarding.Areas.Identity
 
                 services.AddDefaultIdentity<FGC_OnBoardingUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<FGC_OnBoardingContext>();
+
+                services.Configure<IdentityOptions>(opts => {
+                    opts.User.RequireUniqueEmail = true;
+                    opts.User.AllowedUserNameCharacters = "";
+                    //opts.Password.RequiredLength = 8;
+                    //opts.Password.RequireNonAlphanumeric = true;
+                    //opts.Password.RequireLowercase = false;
+                    //opts.Password.RequireUppercase = true;
+                    //opts.Password.RequireDigit = true;
+                });
+
+                //services.AddIdentity<FGC_OnBoardingUser, IdentityRole>(opts =>
+                //{
+                //    opts.User.AllowedUserNameCharacters = null;
+                //});
             });
         }
     }

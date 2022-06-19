@@ -26,7 +26,7 @@
                     <div class="formb1">
                         <div class="formhe">First Name </div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.FirstName, null, new { @placeholder = "Enter your first name" })
+                            @Html.TextBoxFor(x => x.FirstName, null, new { @tabindex = "1" ,@placeholder = "Enter your first name" })
                             @*<input type="text" name="authfname[]" id="chdistext1" placeholder="Enter your first name" tabindex="1" autofous="">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -34,7 +34,7 @@
                         <div class="formhe">Last Name </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authlname[]" id="chdistext2" placeholder="Enter your last name" tabindex="2">*@
-                            @Html.TextBoxFor(x => x.LastName, null, new { @placeholder = "Enter your last name" })
+                            @Html.TextBoxFor(x => x.LastName, null, new { @tabindex = "2", @placeholder = "Enter your last name" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -42,7 +42,7 @@
                     <div class="formb1">
                         <div class="formhe">Address-1 </div><!--formhe-->
                         <div class="formtx">
-                            @Html.TextBoxFor(x => x.Address1, null, new { @placeholder = "Enter your full address" })
+                            @Html.TextBoxFor(x => x.Address1, null, new { @tabindex = "3", @placeholder = "Enter your full address" })
                             @*<input type="text" name="authadd1[]" id="chdistext3" placeholder="Enter your full address" tabindex="3">*@
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -50,7 +50,7 @@
                         <div class="formhe">Address-2 </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authadd2[]" id="chdistext4" placeholder="Enter your full address" tabindex="4">*@
-                            @Html.TextBoxFor(x => x.Address2, null, new { @placeholder = "Enter your full address" })
+                            @Html.TextBoxFor(x => x.Address2, null, new { @tabindex = "4", @placeholder = "Enter your full address" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -59,14 +59,14 @@
                         <div class="formhe">City </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authcity[]" id="chdistext9" placeholder="Enter your city" tabindex="5">*@
-                            @Html.TextBoxFor(x => x.City, null, new { @placeholder = "Enter your full address" })
+                            @Html.TextBoxFor(x => x.City, null, new { @tabindex = "5", @placeholder = "Enter your full address" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                     <div class="formb2">
                         <div class="formhe">Postcode </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authzip[]" min="1" id="chdistext11" placeholder="Enter your postcode" tabindex="6">*@
-                            @Html.TextBoxFor(x => x.PostCode, null, new { @placeholder = "Enter your postcode" })
+                            @Html.TextBoxFor(x => x.PostCode, null, new { @tabindex = "6", @placeholder = "Enter your postcode" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -75,14 +75,14 @@
                         <div class="formhe">County </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authcounty[]" id="chdistext10" placeholder="Enter your county" tabindex="7">*@
-                            @Html.TextBoxFor(x => x.County, null, new { @placeholder = "Enter your county" })
+                            @Html.TextBoxFor(x => x.County, null, new { @tabindex = "7", @placeholder = "Enter your county" })
 
                         </div><!--formtx-->
                     </div><!--formb1-->
                     <div class="formb2">
                         <div class="formhe">Country</div><!--formhe-->
                         <div class="formtx">
-                            <select id="AuthcountrySelect" style="color:black" name="authcountry[]" tabindex="8">
+                            <select class="country" id="AuthcountrySelect" style="color:black" name="authcountry[]" tabindex="8">
                                 <option value="Select country" disabled="" selected="">Select country</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Aland Islands">Aland Islands</option>
@@ -336,8 +336,9 @@
                     <div class="formb1">
                         <div class="formhe">Date of Birth </div><!--formhe-->
                         <div class="formtx">
-                            <div class="input-group3 date" data-date-format="dd-mm-yyyy">
-                                @Html.EditorFor(x => x.DOB, new { @name = "cdatebegan", @class = "form-control", @placeholder = "Enter your date of birth (dd-mm-yyyy)" })
+                            <div class="input-group3 date"  data-date-format="dd-mm-yyyy">
+                                @*@Html.EditorFor(x => x.DOB, new { @class = "form-control" })*@
+                                <input type ="date" asp-for="DOB" class="form-control " tabindex = "9"/>
                                 @*<input type="text" class="form-control" placeholder="Enter your date of birth (dd-mm-yyyy)" name="authedob[]" id="datepicker3" onchange="datepickblock();" tabindex="9">*@
                                 @*<div class="input-group-addon">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -350,7 +351,7 @@
                         <div class="formhe">Phone No</div><!--formhe-->
                         <div class="formtx">
                             @*<input type="text" name="authphone[]" id="chdistext6" placeholder="Enter your contact no" tabindex="10">*@
-                            @Html.TextBoxFor(x => x.PhoneNumber, null, new { @placeholder = "Enter your contact no" })
+                            @Html.TextBoxFor(x => x.PhoneNumber, null, new { @tabindex = "10", @placeholder = "Enter your contact no" })
                         </div><!--formtx-->
                     </div><!--formb1-->
                 </div><!--textformblock-->
@@ -359,7 +360,7 @@
                         <div class="formhe">Email </div><!--formhe-->
                         <div class="formtx">
                             @*<input type="email" name="authemail[]" id="chdistext7" placeholder="Enter valid email address" tabindex="12">*@
-                            @Html.TextBoxFor(x => x.Email, null, new { @placeholder = "Enter valid email address" })
+                            @Html.TextBoxFor(x => x.Email, null, new { @tabindex = "11", @placeholder = "Enter valid email address" })
                             <div id="Validation6" class="errormsg"></div>
                         </div><!--formtx-->
                     </div><!--formb1-->
@@ -368,7 +369,7 @@
                         {
                             <div class="formhe" id="arall1" style="">Position in Company</div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.PositionInComany, null, new { @placeholder = "Enter your designation" })
+                                @Html.TextBoxFor(x => x.PositionInComany, null, new { @tabindex = "12", @placeholder = "Enter your designation" })
                                 @*<input type="text" name="authcomposition[]" id="chdistext8" placeholder="Enter your designation" tabindex="13">*@
                             </div><!--formtx-->
                         }
@@ -376,7 +377,7 @@
                         {
                             <div class="formhe" id="arsole1" style="">Position in Business</div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.PositionInBuisness, null, new { @placeholder = "Enter your designation" })
+                                @Html.TextBoxFor(x => x.PositionInBuisness, null, new { @tabindex = "13", @placeholder = "Enter your designation" })
                                 @*<input type="text" name="authcomposition[]" id="chdistext8" placeholder="Enter your designation" tabindex="13">*@
                             </div><!--formtx-->
                         }
@@ -384,7 +385,7 @@
                         {
                             <div class="formhe" id="archar1" style="">Role in Charity</div><!--formhe-->
                             <div class="formtx">
-                                @Html.TextBoxFor(x => x.RoleIncharity, null, new { @placeholder = "Enter your designation" })
+                                @Html.TextBoxFor(x => x.RoleIncharity, null, new { @tabindex = "14", @placeholder = "Enter your designation" })
                                 @*<input type="text" name="authcomposition[]" id="chdistext8" placeholder="Enter your designation" tabindex="13">*@
                             </div><!--formtx-->
                         }
@@ -694,12 +695,13 @@
                             <div class="formtx">
                                 @*@Html.EditorFor(x => x.DOB, new { @class = "form-control Mydate", @placeholder = "Enter your date of birth (dd-mm-yyyy)" })*@
                                 @*@Html.TextBox("dt1", "{0:yyyy-MM-dd}", new { @type = "date"})*@
-                                <input data-date-format="yyyy-MM-dd" type="date" class="AUTHMydate" id="dt1" />
+                              
+                                <input type="date" class="AUTHMydate" id="dt1" />
                                 @*@Html.EditorFor(x => x.MYdob, new { @class = "form-control myydob", @placeholder = "Enter your date of birth (dd-mm-yyyy)" })*@
                                 @*<input type="text" class="form-control MyDate" placeholder="Enter date of birth (dd-mm-yyyy)" name="authedob[]" onchange="datepickblock();">*@
                                 @*<div class="input-group-addon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </div>*@
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>*@
                                 <div id="de2" class="errormsg"></div>
                             </div>
                         </div><!--formb1-->
@@ -751,12 +753,12 @@
             <p style="width:100%;"><a href="#" class="remove" id="addnewauth1">Remove</a></p>
         </div>
     </div>
-    <p id="addnewbut"><a href="#" class="addsection" id="addnewauth" style="">ADD NEW</a></p>
+    <p id="addnewbut"><a href="#" class="addsection" id="addnewauth" tabindex="15" style="">ADD NEW</a></p>
     <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="topheader11">
         <div class="topheader2" style="text-align:center;">
-            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowBuisnessInfo()" tabindex="27">
-            <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowBuisnessInformation()" tabindex="26">
+            <input type="button" name="next1" class="action-button1" value="Previous" onclick="ShowBuisnessInfo()" >
+            <input type="button" name="next1" class="action-button1" value="Next" onclick="ShowBuisnessInformation()" >
         </div>
     </div><!--topheader-->
 </div>
@@ -790,7 +792,7 @@
         $('.menu5').find('.mneuline').find('img').prop('src', '../Images/dotstraightline.png')
 
               if ("@Model.Country" != "" && "@Model.Country" != null) {
-                $('#countrySelect').val("@Model.Country");
+                  $('.country').val("@Model.Country");
            }
             $.ajax({
                 url: '/Home/GetAllRepresentative',
@@ -832,7 +834,7 @@
                 $(this).find('.AUTHMyPic').val(RepresentativeList[y].positionInComany)
                 $(this).find('.AUTHMyPib').val(RepresentativeList[y].positionInBuisness)
                 $(this).find('.AUTHMyPich').val(RepresentativeList[y].roleIncharity)
-                $(this).find('#AUTHcountrySelect').val(RepresentativeList[y].country)
+                $(this).find('#AuthcountrySelect').val(RepresentativeList[y].country)
                 $(this).find('.AUTHMydate').val(RepresentativeList[y].dateOfBirth)
                   /*  $(this).find('#MYdob').val(RepresentativeList[y].dob)*/
 
@@ -852,7 +854,7 @@
             contentType: 'application/json ; charset:ytf-8',
             type: 'Get',
             dataType: 'json',
-            data: { Form: 1 },
+            data: { Form: 1, BuisnessProfileId:"@ViewBag.BuisnessProfileId"},
             async: false,
             success: function (data) {
                 //$('#myfield').html(data);
@@ -869,7 +871,7 @@
                     type: 'GET',
                     dataType: 'html',
                     async:true,
-                    data: { BuisnessProfileId: "@ViewBag.BuisnessProfileId", CurrencyIds: "", BuisnessType: 0, BuisnessSector: 0},
+                    data: { BuisnessProfileId: "@ViewBag.BuisnessProfileId", CurrencyIds: "", BuisnessType: "@ViewBag.BuisnessType", BuisnessSector: 0},
 
                     success: function (data) {
                     $('#myfield').hide()
@@ -886,18 +888,18 @@
         })
         }
     function ShowBuisnessInformation() {
-
+        debugger
         if (EmailFlag == true) {
             $('#Validation6').html("Invalid Email Address")
             flag = true;
-            window.scrollTo(0, 0);
+          /*  window.scrollTo(0, 0);*/
 
         }
         else if (SecondaryEmailFlag == true)
         {
             $(ValidationField).closest('.topheader11').closest('.myform').find('#Validation7').html(data.validation)
             flag = true;
-            window.scrollTo(0, 0);
+          /*  window.scrollTo(0, 0);*/
         }
         else {
             $.ajax({
@@ -906,7 +908,7 @@
                 contentType: 'application/json ; charset:ytf-8',
                 type: 'Get',
                 dataType: 'json',
-                data: { Form: 3 },
+                data: { Form: 3, BuisnessProfileId:"@ViewBag.BuisnessProfileId" },
                 async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
@@ -923,6 +925,7 @@
                 type: 'GET',
                 dataType: 'html',
                 async: true,
+                data: { BuisnessProfileId: @ViewBag.BuisnessProfileId },
                 success: function (data) {
                     $('#myfield').hide()
                     $('#myfield').html(data)
@@ -938,7 +941,7 @@
             })
         }
 
-           
+
         }
 
         var i = 0;
@@ -1014,6 +1017,7 @@
                var objFields = {
                    "Formid": FormId,
                    "Country": $(this).val(),
+                   "DOB": $(this).closest('.myform').find('.AUTHMydate').val(),
                    "FieldName": "country"
                };
 
@@ -1049,6 +1053,7 @@
         var objFields = {
             "Formid": FormId,
             "FirstName": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "firstname"
         };
         debugger
@@ -1058,7 +1063,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
                 //if (data.flag) {
@@ -1088,6 +1093,7 @@
         var objFields = {
             "Formid": FormId,
             "LastName": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "lastname"
         };
         debugger
@@ -1097,7 +1103,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1118,6 +1124,7 @@
         var objFields = {
             "Formid": FormId,
             "Address1": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "address1"
         };
         debugger
@@ -1127,7 +1134,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1149,6 +1156,7 @@
         var objFields = {
             "Formid": FormId,
             "Address2": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "address2"
         };
         debugger
@@ -1158,7 +1166,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1182,6 +1190,7 @@
         var objFields = {
             "Formid": FormId,
             "City": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "city"
         };
         debugger
@@ -1191,7 +1200,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1212,6 +1221,7 @@
         var objFields = {
             "Formid": FormId,
             "PostCode": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "postcode"
         };
         debugger
@@ -1221,7 +1231,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1242,6 +1252,7 @@
         var objFields = {
             "Formid": FormId,
             "County": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "county"
         };
         debugger
@@ -1251,7 +1262,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1282,7 +1293,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1304,6 +1315,7 @@
         var objFields = {
             "Formid": FormId,
             "PhoneNumber": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "phonenumber"
         };
         debugger
@@ -1313,7 +1325,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1326,47 +1338,54 @@
     })
 
     $('#Email').on('focusout', function () {
-        var FormId = $(this).closest('.topheader11').attr('id');
-        if (FormId == undefined) {
-            FormId = $(this).closest('.myform').attr('id');
-        }
-        var objFields = {
-            "Formid": FormId,
-            "Email": $(this).val(),
-            "FieldName": "email"
-        };
-        debugger
-        $.ajax({
-            url: '/Home/SaveRepresentativeFields',
-            /*  contentType: 'application/json ; charset:ytf-8',*/
-            type: 'POST',
-            dataType: 'json',
-            data: { objFields: objFields },
-            async: true,
-            success: function (data) {
-                //$('#myfield').html(data);
-                debugger
-                if (data.flag) {
-                    // var Id = "#" + data.validation
-                    $('#Validation6').html(data.validation)
-                    EmailFlag = true;
-                    //setTimeout(
-                    //    function () {
-                    //        $('#BuisnessEmail').val("");
-                    //    }, 3000);
 
-                }
-                else {
-                    $('#Validation6').html("");
-                    EmailFlag = false;
-                }
-            },
-            error: function (msg, xhr) {
-                alert("error")
-                console.log(msg);
-                console.log(xhr);
+            var FormId = $(this).closest('.topheader11').attr('id');
+            if (FormId == undefined) {
+                FormId = $(this).closest('.myform').attr('id');
             }
-        })
+            var objFields = {
+                "Formid": FormId,
+                "Email": $(this).val(),
+                "DOB": $('#DOB').val(),
+                "FieldName": "email"
+            };
+            debugger
+            $.ajax({
+                url: '/Home/SaveRepresentativeFields',
+                /*  contentType: 'application/json ; charset:ytf-8',*/
+                type: 'POST',
+                dataType: 'json',
+                data: { objFields: objFields },
+                async: false,
+                success: function (data) {
+                    //$('#myfield').html(data);
+                    debugger
+                    if (data.flag) {
+                        // var Id = "#" + data.validation
+                        $('#Validation6').html(data.validation)
+                        EmailFlag = true;
+                        //setTimeout(
+                        //    function () {
+                        //        $('#BuisnessEmail').val("");
+                        //    }, 3000);
+
+                    }
+                    else {
+                        $('#Validation6').html("");
+                        EmailFlag = false;
+                    }
+                },
+                error: function (msg, xhr) {
+                    alert("error")
+                    console.log(msg);
+                    console.log(xhr);
+                }
+            })
+        if ($('#Email').val() == "") {
+            $('#Validation6').html("")
+            EmailFlag = false;
+        }
+
     })
 
     $('#PositionInBuisness').on('focusout', function () {
@@ -1377,6 +1396,7 @@
         var objFields = {
             "Formid": FormId,
             "PositionInBuisness": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "positioninbuisness"
         };
         debugger
@@ -1386,7 +1406,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1408,6 +1428,7 @@
         var objFields = {
             "Formid": FormId,
             "RoleIncharity": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "roleincharity"
         };
         debugger
@@ -1417,7 +1438,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1438,6 +1459,7 @@
         var objFields = {
             "Formid": FormId,
             "PositionInComany": $(this).val(),
+            "DOB": $('#DOB').val(),
             "FieldName": "positionincompany"
         };
         debugger
@@ -1447,7 +1469,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1468,7 +1490,9 @@
             var objFields = {
             "Formid": FormId,
                 "FirstName": $(this).val(),
-                "FieldName": "firstname"
+                "FieldName": "firstname",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
+
         };
         debugger
         $.ajax({
@@ -1477,7 +1501,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
                 //if (data.flag) {
@@ -1508,7 +1532,8 @@
         var objFields = {
             "Formid": FormId,
             "LastName": $(this).val(),
-            "FieldName": "lastname"
+            "FieldName": "lastname",
+            "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
         };
         debugger
         $.ajax({
@@ -1517,7 +1542,7 @@
             type: 'POST',
             dataType: 'json',
             data: { objFields: objFields },
-            async: true,
+            async: false,
             success: function (data) {
                 //$('#myfield').html(data);
             },
@@ -1539,7 +1564,8 @@
             var objFields = {
                 "Formid": FormId,
                 "Address1": $(this).val(),
-                "FieldName": "address1"
+                "FieldName": "address1",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1548,7 +1574,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1570,7 +1596,8 @@
             var objFields = {
                 "Formid": FormId,
                 "Address2": $(this).val(),
-                "FieldName": "address2"
+                "FieldName": "address2",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1579,7 +1606,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1603,7 +1630,8 @@
             var objFields = {
                 "Formid": FormId,
                 "City": $(this).val(),
-                "FieldName": "city"
+                "FieldName": "city",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1612,7 +1640,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1635,7 +1663,8 @@
             var objFields = {
                 "Formid": FormId,
                 "PostCode": $(this).val(),
-                "FieldName": "postcode"
+                "FieldName": "postcode",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1644,7 +1673,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1666,7 +1695,8 @@
             var objFields = {
                 "Formid": FormId,
                 "County": $(this).val(),
-                "FieldName": "county"
+                "FieldName": "county",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1675,7 +1705,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1698,7 +1728,8 @@
             var objFields = {
                 "Formid": FormId,
                 "DOB": $(this).val(),
-                "FieldName": "dob"
+                "FieldName": "dob",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1707,7 +1738,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1729,7 +1760,8 @@
             var objFields = {
                 "Formid": FormId,
                 "PhoneNumber": $(this).val(),
-                "FieldName": "phonenumber"
+                "FieldName": "phonenumber",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1738,7 +1770,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1761,7 +1793,8 @@
             var objFields = {
                 "Formid": FormId,
                 "Email": $(this).val(),
-                "FieldName": "email"
+                "FieldName": "email",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1770,7 +1803,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                     if (data.flag) {
@@ -1794,6 +1827,10 @@
                     console.log(xhr);
                 }
             })
+        if ($(ValidationField).val() == "") {
+            $(ValidationField).closest('.topheader11').closest('.myform').find('#Validation7').html("");
+            SecondaryEmailFlag = false;
+        }
 
 
         })
@@ -1806,7 +1843,8 @@
             var objFields = {
                 "Formid": FormId,
                 "PositionInBuisness": $(this).val(),
-                "FieldName": "positioninbuisness"
+                "FieldName": "positioninbuisness",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1815,7 +1853,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1837,7 +1875,8 @@
             var objFields = {
                 "Formid": FormId,
                 "RoleIncharity": $(this).val(),
-                "FieldName": "roleincharity"
+                "FieldName": "roleincharity",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1846,7 +1885,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
@@ -1868,7 +1907,8 @@
             var objFields = {
                 "Formid": FormId,
                 "PositionInComany": $(this).val(),
-                "FieldName": "positionincompany"
+                "FieldName": "positionincompany",
+                "DOB": $(this).closest('.myform').find('.AUTHMydate').val()
             };
             debugger
             $.ajax({
@@ -1877,7 +1917,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: { objFields: objFields },
-                async: true,
+                async: false,
                 success: function (data) {
                     //$('#myfield').html(data);
                 },
