@@ -58,6 +58,7 @@ namespace FGC_OnBoarding.Areas.Identity.Pages.Account
             ObjCustomers.UserId = userId;
             ObjCustomers.Country = Country;
             ObjCustomers.Ip = remoteIpAddress.ToString();
+            ObjCustomers.UserId = user.Id;
             _dbcontext.Customers.Add(ObjCustomers);
             _dbcontext.SaveChanges();
 
